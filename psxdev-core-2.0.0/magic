@@ -1,0 +1,64 @@
+#------------------------------------------------------------------------------
+# append this to "/usr/share/magic" or "/etc/magic" for PS-X development
+# Copyright (C) Daniel Balster <dbalster@psxdev.de>
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+# psx:  file(1) magic for PS-X executables
+0		string	PS-X\ EXE	PS-X executable,
+>16		lelong	x			PC=0x%08lx,
+>20		lelong	!0			GP=0x%08lx,
+>24		lelong	!0			.text=[0x%08lx,
+>>28	lelong	x			\b0x%lx],
+>32		lelong	!0			.data=[0x%08lx,
+>>36	lelong	x			\b0x%lx],
+>40		lelong	!0			.bss=[0x%08lx,
+>>44	lelong	x			\b0x%lx],
+>48		lelong	!0			Stack=0x%08lx,
+>48		lelong	=0			No Stack!,
+>52		lelong	!0			StackSize=0x%lx,
+>76		string	>\0			(%s)
+
+#------------------------------------------------------------------------------
+# cpe:  file(1) magic for CPE executables
+0		string	CPE		CPE executable
+>3		byte	x		(version %d)
+
+#------------------------------------------------------------------------------
+# tim:  file(1) magic for TIM images
+0		lelong	0x00000010	TIM image,
+>4		lelong  =0x8		4-Bit,
+>4		lelong  =0x9		8-Bit,
+>4		lelong  =0x2		15-Bit,
+>4		lelong  =0x3		24-Bit,
+>4		lelong  &8
+>>(8.l+12)	leshort	x		Pixel at (%d,
+>>(8.l+14)	leshort	x		\b%d)
+>>(8.l+16)	leshort	x		Size=%dx
+>>(8.l+18)	leshort	x		\b%d,
+>>4		lelong  =0x8		16 CLUT Entries at
+>>4		lelong  =0x9		256 CLUT Entries at
+>>12	leshort	x		(%d,
+>>14	leshort	x		\b%d)
+>4		lelong	^8
+>>12	leshort	x		Pixel at (%d,
+>>14	leshort	x		\b%d)
+>>16	leshort	x		Size=%dx
+>>18	leshort	x		\b%d
+
+#------------------------------------------------------------------------------
+# str:  file(1) magic for MDEC streams
+0		lelong	0x80010160	MDEC video stream,
+>16		leshort  x		%dx
+>18		leshort  x		\b%d
+#>8		lelong  x		%d frames
+#>4     leshort x secCount=%d;
+#>6     leshort x nSectors=%d;
+#>12     lelong x frameSize=%d;
+
+#------------------------------------------------------------------------------
+# bs:  file(1) magic for bs encoded bitstreams
+2		leshort		0x3800		BS image,
+>6		leshort		x			Version %d,
+>4		leshort		x			Quantization %d,
+>0		leshort		x			(Decompresses to %d words)

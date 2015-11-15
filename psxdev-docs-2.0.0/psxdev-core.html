@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html lang=en><head>
+<title>psxdev.de: psxdev-core</title>
+<meta http-equiv="content-type" content="text/html;">
+<link rel=stylesheet type="text/css" href="psxdev.css">
+</head><body background="images/bg.png" color=#000000 bgcolor=#999999>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>psxdev-core</TD><TD ALIGN=RIGHT>[<A HREF=index.html>top</A>|<A HREF=overview.html>sitemap</A>|<A HREF=download.html>download</A>|<A HREF=documentation.html>docs</A>]</TD></TR></TABLE>
+<hr size=2 noshade>
+<center><img src=images/psxtux2.png border=0 width=78 height=90><img src=images/logo.png width=496 height=90></center>
+<h1>psxdev core - device driver and filesystem</h1>
+
+<table  width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center><table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#FFFFFF><td width=100% valign=top>
+Currently nothing important to type...
+</table></td></tr></table><hr width=0 size=0>
+<table width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center>
+<table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#000000><td width=100%>
+<p class=title><img src=images/star.png>PSXDEV core components</p></td></tr><tr><td bgcolor=#FFFFFF>
+<p>
+The psxdev-core package installs the basic PSXDEV filesystem hierarchy
+(typically in /opt/psxdev), the PSXDEV kernel device driver sources and
+a compiled version of the driver (only during RPM install!) and as a bonus
+a small <i>file magic</i> configuration.
+</p>
+<p>
+The <b>driver sources</b> are located in <code>/opt/psxdev/pccl</code>.
+Each time you have compiled a new kernel it is necessary to enter into this
+directory and do a <b><code>make install</code></b>, which simply builds and
+installs a recent version of the <b>pccl.o</b> module against the new kernel.
+You could also reinstall the psxdev-core RPM package with the <i>--force</i>
+option, but that is not the recommended way. I don't think that the pccl
+module will ever make it into the kernel...
+</p>
+<p>
+The file <b>/opt/psxdev/share/magic</b> can be used to check typical PSX
+data files like <i>PS-X EXE</i>, <i>TIM</i>, <i>BS</i>, <i>STR</i>, and
+many more. You need the <b>file</b> package installed for this and you
+surely want to merge the PSXDEV magic entries with the global magic
+entries located in <b>/usr/share/magic</b>! This is not yet done during the
+installation process.
+</p>
+</td></tr></table></td></tr></table><br><table width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center>
+<table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#000000><td width=100%>
+<p class=title><img src=images/star.png>The /proc/pccl process information pseudo-filesystem</p></td></tr><tr><td bgcolor=#FFFFFF>
+<p>
+PSXDEV comes with an extension to the linux /proc pseudo-filesystem. If
+you do not know what the /proc pseudo-filesystem is, you should read
+the manual page of proc (<i>man proc</i>). To be short, /proc/pccl
+is an application which looks like a filesystem and is available as soon
+as the kernel driver is installed!
+</p>
+
+The PSXDEV pccl driver is able to support up to four (4) PCCL boards
+simultaneously, and so the /proc/pccl hierarchy has four subdirectories
+for each possible card. This is the hierarchy tree of /proc/pccl:
+<ul>
+<ul>
+<code><pre>
+/proc/pccl
+|-- 0
+|   |-- config		driver configuration
+|   |-- fullmem		pseudo-mirrored ram (full 32-bit)
+|   |-- mem			pseudo-mirrored main ram
+|   |-- status		CAETLA status
+|   |-- version		CAETLA versions
+|   `-- vram		pseudo-mirrored video ram
+|-- 1
+|   |-- config
+|   |-- fullmem
+|   |-- mem			-"-
+|   |-- status
+|   |-- version
+|   `-- vram
+|-- 2
+|   |-- config
+|   |-- fullmem
+|   |-- mem			-"-
+|   |-- status
+|   |-- version
+|   `-- vram
+|-- 3
+|   |-- config
+|   |-- fullmem
+|   |-- mem			-"-
+|   |-- status
+|   |-- version
+|   `-- vram
+`-- readme		a small static copyright notice
+</pre></code>
+</ul>
+</ul>
+
+<ul>
+<li><b>config</b><br>
+You can read and write configurations from/to this file. So if you <code>cat
+/proc/pccl/0/config</code> you'll get the current configuration. The most important reason
+for this is currently the need to specify the VRAM dimensions for a snapshot during a
+game. Just <code>echo "width=320" > /proc/pccl/0/config</code> to set single options. 
+
+<li><b>mem</b><br>
+This special file represents the main memory of the PSX,
+located from 0x80000000-0x801FFFFF. You can
+search for strings in it, i.e. <tt>psx-strings /proc/pccl/0/mem</tt>
+but the coolest application is to use a memory editor with it. A
+very good program for this purpose is <b>hexedit</b>. Or just copy
+this file to /tmp to take a snapshot and so on.
+
+<li><b>fullmem</b><br>
+This is the same as above, but this time the full 32-bit address range.
+This is a very very useful file for applications, since they are allowed
+to <code>lseek()</code> anywhere into existing address ranges and read/write
+from them, like the cache, the ROM and the HW registers. I mainly implemented
+this new file interface for debuggers and real time utilities.
+
+<li><b>status</b><br>
+This file is only readable and returns the current state of the
+communication link. Example output:
+<code><pre>
+Status (PS/PAR) = (0x00) : CAETLA
+Status (CAETLA) = (0x40) : NOTIFY_HBP
+Execution Flags = (0x00) :
+</pre></code>
+
+<li><b>version</b><br>
+This file is like the status file, but it will retrieve the
+version numbers of the caetla subsystems. example output:
+<code><pre>
+caetla firmware     :  0.33
+CD-ROM manager      :  0.1
+memory card manager :  0.5
+frame buffer viewer :  0.2
+cheat code selector :  0.2
+debug utility       :  0.5
+configuration menu  :  0.2
+main menu           :  0.33
+</pre></code>
+
+<li><b>vram</b><br>
+This file is very useful. It represents the contents of the VRAM.
+Unlike the /proc/pccl/?/mem file, it has a file format - TIM. This
+means you can drop TIM images on this file and they will be uploaded!
+Example:
+<code><pre>
+#
+# upload all TIM images of your
+# project directly into the VRAM
+#
+bash> find *.tim -printf "cp %f /proc/pccl/0/vram\n" | sh
+</pre></code>
+You can of course copy all types of TIM images to this file; files with
+a palette and direct color images. If you read from this file, you'll
+get a screen snapshot, even during a game! If you are in the caetla
+frame buffer viewer, /proc/pccl/0/vram uses the selected dimensions
+(unfortunately no palette pictures for now!). During a game you have
+to specify the image dimensions with the config file. Example:
+<code><pre>
+# we want to download 320x240 images from 0,0 in 16-Bit
+bash> echo "width=320"  > /proc/pccl/0/config
+bash> echo "height=240" > /proc/pccl/0/config
+bash> echo "x=0"        > /proc/pccl/0/config
+bash> echo "y=0"        > /proc/pccl/0/config
+
+# now we can take pictures just by copying from the vram file !
+bash> cp /proc/pccl/0/vram /tmp/image.tim
+
+# directly view an image
+bash> timtoppm /proc/pccl/0/vram | xv -
+</pre></code>
+</ul>
+</p>
+</td></tr></table></td></tr></table><br><table width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center>
+<table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#000000><td width=100%>
+<p class=title><img src=images/star.png>The /dev/pccl kernel device driver interface</p></td></tr><tr><td bgcolor=#FFFFFF>
+<p>
+The PSXDEV pccl device driver is accessible through the device nodes
+<ul>
+<li><b>/dev/pccl0</b> - first PC commslink board
+<li><b>/dev/pccl1</b> - second PC commslink board
+<li><b>/dev/pccl2</b> - third PC commslink board
+<li><b>/dev/pccl3</b> - fourth PC commslink board
+<li><b>/dev/pccl</b> - a symbolic link to the first board (/dev/pccl0)
+</ul>
+All PSXDEV tools and applications are using the <b>/dev/pccl</b> link by
+default, but you can always use a configuration option like <b>--device=/dev/pccl2</b>
+to use another device node. Your application should also provide this feature!
+</p>
+<p>
+The PCCL API is a linux wrapper for the <B>CAETLA</B> API. All CAETLA
+protocol commands are available as <b>ioctl()</b> commands. So a minimal
+and also typical program which uses /dev/pccl would be:
+<ul><code><pre>
+<span class=y2>/** software reset the PlayStation **/</span>
+
+<span class=x4>#include &lt;pccl.h&gt;        <span class=y2>/* load device driver api */</span></span>
+<span class=x4>#include &lt;sys/ioctl.h&gt;   <span class=y2>/* needed <b>for</b> the ioctl<b>(</b><b>)</b> */</span></span>
+
+main<b>(</b><b>)</b>
+<b>{</b>
+	<span class=y1>int</span> pccl;
+             
+	<span class=y2>// open the device driver always in read/write mode,</span>
+	<span class=y2>// since we want to communicate with it!</span>
+             
+	pccl = open<b>(</b><span class=x1>"/dev/pccl"</span>,<span class=y3>O_RDWR</span><b>)</b>;
+	<b>if</b> <b>(</b>pccl != -1<b>)</b>
+	<b>{</b>
+		<span class=y2>// reset the PlayStation</span>
+		ioctl <b>(</b>pccl, <span class=y3>CAEIOC_RESET</span><b>)</b>;
+             
+		close <b>(</b>pccl<b>)</b>;
+	<b>}</b>
+	<b>else</b> perror<b>(</b><span class=x1>"/dev/pccl"</span><b>)</b>;
+<b>}</b>
+</pre></code></ul>Very important: <b>you must not be root in the default installation</b>!
+The device nodes are all protected by evil (666). This could be considered a
+security hole, but I don't think that someone will ever try to break into
+your linux system operating from your PlayStation...
+</p>
+<p>
+If you want to code an application which uses the /dev/pccl API, you should
+check the &lt;pccl.h&gt; header file and read the
+<A href=pccl_api.html>PCCL API reference</a>.
+</p>
+</td></tr></table></td></tr></table><br>
+<hr size=2 noshade>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>
+<address>Created with <a href=psxdev.pl>psxdev.pl</a></address>
+</td><td align=right>
+<address>Copyright &copy;2000
+ by <a href="mailto:dbalster@psxdev.de">Daniel Balster</a></address>
+</td></tr></table>
+</body></html>

@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html lang=en><head>
+<title>psxdev.de: RAW BINARY to PS-X EXE converter</title>
+<meta http-equiv="content-type" content="text/html;">
+<link rel=stylesheet type="text/css" href="psxdev.css">
+</head><body background="images/bg.png" color=#000000 bgcolor=#999999>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>RAW BINARY to PS-X EXE converter</TD><TD ALIGN=RIGHT>[<A HREF=index.html>top</A>|<A HREF=overview.html>sitemap</A>|<A HREF=download.html>download</A>|<A HREF=documentation.html>docs</A>]</TD></TR></TABLE>
+<hr size=2 noshade>
+<center><img src=images/psxtux2.png border=0 width=78 height=90><img src=images/logo.png width=496 height=90></center>
+<h1>RAW BINARY to PS-X EXE converter</h1>
+
+<table  width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center><table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#FFFFFF><td width=100% valign=top>
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE><tr VALIGN=top><td align=left>
+<B>psx-bin2x</B> - RAW BINARY to PS-X EXE converter</td><td align=right>
+<FONT SIZE=-2><A HREF="mailto:dbalster@psxdev.de">Daniel Balster</A>/psxdev-tools
+</FONT></td></tr></table>
+<ul><li><b>SYNOPSIS OF psx-bin2x</b><br>
+<CODE><PRE>
+</PRE></CODE></ul>
+<ul><li><b>DESCRIPTION OF psx-bin2x</b><br>
+<B>psx-bin2x</B> converts a raw binary file into a PSX executable binary. This comes in handy if you can produce code which is not in BFD readable format (lets say with an own or a third party assembler/linker). Additionally to the steps required with psx-bfd2x you also need to specify the program entry point address (<i><code>--pc</code></i>) and the loading address (<i><code>--address</code></i>). Instead of using psx-bfd2x you could also use a script which first uses psx-objcopy to flatten a BFD binary and then uses psx-bin2x to add the correct header to the binary.
+
+
+
+</ul>
+<ul><li><b>EXAMPLES FOR psx-bin2x</b><br>
+<code><pre><b>psx-bin2x --pc=0x80010000 --address=0x80010000 -o file.psx file.bin</b></pre></code> will create a PSX executable binary from a raw binary, which will be loaded to address 0x80010000 and with the program entry point 0x80010000.
+
+
+</ul>
+<ul><li><b>SEE ALSO</b><br>
+<A HREF=psx-bfd2x.html>psx-bfd2x</A>&nbsp;&nbsp;&nbsp;<p>&nbsp;</p></table></td></tr></table><hr width=0 size=0>
+<P ALIGN=CENTER><A HREF=psxdev-tools.html>back to index</A></P>
+<hr size=2 noshade>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>
+<address>Created with <a href=psxdev.pl>psxdev.pl</a></address>
+</td><td align=right>
+<address>Copyright &copy;2000
+ by <a href="mailto:dbalster@psxdev.de">Daniel Balster</a></address>
+</td></tr></table>
+</body></html>

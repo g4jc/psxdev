@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html lang=en><head>
+<title>psxdev.de: Rotation matrix setup</title>
+<meta http-equiv="content-type" content="text/html;">
+<link rel=stylesheet type="text/css" href="psxdev.css">
+</head><body background="images/bg.png" color=#000000 bgcolor=#999999>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>Rotation matrix setup</TD><TD ALIGN=RIGHT>[<A HREF=index.html>top</A>|<A HREF=overview.html>sitemap</A>|<A HREF=download.html>download</A>|<A HREF=documentation.html>docs</A>]</TD></TR></TABLE>
+<hr size=2 noshade>
+<center><img src=images/psxtux2.png border=0 width=78 height=90><img src=images/logo.png width=496 height=90></center>
+<h1>Rotation matrix setup</h1>
+
+
+<table  width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center><table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#FFFFFF><td width=100% valign=top>
+Blablabla
+</table></td></tr></table><hr width=0 size=0>
+
+<table width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center>
+<table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#000000><td width=100%>
+<p class=title><img src=images/star.png>Rotation matrix in C
+</p></td></tr><tr><td bgcolor=#FFFFFF>
+<ul><code><pre>
+<span class=y1>void</span> setup_rot_matrix <b>(</b><span class=y1>short</span> *m, <span class=y1>short</span> *r<b>)</b>
+<b>{</b>
+	<span class=y1>int</span> sinx,siny,sinz;
+	<span class=y1>int</span> cosx,cosy,cosz;
+	<span class=y1>int</span> sinysinx,sinycosx;
+	
+	sinx = rsin<b>(</b>r<b>[</b>0<b>]</b><b>)</b>;
+	siny = rsin<b>(</b>r<b>[</b>1<b>]</b><b>)</b>;
+	sinz = rsin<b>(</b>r<b>[</b>2<b>]</b><b>)</b>;
+
+	cosx = rcos<b>(</b>r<b>[</b>0<b>]</b><b>)</b>;
+	cosy = rcos<b>(</b>r<b>[</b>1<b>]</b><b>)</b>;
+	cosz = rcos<b>(</b>r<b>[</b>2<b>]</b><b>)</b>;
+
+	<span class=y2>// these are used twice</span>
+	sinysinx = <b>(</b>siny*sinx<b>)</b>&gt;&gt;12;
+	sinycosx = <b>(</b>siny*cosy<b>)</b>&gt;&gt;12;
+
+	m<b>[</b>_m11<b>]</b> = <b>(</b> cosy*cosz                <b>)</b> &gt;&gt; 12;
+	m<b>[</b>_m12<b>]</b> = <b>(</b>-cosy*sinz                <b>)</b> &gt;&gt; 12;
+	m<b>[</b>_m13<b>]</b> =   siny;
+	m<b>[</b>_m21<b>]</b> = <b>(</b> cosx*sinz + sinysinx*cosz<b>)</b> &gt;&gt; 12;
+	m<b>[</b>_m22<b>]</b> = <b>(</b> cosx*cosz - sinysinx*sinz<b>)</b> &gt;&gt; 12;
+	m<b>[</b>_m23<b>]</b> = <b>(</b>-sinx*cosy                <b>)</b> &gt;&gt; 12;
+	m<b>[</b>_m31<b>]</b> = <b>(</b> sinx*sinz - sinycosx*cosz<b>)</b> &gt;&gt; 12;
+	m<b>[</b>_m32<b>]</b> = <b>(</b> sinx*cosz + sinycosx*sinz<b>)</b> &gt;&gt; 12;
+	m<b>[</b>_m33<b>]</b> = <b>(</b> cosx*cosy                <b>)</b> &gt;&gt; 12;
+<b>}</b>
+</pre></code></ul></td></tr></table></td></tr></table><br>
+<table width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center>
+<table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#000000><td width=100%>
+<p class=title><img src=images/star.png>Rotation matrix in Assembler
+</p></td></tr><tr><td bgcolor=#FFFFFF>
+<ul><code><pre>
+<span class=y2>//	to be done</span>
+<span class=y2>//</span>
+<span class=y2>//	ideas:</span>
+<span class=y2>//</span>
+<span class=y2>//	- use general purpose interpolation <b>for</b></span>
+<span class=y2>//	  the multiplication <b>(</b>parallel multiplication!<b>)</b></span>
+<span class=y2>//	- use sin <span class=y3>AND</span> cos lookup table and interleave them</span>
+<span class=y2>//	=&gt; will save <span class=y1>double</span> index calculation</span>
+</pre></code></ul></td></tr></table></td></tr></table><br>
+<hr size=2 noshade>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>
+<address>Created with <a href=psxdev.pl>psxdev.pl</a></address>
+</td><td align=right>
+<address>Copyright &copy;2000
+ by <a href="mailto:dbalster@psxdev.de">Daniel Balster</a></address>
+</td></tr></table>
+</body></html>

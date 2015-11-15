@@ -1,0 +1,634 @@
+# Makefile.in generated automatically by automake 1.4 from Makefile.am
+
+# Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
+# This Makefile.in is free software; the Free Software Foundation
+# gives unlimited permission to copy and/or distribute it,
+# with or without modifications, as long as this notice is preserved.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY, to the extent permitted by law; without
+# even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+# $Id: Makefile.am,v 1.1.1.1 2001/05/17 11:50:26 dbalster Exp $
+
+#
+#	psxtools - communication and data convert tools for the unix shell
+#
+#	Copyright (C) 1997, 1998, 1999, 2000 by these people, who contributed to this project
+#
+#	  Daniel Balster <dbalster@psxdev.de>
+#	  Sergio Moreira <sergio@x-plorer.co.uk>
+#	  Andrew Kieschnick <andrewk@cerc.utexas.edu>
+#	  Kazuki Sakamoto <bsd-ps@geocities.co.jp>
+#
+#	This program is free software; you can redistribute it and/or modify
+#	it under the terms of the GNU General Public License as published by
+#	the Free Software Foundation; either version 2 of the License, or
+#	(at your option) any later version.
+#
+#	This program is distributed in the hope that it will be useful,
+#	but WITHOUT ANY WARRANTY; without even the implied warranty of
+#	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#	GNU General Public License for more details.
+#
+#	You should have received a copy of the GNU General Public License
+#	along with this program; if not, write to the Free Software
+#	Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+
+
+SHELL = @SHELL@
+
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+VPATH = @srcdir@
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+
+bindir = @bindir@
+sbindir = @sbindir@
+libexecdir = @libexecdir@
+datadir = @datadir@
+sysconfdir = @sysconfdir@
+sharedstatedir = @sharedstatedir@
+localstatedir = @localstatedir@
+libdir = @libdir@
+infodir = @infodir@
+mandir = @mandir@
+includedir = @includedir@
+oldincludedir = /usr/include
+
+DESTDIR =
+
+pkgdatadir = $(datadir)/@PACKAGE@
+pkglibdir = $(libdir)/@PACKAGE@
+pkgincludedir = $(includedir)/@PACKAGE@
+
+top_builddir = ..
+
+ACLOCAL = @ACLOCAL@
+AUTOCONF = @AUTOCONF@
+AUTOMAKE = @AUTOMAKE@
+AUTOHEADER = @AUTOHEADER@
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@ $(AM_INSTALL_PROGRAM_FLAGS)
+INSTALL_DATA = @INSTALL_DATA@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+transform = @program_transform_name@
+
+NORMAL_INSTALL = :
+PRE_INSTALL = :
+POST_INSTALL = :
+NORMAL_UNINSTALL = :
+PRE_UNINSTALL = :
+POST_UNINSTALL = :
+CATALOGS = @CATALOGS@
+CATOBJEXT = @CATOBJEXT@
+CC = @CC@
+CPP = @CPP@
+DATADIRNAME = @DATADIRNAME@
+GENCAT = @GENCAT@
+GMOFILES = @GMOFILES@
+GMSGFMT = @GMSGFMT@
+GT_NO = @GT_NO@
+GT_YES = @GT_YES@
+INCLUDE_LOCALE_H = @INCLUDE_LOCALE_H@
+INSTOBJEXT = @INSTOBJEXT@
+INTLDEPS = @INTLDEPS@
+INTLLIBS = @INTLLIBS@
+INTLOBJS = @INTLOBJS@
+MAKEINFO = @MAKEINFO@
+MKINSTALLDIRS = @MKINSTALLDIRS@
+MSGFMT = @MSGFMT@
+PACKAGE = @PACKAGE@
+POFILES = @POFILES@
+POSUB = @POSUB@
+RANLIB = @RANLIB@
+USE_INCLUDED_LIBINTL = @USE_INCLUDED_LIBINTL@
+USE_NLS = @USE_NLS@
+VERSION = @VERSION@
+l = @l@
+psxdev_includes = @psxdev_includes@
+psxdev_libraries = @psxdev_libraries@
+tim_includes = @tim_includes@
+tim_libraries = @tim_libraries@
+
+bin_PROGRAMS =  	psx-bin2x psx-bfd2x 	psx-run psx-reset psx-resume psx-halt psx-mode 	psx-upload psx-download psx-server psx-flash  	psx-codedown psx-codeup psx-exe2mexe 	psx-xaldown psx-xalup psx-xaldump 	mc-ls mc-mkfs mc-rm mc-down mc-up 	tim-down psx-fbmode tim-up 	mc-geticon 	psx-show-registers
+
+
+psx_bin2x_SOURCES = bin2x.c error.c common.h
+psx_bin2x_LDADD = @psxdev_libraries@ -lpsxdev
+
+psx_bfd2x_SOURCES = bfd2x.c error.c common.h
+psx_bfd2x_LDADD = @psxdev_libraries@ -lpsxdev -lbfd -liberty
+
+psx_run_SOURCES = run.c error.c common.h
+psx_run_LDADD = @psxdev_libraries@ -lpsxdev
+
+psx_reset_SOURCES = reset.c error.c common.h
+psx_reset_LDADD = @psxdev_libraries@ -lpsxdev
+
+psx_mode_SOURCES = mode.c error.c common.h
+psx_mode_LDADD = @psxdev_libraries@ -lpsxdev
+
+psx_halt_SOURCES = halt.c error.c common.h
+psx_halt_LDADD = @psxdev_libraries@ -lpsxdev
+
+psx_resume_SOURCES = resume.c error.c common.h
+psx_resume_LDADD = @psxdev_libraries@ -lpsxdev
+
+psx_upload_SOURCES = upload.c error.c common.h
+psx_upload_LDADD = @psxdev_libraries@ -lpsxdev
+
+psx_download_SOURCES = download.c error.c common.h
+psx_download_LDADD = @psxdev_libraries@ -lpsxdev
+
+psx_server_SOURCES = server.c error.c common.h
+psx_server_LDADD = @psxdev_libraries@ -lpsxdev
+
+psx_flash_SOURCES = flash.c error.c common.h flasher.h
+psx_flash_LDADD = @psxdev_libraries@ -lpsxdev
+
+psx_codedown_SOURCES = codedown.c error.c common.h
+psx_codedown_LDADD = @psxdev_libraries@ -lpsxdev
+
+psx_codeup_SOURCES = codeup.c error.c common.h
+psx_codeup_LDADD = @psxdev_libraries@ -lpsxdev
+
+psx_xaldown_SOURCES = xaldown.c error.c common.h
+psx_xaldown_LDADD = @psxdev_libraries@ -lpsxdev
+
+psx_xalup_SOURCES = xalup.c error.c common.h
+psx_xalup_LDADD = @psxdev_libraries@ -lpsxdev
+
+psx_xaldump_SOURCES = xaldump.c error.c common.h
+psx_xaldump_LDADD = 
+
+mc_ls_SOURCES = ls.c error.c common.h
+mc_ls_LDADD = @psxdev_libraries@ -lpsxdev
+
+mc_mkfs_SOURCES = mkfs.c error.c common.h
+mc_mkfs_LDADD = @psxdev_libraries@ -lpsxdev
+
+mc_rm_SOURCES = rm.c error.c common.h
+mc_rm_LDADD = @psxdev_libraries@ -lpsxdev
+
+mc_down_SOURCES = mcdown.c error.c common.h
+mc_down_LDADD = @psxdev_libraries@ -lpsxdev
+
+mc_up_SOURCES = mcup.c error.c common.h
+mc_up_LDADD = @psxdev_libraries@ -lpsxdev
+
+psx_exe2mexe_SOURCES = exe2mexe.c error.c common.h
+psx_exe2mexe_LDADD = @psxdev_libraries@ -lpsxdev -ltim
+
+mc_geticon_SOURCES = geticon.c error.c common.h
+mc_geticon_LDADD = @psxdev_libraries@ -lpsxdev -ltim
+
+tim_down_SOURCES = timdown.c error.c common.h
+tim_down_LDADD = @psxdev_libraries@ -lpsxdev @tim_libraries@ -ltim
+
+tim_up_SOURCES = timup.c error.c common.h
+tim_up_LDADD = @psxdev_libraries@ -lpsxdev @tim_libraries@ -ltim
+
+psx_fbmode_SOURCES = fbmode.c error.c common.h
+psx_fbmode_LDADD = @psxdev_libraries@ -lpsxdev
+
+psx_show_registers_SOURCES = show_registers.c error.c common.h
+psx_show_registers_LDADD = @psxdev_libraries@ -lpsxdev
+
+localedir = $(datadir)/locale
+
+INCLUDES =  	@INCLUDES@ 	@psxdev_includes@ 	@tim_includes@ 	-DLOCALEDIR=\"$(localedir)\" 	-DBINDIR=\"$(bindir)\"
+
+mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+CONFIG_HEADER = ../config.h
+CONFIG_CLEAN_FILES = 
+PROGRAMS =  $(bin_PROGRAMS)
+
+
+DEFS = @DEFS@ -I. -I$(srcdir) -I..
+CPPFLAGS = @CPPFLAGS@
+LDFLAGS = @LDFLAGS@
+LIBS = @LIBS@
+psx_bin2x_OBJECTS =  bin2x.o error.o
+psx_bin2x_DEPENDENCIES = 
+psx_bin2x_LDFLAGS = 
+psx_bfd2x_OBJECTS =  bfd2x.o error.o
+psx_bfd2x_DEPENDENCIES = 
+psx_bfd2x_LDFLAGS = 
+psx_run_OBJECTS =  run.o error.o
+psx_run_DEPENDENCIES = 
+psx_run_LDFLAGS = 
+psx_reset_OBJECTS =  reset.o error.o
+psx_reset_DEPENDENCIES = 
+psx_reset_LDFLAGS = 
+psx_resume_OBJECTS =  resume.o error.o
+psx_resume_DEPENDENCIES = 
+psx_resume_LDFLAGS = 
+psx_halt_OBJECTS =  halt.o error.o
+psx_halt_DEPENDENCIES = 
+psx_halt_LDFLAGS = 
+psx_mode_OBJECTS =  mode.o error.o
+psx_mode_DEPENDENCIES = 
+psx_mode_LDFLAGS = 
+psx_upload_OBJECTS =  upload.o error.o
+psx_upload_DEPENDENCIES = 
+psx_upload_LDFLAGS = 
+psx_download_OBJECTS =  download.o error.o
+psx_download_DEPENDENCIES = 
+psx_download_LDFLAGS = 
+psx_server_OBJECTS =  server.o error.o
+psx_server_DEPENDENCIES = 
+psx_server_LDFLAGS = 
+psx_flash_OBJECTS =  flash.o error.o
+psx_flash_DEPENDENCIES = 
+psx_flash_LDFLAGS = 
+psx_codedown_OBJECTS =  codedown.o error.o
+psx_codedown_DEPENDENCIES = 
+psx_codedown_LDFLAGS = 
+psx_codeup_OBJECTS =  codeup.o error.o
+psx_codeup_DEPENDENCIES = 
+psx_codeup_LDFLAGS = 
+psx_exe2mexe_OBJECTS =  exe2mexe.o error.o
+psx_exe2mexe_DEPENDENCIES = 
+psx_exe2mexe_LDFLAGS = 
+psx_xaldown_OBJECTS =  xaldown.o error.o
+psx_xaldown_DEPENDENCIES = 
+psx_xaldown_LDFLAGS = 
+psx_xalup_OBJECTS =  xalup.o error.o
+psx_xalup_DEPENDENCIES = 
+psx_xalup_LDFLAGS = 
+psx_xaldump_OBJECTS =  xaldump.o error.o
+psx_xaldump_DEPENDENCIES = 
+psx_xaldump_LDFLAGS = 
+mc_ls_OBJECTS =  ls.o error.o
+mc_ls_DEPENDENCIES = 
+mc_ls_LDFLAGS = 
+mc_mkfs_OBJECTS =  mkfs.o error.o
+mc_mkfs_DEPENDENCIES = 
+mc_mkfs_LDFLAGS = 
+mc_rm_OBJECTS =  rm.o error.o
+mc_rm_DEPENDENCIES = 
+mc_rm_LDFLAGS = 
+mc_down_OBJECTS =  mcdown.o error.o
+mc_down_DEPENDENCIES = 
+mc_down_LDFLAGS = 
+mc_up_OBJECTS =  mcup.o error.o
+mc_up_DEPENDENCIES = 
+mc_up_LDFLAGS = 
+tim_down_OBJECTS =  timdown.o error.o
+tim_down_DEPENDENCIES = 
+tim_down_LDFLAGS = 
+psx_fbmode_OBJECTS =  fbmode.o error.o
+psx_fbmode_DEPENDENCIES = 
+psx_fbmode_LDFLAGS = 
+tim_up_OBJECTS =  timup.o error.o
+tim_up_DEPENDENCIES = 
+tim_up_LDFLAGS = 
+mc_geticon_OBJECTS =  geticon.o error.o
+mc_geticon_DEPENDENCIES = 
+mc_geticon_LDFLAGS = 
+psx_show_registers_OBJECTS =  show_registers.o error.o
+psx_show_registers_DEPENDENCIES = 
+psx_show_registers_LDFLAGS = 
+CFLAGS = @CFLAGS@
+COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+CCLD = $(CC)
+LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(LDFLAGS) -o $@
+DIST_COMMON =  Makefile.am Makefile.in
+
+
+DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
+
+TAR = gtar
+GZIP_ENV = --best
+DEP_FILES =  .deps/bfd2x.P .deps/bin2x.P .deps/codedown.P .deps/codeup.P \
+.deps/download.P .deps/error.P .deps/exe2mexe.P .deps/fbmode.P \
+.deps/flash.P .deps/geticon.P .deps/halt.P .deps/ls.P .deps/mcdown.P \
+.deps/mcup.P .deps/mkfs.P .deps/mode.P .deps/reset.P .deps/resume.P \
+.deps/rm.P .deps/run.P .deps/server.P .deps/show_registers.P \
+.deps/timdown.P .deps/timup.P .deps/upload.P .deps/xaldown.P \
+.deps/xaldump.P .deps/xalup.P
+SOURCES = $(psx_bin2x_SOURCES) $(psx_bfd2x_SOURCES) $(psx_run_SOURCES) $(psx_reset_SOURCES) $(psx_resume_SOURCES) $(psx_halt_SOURCES) $(psx_mode_SOURCES) $(psx_upload_SOURCES) $(psx_download_SOURCES) $(psx_server_SOURCES) $(psx_flash_SOURCES) $(psx_codedown_SOURCES) $(psx_codeup_SOURCES) $(psx_exe2mexe_SOURCES) $(psx_xaldown_SOURCES) $(psx_xalup_SOURCES) $(psx_xaldump_SOURCES) $(mc_ls_SOURCES) $(mc_mkfs_SOURCES) $(mc_rm_SOURCES) $(mc_down_SOURCES) $(mc_up_SOURCES) $(tim_down_SOURCES) $(psx_fbmode_SOURCES) $(tim_up_SOURCES) $(mc_geticon_SOURCES) $(psx_show_registers_SOURCES)
+OBJECTS = $(psx_bin2x_OBJECTS) $(psx_bfd2x_OBJECTS) $(psx_run_OBJECTS) $(psx_reset_OBJECTS) $(psx_resume_OBJECTS) $(psx_halt_OBJECTS) $(psx_mode_OBJECTS) $(psx_upload_OBJECTS) $(psx_download_OBJECTS) $(psx_server_OBJECTS) $(psx_flash_OBJECTS) $(psx_codedown_OBJECTS) $(psx_codeup_OBJECTS) $(psx_exe2mexe_OBJECTS) $(psx_xaldown_OBJECTS) $(psx_xalup_OBJECTS) $(psx_xaldump_OBJECTS) $(mc_ls_OBJECTS) $(mc_mkfs_OBJECTS) $(mc_rm_OBJECTS) $(mc_down_OBJECTS) $(mc_up_OBJECTS) $(tim_down_OBJECTS) $(psx_fbmode_OBJECTS) $(tim_up_OBJECTS) $(mc_geticon_OBJECTS) $(psx_show_registers_OBJECTS)
+
+all: all-redirect
+.SUFFIXES:
+.SUFFIXES: .S .c .o .s
+$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4) 
+	cd $(top_srcdir) && $(AUTOMAKE) --foreign src/Makefile
+
+Makefile: $(srcdir)/Makefile.in  $(top_builddir)/config.status $(BUILT_SOURCES)
+	cd $(top_builddir) \
+	  && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+
+
+mostlyclean-binPROGRAMS:
+
+clean-binPROGRAMS:
+	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
+
+distclean-binPROGRAMS:
+
+maintainer-clean-binPROGRAMS:
+
+install-binPROGRAMS: $(bin_PROGRAMS)
+	@$(NORMAL_INSTALL)
+	$(mkinstalldirs) $(DESTDIR)$(bindir)
+	@list='$(bin_PROGRAMS)'; for p in $$list; do \
+	  if test -f $$p; then \
+	    echo "  $(INSTALL_PROGRAM) $$p $(DESTDIR)$(bindir)/`echo $$p|sed 's/$(EXEEXT)$$//'|sed '$(transform)'|sed 's/$$/$(EXEEXT)/'`"; \
+	     $(INSTALL_PROGRAM) $$p $(DESTDIR)$(bindir)/`echo $$p|sed 's/$(EXEEXT)$$//'|sed '$(transform)'|sed 's/$$/$(EXEEXT)/'`; \
+	  else :; fi; \
+	done
+
+uninstall-binPROGRAMS:
+	@$(NORMAL_UNINSTALL)
+	list='$(bin_PROGRAMS)'; for p in $$list; do \
+	  rm -f $(DESTDIR)$(bindir)/`echo $$p|sed 's/$(EXEEXT)$$//'|sed '$(transform)'|sed 's/$$/$(EXEEXT)/'`; \
+	done
+
+.s.o:
+	$(COMPILE) -c $<
+
+.S.o:
+	$(COMPILE) -c $<
+
+mostlyclean-compile:
+	-rm -f *.o core *.core
+
+clean-compile:
+
+distclean-compile:
+	-rm -f *.tab.c
+
+maintainer-clean-compile:
+
+psx-bin2x: $(psx_bin2x_OBJECTS) $(psx_bin2x_DEPENDENCIES)
+	@rm -f psx-bin2x
+	$(LINK) $(psx_bin2x_LDFLAGS) $(psx_bin2x_OBJECTS) $(psx_bin2x_LDADD) $(LIBS)
+
+psx-bfd2x: $(psx_bfd2x_OBJECTS) $(psx_bfd2x_DEPENDENCIES)
+	@rm -f psx-bfd2x
+	$(LINK) $(psx_bfd2x_LDFLAGS) $(psx_bfd2x_OBJECTS) $(psx_bfd2x_LDADD) $(LIBS)
+
+psx-run: $(psx_run_OBJECTS) $(psx_run_DEPENDENCIES)
+	@rm -f psx-run
+	$(LINK) $(psx_run_LDFLAGS) $(psx_run_OBJECTS) $(psx_run_LDADD) $(LIBS)
+
+psx-reset: $(psx_reset_OBJECTS) $(psx_reset_DEPENDENCIES)
+	@rm -f psx-reset
+	$(LINK) $(psx_reset_LDFLAGS) $(psx_reset_OBJECTS) $(psx_reset_LDADD) $(LIBS)
+
+psx-resume: $(psx_resume_OBJECTS) $(psx_resume_DEPENDENCIES)
+	@rm -f psx-resume
+	$(LINK) $(psx_resume_LDFLAGS) $(psx_resume_OBJECTS) $(psx_resume_LDADD) $(LIBS)
+
+psx-halt: $(psx_halt_OBJECTS) $(psx_halt_DEPENDENCIES)
+	@rm -f psx-halt
+	$(LINK) $(psx_halt_LDFLAGS) $(psx_halt_OBJECTS) $(psx_halt_LDADD) $(LIBS)
+
+psx-mode: $(psx_mode_OBJECTS) $(psx_mode_DEPENDENCIES)
+	@rm -f psx-mode
+	$(LINK) $(psx_mode_LDFLAGS) $(psx_mode_OBJECTS) $(psx_mode_LDADD) $(LIBS)
+
+psx-upload: $(psx_upload_OBJECTS) $(psx_upload_DEPENDENCIES)
+	@rm -f psx-upload
+	$(LINK) $(psx_upload_LDFLAGS) $(psx_upload_OBJECTS) $(psx_upload_LDADD) $(LIBS)
+
+psx-download: $(psx_download_OBJECTS) $(psx_download_DEPENDENCIES)
+	@rm -f psx-download
+	$(LINK) $(psx_download_LDFLAGS) $(psx_download_OBJECTS) $(psx_download_LDADD) $(LIBS)
+
+psx-server: $(psx_server_OBJECTS) $(psx_server_DEPENDENCIES)
+	@rm -f psx-server
+	$(LINK) $(psx_server_LDFLAGS) $(psx_server_OBJECTS) $(psx_server_LDADD) $(LIBS)
+
+psx-flash: $(psx_flash_OBJECTS) $(psx_flash_DEPENDENCIES)
+	@rm -f psx-flash
+	$(LINK) $(psx_flash_LDFLAGS) $(psx_flash_OBJECTS) $(psx_flash_LDADD) $(LIBS)
+
+psx-codedown: $(psx_codedown_OBJECTS) $(psx_codedown_DEPENDENCIES)
+	@rm -f psx-codedown
+	$(LINK) $(psx_codedown_LDFLAGS) $(psx_codedown_OBJECTS) $(psx_codedown_LDADD) $(LIBS)
+
+psx-codeup: $(psx_codeup_OBJECTS) $(psx_codeup_DEPENDENCIES)
+	@rm -f psx-codeup
+	$(LINK) $(psx_codeup_LDFLAGS) $(psx_codeup_OBJECTS) $(psx_codeup_LDADD) $(LIBS)
+
+psx-exe2mexe: $(psx_exe2mexe_OBJECTS) $(psx_exe2mexe_DEPENDENCIES)
+	@rm -f psx-exe2mexe
+	$(LINK) $(psx_exe2mexe_LDFLAGS) $(psx_exe2mexe_OBJECTS) $(psx_exe2mexe_LDADD) $(LIBS)
+
+psx-xaldown: $(psx_xaldown_OBJECTS) $(psx_xaldown_DEPENDENCIES)
+	@rm -f psx-xaldown
+	$(LINK) $(psx_xaldown_LDFLAGS) $(psx_xaldown_OBJECTS) $(psx_xaldown_LDADD) $(LIBS)
+
+psx-xalup: $(psx_xalup_OBJECTS) $(psx_xalup_DEPENDENCIES)
+	@rm -f psx-xalup
+	$(LINK) $(psx_xalup_LDFLAGS) $(psx_xalup_OBJECTS) $(psx_xalup_LDADD) $(LIBS)
+
+psx-xaldump: $(psx_xaldump_OBJECTS) $(psx_xaldump_DEPENDENCIES)
+	@rm -f psx-xaldump
+	$(LINK) $(psx_xaldump_LDFLAGS) $(psx_xaldump_OBJECTS) $(psx_xaldump_LDADD) $(LIBS)
+
+mc-ls: $(mc_ls_OBJECTS) $(mc_ls_DEPENDENCIES)
+	@rm -f mc-ls
+	$(LINK) $(mc_ls_LDFLAGS) $(mc_ls_OBJECTS) $(mc_ls_LDADD) $(LIBS)
+
+mc-mkfs: $(mc_mkfs_OBJECTS) $(mc_mkfs_DEPENDENCIES)
+	@rm -f mc-mkfs
+	$(LINK) $(mc_mkfs_LDFLAGS) $(mc_mkfs_OBJECTS) $(mc_mkfs_LDADD) $(LIBS)
+
+mc-rm: $(mc_rm_OBJECTS) $(mc_rm_DEPENDENCIES)
+	@rm -f mc-rm
+	$(LINK) $(mc_rm_LDFLAGS) $(mc_rm_OBJECTS) $(mc_rm_LDADD) $(LIBS)
+
+mc-down: $(mc_down_OBJECTS) $(mc_down_DEPENDENCIES)
+	@rm -f mc-down
+	$(LINK) $(mc_down_LDFLAGS) $(mc_down_OBJECTS) $(mc_down_LDADD) $(LIBS)
+
+mc-up: $(mc_up_OBJECTS) $(mc_up_DEPENDENCIES)
+	@rm -f mc-up
+	$(LINK) $(mc_up_LDFLAGS) $(mc_up_OBJECTS) $(mc_up_LDADD) $(LIBS)
+
+tim-down: $(tim_down_OBJECTS) $(tim_down_DEPENDENCIES)
+	@rm -f tim-down
+	$(LINK) $(tim_down_LDFLAGS) $(tim_down_OBJECTS) $(tim_down_LDADD) $(LIBS)
+
+psx-fbmode: $(psx_fbmode_OBJECTS) $(psx_fbmode_DEPENDENCIES)
+	@rm -f psx-fbmode
+	$(LINK) $(psx_fbmode_LDFLAGS) $(psx_fbmode_OBJECTS) $(psx_fbmode_LDADD) $(LIBS)
+
+tim-up: $(tim_up_OBJECTS) $(tim_up_DEPENDENCIES)
+	@rm -f tim-up
+	$(LINK) $(tim_up_LDFLAGS) $(tim_up_OBJECTS) $(tim_up_LDADD) $(LIBS)
+
+mc-geticon: $(mc_geticon_OBJECTS) $(mc_geticon_DEPENDENCIES)
+	@rm -f mc-geticon
+	$(LINK) $(mc_geticon_LDFLAGS) $(mc_geticon_OBJECTS) $(mc_geticon_LDADD) $(LIBS)
+
+psx-show-registers: $(psx_show_registers_OBJECTS) $(psx_show_registers_DEPENDENCIES)
+	@rm -f psx-show-registers
+	$(LINK) $(psx_show_registers_LDFLAGS) $(psx_show_registers_OBJECTS) $(psx_show_registers_LDADD) $(LIBS)
+
+tags: TAGS
+
+ID: $(HEADERS) $(SOURCES) $(LISP)
+	list='$(SOURCES) $(HEADERS)'; \
+	unique=`for i in $$list; do echo $$i; done | \
+	  awk '    { files[$$0] = 1; } \
+	       END { for (i in files) print i; }'`; \
+	here=`pwd` && cd $(srcdir) \
+	  && mkid -f$$here/ID $$unique $(LISP)
+
+TAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) $(LISP)
+	tags=; \
+	here=`pwd`; \
+	list='$(SOURCES) $(HEADERS)'; \
+	unique=`for i in $$list; do echo $$i; done | \
+	  awk '    { files[$$0] = 1; } \
+	       END { for (i in files) print i; }'`; \
+	test -z "$(ETAGS_ARGS)$$unique$(LISP)$$tags" \
+	  || (cd $(srcdir) && etags $(ETAGS_ARGS) $$tags  $$unique $(LISP) -o $$here/TAGS)
+
+mostlyclean-tags:
+
+clean-tags:
+
+distclean-tags:
+	-rm -f TAGS ID
+
+maintainer-clean-tags:
+
+distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
+
+subdir = src
+
+distdir: $(DISTFILES)
+	here=`cd $(top_builddir) && pwd`; \
+	top_distdir=`cd $(top_distdir) && pwd`; \
+	distdir=`cd $(distdir) && pwd`; \
+	cd $(top_srcdir) \
+	  && $(AUTOMAKE) --include-deps --build-dir=$$here --srcdir-name=$(top_srcdir) --output-dir=$$top_distdir --foreign src/Makefile
+	@for file in $(DISTFILES); do \
+	  d=$(srcdir); \
+	  if test -d $$d/$$file; then \
+	    cp -pr $$/$$file $(distdir)/$$file; \
+	  else \
+	    test -f $(distdir)/$$file \
+	    || ln $$d/$$file $(distdir)/$$file 2> /dev/null \
+	    || cp -p $$d/$$file $(distdir)/$$file || :; \
+	  fi; \
+	done
+
+DEPS_MAGIC := $(shell mkdir .deps > /dev/null 2>&1 || :)
+
+-include $(DEP_FILES)
+
+mostlyclean-depend:
+
+clean-depend:
+
+distclean-depend:
+	-rm -rf .deps
+
+maintainer-clean-depend:
+
+%.o: %.c
+	@echo '$(COMPILE) -c $<'; \
+	$(COMPILE) -Wp,-MD,.deps/$(*F).pp -c $<
+	@-cp .deps/$(*F).pp .deps/$(*F).P; \
+	tr ' ' '\012' < .deps/$(*F).pp \
+	  | sed -e 's/^\\$$//' -e '/^$$/ d' -e '/:$$/ d' -e 's/$$/ :/' \
+	    >> .deps/$(*F).P; \
+	rm .deps/$(*F).pp
+
+%.lo: %.c
+	@echo '$(LTCOMPILE) -c $<'; \
+	$(LTCOMPILE) -Wp,-MD,.deps/$(*F).pp -c $<
+	@-sed -e 's/^\([^:]*\)\.o[ 	]*:/\1.lo \1.o :/' \
+	  < .deps/$(*F).pp > .deps/$(*F).P; \
+	tr ' ' '\012' < .deps/$(*F).pp \
+	  | sed -e 's/^\\$$//' -e '/^$$/ d' -e '/:$$/ d' -e 's/$$/ :/' \
+	    >> .deps/$(*F).P; \
+	rm -f .deps/$(*F).pp
+info-am:
+info: info-am
+dvi-am:
+dvi: dvi-am
+check-am: all-am
+check: check-am
+installcheck-am:
+installcheck: installcheck-am
+install-exec-am: install-binPROGRAMS
+install-exec: install-exec-am
+
+install-data-am:
+install-data: install-data-am
+
+install-am: all-am
+	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
+install: install-am
+uninstall-am: uninstall-binPROGRAMS
+uninstall: uninstall-am
+all-am: Makefile $(PROGRAMS)
+all-redirect: all-am
+install-strip:
+	$(MAKE) $(AM_MAKEFLAGS) AM_INSTALL_PROGRAM_FLAGS=-s install
+installdirs:
+	$(mkinstalldirs)  $(DESTDIR)$(bindir)
+
+
+mostlyclean-generic:
+
+clean-generic:
+
+distclean-generic:
+	-rm -f Makefile $(CONFIG_CLEAN_FILES)
+	-rm -f config.cache config.log stamp-h stamp-h[0-9]*
+
+maintainer-clean-generic:
+mostlyclean-am:  mostlyclean-binPROGRAMS mostlyclean-compile \
+		mostlyclean-tags mostlyclean-depend mostlyclean-generic
+
+mostlyclean: mostlyclean-am
+
+clean-am:  clean-binPROGRAMS clean-compile clean-tags clean-depend \
+		clean-generic mostlyclean-am
+
+clean: clean-am
+
+distclean-am:  distclean-binPROGRAMS distclean-compile distclean-tags \
+		distclean-depend distclean-generic clean-am
+
+distclean: distclean-am
+
+maintainer-clean-am:  maintainer-clean-binPROGRAMS \
+		maintainer-clean-compile maintainer-clean-tags \
+		maintainer-clean-depend maintainer-clean-generic \
+		distclean-am
+	@echo "This command is intended for maintainers to use;"
+	@echo "it deletes files that may require special tools to rebuild."
+
+maintainer-clean: maintainer-clean-am
+
+.PHONY: mostlyclean-binPROGRAMS distclean-binPROGRAMS clean-binPROGRAMS \
+maintainer-clean-binPROGRAMS uninstall-binPROGRAMS install-binPROGRAMS \
+mostlyclean-compile distclean-compile clean-compile \
+maintainer-clean-compile tags mostlyclean-tags distclean-tags \
+clean-tags maintainer-clean-tags distdir mostlyclean-depend \
+distclean-depend clean-depend maintainer-clean-depend info-am info \
+dvi-am dvi check check-am installcheck-am installcheck install-exec-am \
+install-exec install-data-am install-data install-am install \
+uninstall-am uninstall all-redirect all-am all installdirs \
+mostlyclean-generic distclean-generic clean-generic \
+maintainer-clean-generic clean mostlyclean distclean maintainer-clean
+
+
+# Tell versions [3.59,3.63) of GNU make to not export all variables.
+# Otherwise a system limit (for SysV at least) may be exceeded.
+.NOEXPORT:

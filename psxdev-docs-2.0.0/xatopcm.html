@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html lang=en><head>
+<title>psxdev.de: extract XA sectors and convert them back to PCM audio</title>
+<meta http-equiv="content-type" content="text/html;">
+<link rel=stylesheet type="text/css" href="psxdev.css">
+</head><body background="images/bg.png" color=#000000 bgcolor=#999999>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>extract XA sectors and convert them back to PCM audio</TD><TD ALIGN=RIGHT>[<A HREF=index.html>top</A>|<A HREF=overview.html>sitemap</A>|<A HREF=download.html>download</A>|<A HREF=documentation.html>docs</A>]</TD></TR></TABLE>
+<hr size=2 noshade>
+<center><img src=images/psxtux2.png border=0 width=78 height=90><img src=images/logo.png width=496 height=90></center>
+<h1>extract XA sectors and convert them back to PCM audio</h1>
+
+<table  width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center><table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#FFFFFF><td width=100% valign=top>
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE><tr VALIGN=top><td align=left>
+<B>xatopcm</B> - extract XA sectors and convert them back to PCM audio</td><td align=right>
+<FONT SIZE=-2><A HREF="mailto:dbalster@psxdev.de">Daniel Balster</A>/psxdev-tools
+</FONT></td></tr></table>
+<ul><li><b>SYNOPSIS OF xatopcm</b><br>
+<CODE><PRE>
+</PRE></CODE></ul>
+<ul><li><b>DESCRIPTION OF xatopcm</b><br>
+<B>xatopcm</B> allows you to extract XA audio as PC-typical PCM data (raw audio data). It automatically writes multiple files if a stream contains more than one audio track and detects mono/stereo and 18.9/37.8 KHz. I wrote this utility mainly to convert some of my favorite game music scores to MP3 for my portable...
+</ul>
+<ul><li><b>EXAMPLES FOR xatopcm</b><br>
+xatopcm /mnt/cdrom/music.xa music_
+
+this will write out as many music tracks XXX can find with the prefix <i>music_</i> to the current directory. Please note that the CD-ROM must be mounted in /mnt/cdrom and music.xa must be in XA format.
+</ul>
+<ul><li><b>NOTES ON xatopcm</b><br>
+It is not allowed to use this utility to create public music archives!
+</ul>
+<p>&nbsp;</p></table></td></tr></table><hr width=0 size=0>
+<P ALIGN=CENTER><A HREF=psxdev-tools.html>back to index</A></P>
+<hr size=2 noshade>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>
+<address>Created with <a href=psxdev.pl>psxdev.pl</a></address>
+</td><td align=right>
+<address>Copyright &copy;2000
+ by <a href="mailto:dbalster@psxdev.de">Daniel Balster</a></address>
+</td></tr></table>
+</body></html>

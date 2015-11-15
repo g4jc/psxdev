@@ -1,0 +1,214 @@
+diff -crN psxdev-gcc.orig/config.sub psxdev-gcc/config.sub
+*** psxdev-gcc.orig/config.sub	Wed Aug  4 10:09:26 1999
+--- psxdev-gcc/config.sub	Sun Feb 27 23:18:04 2000
+***************
+*** 677,682 ****
+--- 677,686 ----
+  	ps2)
+  		basic_machine=i386-ibm
+  		;;
++ 	psx*)
++ 		basic_machine=mips-sony
++ 		os=-psx
++ 		;;
+  	rom68k)						# EGCS LOCAL
+  		basic_machine=m68k-rom68k
+  		os=-coff
+***************
+*** 937,943 ****
+  	      | -udi* | -eabi* | -lites* | -ieee* | -go32* | -aux* \
+  	      | -cygwin* | -pe* | -psos* | -moss* | -proelf* | -rtems* \
+  	      | -mingw32* | -linux-gnu* | -uxpv* | -beos* | -mpeix* | -udk* \
+! 	      | -interix* | -uwin* )
+  	# Remember, each alternative MUST END IN *, to match a version number.
+  		;;
+  	# EGCS LOCAL
+--- 941,947 ----
+  	      | -udi* | -eabi* | -lites* | -ieee* | -go32* | -aux* \
+  	      | -cygwin* | -pe* | -psos* | -moss* | -proelf* | -rtems* \
+  	      | -mingw32* | -linux-gnu* | -uxpv* | -beos* | -mpeix* | -udk* \
+! 	      | -interix* | -uwin* | -psx*)
+  	# Remember, each alternative MUST END IN *, to match a version number.
+  		;;
+  	# EGCS LOCAL
+diff -crN psxdev-gcc.orig/gcc/config/mips/mipspsx.h psxdev-gcc/gcc/config/mips/mipspsx.h
+*** psxdev-gcc.orig/gcc/config/mips/mipspsx.h	Thu Jan  1 01:00:00 1970
+--- psxdev-gcc/gcc/config/mips/mipspsx.h	Sun Feb 27 23:17:23 2000
+***************
+*** 0 ****
+--- 1,77 ----
++ /* Definitions of target machine for GNU compiler.  Little endian MIPS
++    version without GOFAST floating point library.
++    Copyright (C) 1994 Free Software Foundation, Inc.
++ 
++ This file is part of GNU CC.
++ 
++ GNU CC is free software; you can redistribute it and/or modify
++ it under the terms of the GNU General Public License as published by
++ the Free Software Foundation; either version 2, or (at your option)
++ any later version.
++ 
++ GNU CC is distributed in the hope that it will be useful,
++ but WITHOUT ANY WARRANTY; without even the implied warranty of
++ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ GNU General Public License for more details.
++ 
++ You should have received a copy of the GNU General Public License
++ along with GNU CC; see the file COPYING.  If not, write to
++ the Free Software Foundation, 59 Temple Place - Suite 330,
++ Boston, MA 02111-1307, USA.  */
++ 
++ /* This is a little endian version of ecoff.h.  */
++ 
++ #define TARGET_ENDIAN_DEFAULT 0
++ #define PREFERRED_DEBUGGING_TYPE DBX_DEBUG
++ 
++ #define MACHINE_TYPE  "Sony PlayStation"
++ 
++ #define CC1_SPEC "\
++ %{gline:%{!g:%{!g0:%{!g1:%{!g2: -g1}}}}} \
++ %{mips1:-mfp32 -mgp32}%{mips2:-mfp32 -mgp32}\
++ %{mips3:%{!msingle-float:%{!m4650:-mfp64}} -mgp64} \
++ %{mips4:%{!msingle-float:%{!m4650:-mfp64}} -mgp64} \
++ %{mfp64:%{msingle-float:%emay not use both -mfp64 and -msingle-float}} \
++ %{mfp64:%{m4650:%emay not use both -mfp64 and -m4650}} \
++ %{m4650:-mcpu=r4650} \
++ %{!mhard-float: -msoft-float} \
++ %{G*} %{EB:-meb} %{EL:-mel} %{EB:%{EL:%emay not use both -EB and -EL}} \
++ %{pic-none:   -mno-half-pic} \
++ %{pic-lib:    -mhalf-pic} \
++ %{pic-extern: -mhalf-pic} \
++ %{pic-calls:  -mhalf-pic} \
++ %{save-temps: }"
++ 
++ 
++ #include "mips/ecoff.h"
++ 
++ #ifdef    INIT_TARGET_OPTABS
++ #undef    INIT_TARGET_OPTABS
++ #endif
++ #ifdef    US_SOFTWARE_GOFAST
++ #undef    US_SOFTWARE_GOFAST
++ #endif
++ #ifdef    GOFAST_CLEAR_NEG_FLOAT_OPTAB
++ #undef    GOFAST_CLEAR_NEG_FLOAT_OPTAB
++ #endif
++ #ifdef    GOFAST_RENAME_LIBCALLS
++ #undef    GOFAST_RENAME_LIBCALLS
++ #endif
++ 
++ #undef CPP_PREDEFINES
++ #define CPP_PREDEFINES "-Dmips -DMIPSEL -DR3000 -D_mips -D_MIPSEL -D_R3000"
++ 
++ #ifdef    STARTFILE_SPEC
++ #undef    STARTFILE_SPEC
++ #endif
++ #define   STARTFILE_SPEC "psx-crt.o%s"
++ 
++ #ifdef    LIB_SPEC
++ #undef    LIB_SPEC
++ #endif
++ #define   LIB_SPEC ""
++ 
++ #ifdef    LIBGCC_SPEC
++ #undef    LIBGCC_SPEC
++ #endif
++ #define   LIBGCC_SPEC "%{!shared:}"
+diff -crN psxdev-gcc.orig/gcc/config/mips/t-mipspsx psxdev-gcc/gcc/config/mips/t-mipspsx
+*** psxdev-gcc.orig/gcc/config/mips/t-mipspsx	Thu Jan  1 01:00:00 1970
+--- psxdev-gcc/gcc/config/mips/t-mipspsx	Sun Feb 27 23:16:41 2000
+***************
+*** 0 ****
+--- 1,75 ----
++ CONFIG2_H = $(srcdir)/config/mips/ecoff.h
++ 
++ # We have a premade insn-attrtab.c to save the hour it takes to run genattrtab.
++ # PREMADE_ATTRTAB = $(srcdir)/config/mips/mips-at.c
++ # PREMADE_ATTRTAB_MD = $(srcdir)/config/mips/mips-at.md
++ 
++ # Suppress building libgcc1.a, since the MIPS compiler port is complete
++ # and does not need anything from libgcc1.a.
++ LIBGCC1 =
++ CROSS_LIBGCC1 =
++ 
++ # We must build libgcc2.a with -G 0, in case the user wants to link
++ # without the $gp register.
++ LIBGCC2_CFLAGS = -O2 $(LIBGCC2_INCLUDES) $(GCC_CFLAGS) -g1 -G 0
++ 
++ # These are really part of libgcc1, but this will cause them to be
++ # built correctly, so... [taken from t-sparclite]
++ LIB2FUNCS_EXTRA = fp-bit.c dp-bit.c
++ 
++ dp-bit.c: $(srcdir)/config/fp-bit.c
++ 	echo '#ifdef __MIPSEL__' > dp-bit.c
++ 	echo '#define FLOAT_BIT_ORDER_MISMATCH' >> dp-bit.c
++ 	echo '#endif' >> dp-bit.c
++ #	echo '#define US_SOFTWARE_GOFAST' >> dp-bit.c
++ 	cat $(srcdir)/config/fp-bit.c >> dp-bit.c
++ 
++ fp-bit.c: $(srcdir)/config/fp-bit.c
++ 	echo '#define FLOAT' > fp-bit.c
++ 	echo '#ifdef __MIPSEL__' >> fp-bit.c
++ 	echo '#define FLOAT_BIT_ORDER_MISMATCH' >> fp-bit.c
++ 	echo '#endif' >> fp-bit.c
++ #	echo '#define US_SOFTWARE_GOFAST' >> fp-bit.c
++ 	cat $(srcdir)/config/fp-bit.c >> fp-bit.c
++ 
++ # Build the libraries for both hard and soft floating point
++ 
++ MULTILIB_OPTIONS = #msoft-float
++ MULTILIB_DIRNAMES = #soft-float
++ MULTILIB_MATCHES =
++ 
++ LIBGCC = #stmp-multilib
++ INSTALL_LIBGCC = #install-multilib
++ 
++ # Add additional dependencies to recompile selected modules whenever the
++ # tm.h file changes.  The files compiled are:
++ #
++ # gcc.c 	  (*_SPEC changes)
++ # toplev.c    (new switches + assembly output changes)
++ # sdbout.c    (debug format changes)
++ # dbxout.c    (debug format changes)
++ # dwarfout.c  (debug format changes)
++ # final.c	  (assembly output changes)
++ # varasm.c    (assembly output changes)
++ # cse.c 	  (cost functions)
++ # insn-output.c   (possible ifdef changes in tm.h)
++ # regclass.c  (fixed/call used register changes)
++ # cccp.c	  (new preprocessor macros, -v version #)
++ # explow.c    (GO_IF_LEGITIMATE_ADDRESS)
++ # recog.c	  (GO_IF_LEGITIMATE_ADDRESS)
++ # reload.c    (GO_IF_LEGITIMATE_ADDRESS)
++ 
++ gcc.o: $(CONFIG2_H)
++ toplev.o: $(CONFIG2_H)
++ sdbout.o: $(CONFIG2_H)
++ dbxout.o: $(CONFIG2_H)
++ dwarfout.o: $(CONFIG2_H)
++ final.o: $(CONFIG2_H)
++ varasm.o: $(CONFIG2_H)
++ cse.o: $(CONFIG2_H)
++ insn-output.o: $(CONFIG2_H)
++ regclass.o: $(CONFIG2_H)
++ cccp.o: $(CONFIG2_H)
++ explow.o: $(CONFIG2_H)
++ recog.o: $(CONFIG2_H)
++ reload.o: $(CONFIG2_H)
+diff -crN psxdev-gcc.orig/gcc/configure.in psxdev-gcc/gcc/configure.in
+*** psxdev-gcc.orig/gcc/configure.in	Wed Oct 13 09:58:02 1999
+--- psxdev-gcc/gcc/configure.in	Sun Feb 27 23:16:07 2000
+***************
+*** 2591,2596 ****
+--- 2591,2601 ----
+  		;;
+  	mips-*-gnu*)
+  		;;
++ 	mips-sony-psx*)
++ 		cpu_type=mips
++ 		tm_file="mips/mipspsx.h"
++ 		tmake_file="mips/t-mipspsx"
++ 		;;
+  	mipsel-*-ecoff*)
+  		tm_file=mips/ecoffl.h
+  		if test x$stabs = xyes; then

@@ -1,0 +1,2063 @@
+<?xml version="1.0"?>
+<GTK-Interface>
+
+<project>
+  <name>Interactor</name>
+  <program_name>psxinteractor</program_name>
+  <directory></directory>
+  <source_directory>src</source_directory>
+  <pixmaps_directory>pixmaps</pixmaps_directory>
+  <language>C</language>
+  <gnome_support>True</gnome_support>
+  <gettext_support>True</gettext_support>
+  <use_widget_names>False</use_widget_names>
+  <output_main_file>True</output_main_file>
+  <output_support_files>True</output_support_files>
+  <output_build_files>True</output_build_files>
+  <backup_source_files>True</backup_source_files>
+  <main_source_file>interface.c</main_source_file>
+  <main_header_file>interface.h</main_header_file>
+  <handler_source_file>callbacks.c</handler_source_file>
+  <handler_header_file>callbacks.h</handler_header_file>
+  <support_source_file>support.c</support_source_file>
+  <support_header_file>support.h</support_header_file>
+  <output_translatable_strings>True</output_translatable_strings>
+  <translatable_strings_file>translation.c</translatable_strings_file>
+</project>
+
+<widget>
+  <class>GnomeApp</class>
+  <name>app</name>
+  <signal>
+    <name>delete_event</name>
+    <handler>gtk_main_quit</handler>
+    <last_modification_time>Fri, 24 Jul 1998 23:26:10 GMT</last_modification_time>
+  </signal>
+  <title>PSXDEV Interactor</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <allow_shrink>False</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>False</auto_shrink>
+  <enable_layout_config>True</enable_layout_config>
+
+  <widget>
+    <class>GnomeDock</class>
+    <child_name>GnomeApp:dock</child_name>
+    <name>dock1</name>
+    <allow_floating>True</allow_floating>
+    <child>
+      <padding>0</padding>
+      <expand>True</expand>
+      <fill>True</fill>
+    </child>
+
+    <widget>
+      <class>GnomeDockItem</class>
+      <name>dockitem1</name>
+      <border_width>2</border_width>
+      <placement>GNOME_DOCK_TOP</placement>
+      <band>0</band>
+      <position>0</position>
+      <offset>0</offset>
+      <locked>False</locked>
+      <exclusive>True</exclusive>
+      <never_floating>False</never_floating>
+      <never_vertical>True</never_vertical>
+      <never_horizontal>False</never_horizontal>
+      <shadow_type>GTK_SHADOW_OUT</shadow_type>
+
+      <widget>
+	<class>GtkMenuBar</class>
+	<name>menubar1</name>
+	<shadow_type>GTK_SHADOW_NONE</shadow_type>
+
+	<widget>
+	  <class>GtkMenuItem</class>
+	  <name>file1</name>
+	  <stock_item>GNOMEUIINFO_MENU_FILE_TREE</stock_item>
+
+	  <widget>
+	    <class>GtkMenu</class>
+	    <name>file1_menu</name>
+
+	    <widget>
+	      <class>GtkPixmapMenuItem</class>
+	      <name>revert1</name>
+	      <accelerator>
+		<modifiers>GDK_CONTROL_MASK</modifiers>
+		<key>GDK_R</key>
+		<signal>activate</signal>
+	      </accelerator>
+	      <signal>
+		<name>activate</name>
+		<handler>on_open2_clicked</handler>
+		<last_modification_time>Fri, 24 Jul 1998 22:58:59 GMT</last_modification_time>
+	      </signal>
+	      <label>_Revert</label>
+	      <right_justify>False</right_justify>
+	      <stock_icon>GNOME_STOCK_MENU_REVERT</stock_icon>
+	    </widget>
+
+	    <widget>
+	      <class>GtkPixmapMenuItem</class>
+	      <name>exit1</name>
+	      <signal>
+		<name>activate</name>
+		<handler>on_exit1_activate</handler>
+		<last_modification_time>Fri, 24 Jul 1998 15:35:22 GMT</last_modification_time>
+	      </signal>
+	      <stock_item>GNOMEUIINFO_MENU_EXIT_ITEM</stock_item>
+	    </widget>
+	  </widget>
+	</widget>
+
+	<widget>
+	  <class>GtkMenuItem</class>
+	  <name>help1</name>
+	  <stock_item>GNOMEUIINFO_MENU_HELP_TREE</stock_item>
+
+	  <widget>
+	    <class>GtkMenu</class>
+	    <name>help1_menu</name>
+
+	    <widget>
+	      <class>GtkPixmapMenuItem</class>
+	      <name>about1</name>
+	      <signal>
+		<name>activate</name>
+		<handler>on_about1_activate</handler>
+		<last_modification_time>Fri, 24 Jul 1998 15:35:22 GMT</last_modification_time>
+	      </signal>
+	      <stock_item>GNOMEUIINFO_MENU_ABOUT_ITEM</stock_item>
+	    </widget>
+	  </widget>
+	</widget>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GnomeDockItem</class>
+      <name>dockitem2</name>
+      <border_width>1</border_width>
+      <placement>GNOME_DOCK_TOP</placement>
+      <band>1</band>
+      <position>0</position>
+      <offset>0</offset>
+      <locked>False</locked>
+      <exclusive>True</exclusive>
+      <never_floating>False</never_floating>
+      <never_vertical>False</never_vertical>
+      <never_horizontal>False</never_horizontal>
+      <shadow_type>GTK_SHADOW_OUT</shadow_type>
+
+      <widget>
+	<class>GtkToolbar</class>
+	<name>toolbar1</name>
+	<border_width>1</border_width>
+	<orientation>GTK_ORIENTATION_HORIZONTAL</orientation>
+	<type>GTK_TOOLBAR_BOTH</type>
+	<space_size>16</space_size>
+	<space_style>GTK_TOOLBAR_SPACE_LINE</space_style>
+	<relief>GTK_RELIEF_NONE</relief>
+	<tooltips>True</tooltips>
+
+	<widget>
+	  <class>GtkButton</class>
+	  <child_name>Toolbar:button</child_name>
+	  <name>open</name>
+	  <tooltip>Open File</tooltip>
+	  <signal>
+	    <name>clicked</name>
+	    <handler>on_open_clicked</handler>
+	    <last_modification_time>Fri, 24 Jul 1998 21:04:47 GMT</last_modification_time>
+	  </signal>
+	  <label>Revert</label>
+	  <stock_pixmap>GNOME_STOCK_PIXMAP_REVERT</stock_pixmap>
+	</widget>
+
+	<widget>
+	  <class>GtkButton</class>
+	  <child_name>Toolbar:button</child_name>
+	  <name>resume</name>
+	  <tooltip>Clear Selection</tooltip>
+	  <signal>
+	    <name>clicked</name>
+	    <handler>on_resume_clicked</handler>
+	    <last_modification_time>Fri, 24 Jul 1998 20:37:12 GMT</last_modification_time>
+	  </signal>
+	  <label>Resume</label>
+	  <stock_pixmap>GNOME_STOCK_PIXMAP_TIMER</stock_pixmap>
+	  <child>
+	    <new_group>True</new_group>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GtkButton</class>
+	  <child_name>Toolbar:button</child_name>
+	  <name>halt</name>
+	  <signal>
+	    <name>clicked</name>
+	    <handler>on_halt_clicked</handler>
+	    <last_modification_time>Fri, 24 Jul 1998 20:37:01 GMT</last_modification_time>
+	  </signal>
+	  <label>Halt</label>
+	  <stock_pixmap>GNOME_STOCK_PIXMAP_TIMER_STOP</stock_pixmap>
+	</widget>
+
+	<widget>
+	  <class>GtkButton</class>
+	  <child_name>Toolbar:button</child_name>
+	  <name>reset</name>
+	  <signal>
+	    <name>clicked</name>
+	    <handler>on_reset_clicked</handler>
+	    <last_modification_time>Fri, 24 Jul 1998 20:36:57 GMT</last_modification_time>
+	  </signal>
+	  <label>Reset</label>
+	  <stock_pixmap>GNOME_STOCK_PIXMAP_REFRESH</stock_pixmap>
+	</widget>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkVBox</class>
+      <child_name>GnomeDock:contents</child_name>
+      <name>vbox1</name>
+      <homogeneous>False</homogeneous>
+      <spacing>0</spacing>
+
+      <widget>
+	<class>GtkScrolledWindow</class>
+	<name>scrolledwindow</name>
+	<hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
+	<vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+	<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+	<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GtkCList</class>
+	  <name>clist</name>
+	  <can_focus>True</can_focus>
+	  <signal>
+	    <name>select_row</name>
+	    <handler>on_clist_select_row</handler>
+	    <last_modification_time>Fri, 24 Jul 1998 19:53:21 GMT</last_modification_time>
+	  </signal>
+	  <signal>
+	    <name>unselect_row</name>
+	    <handler>on_clist_unselect_row</handler>
+	    <last_modification_time>Fri, 24 Jul 1998 19:53:23 GMT</last_modification_time>
+	  </signal>
+	  <signal>
+	    <name>unselect_all</name>
+	    <handler>on_clist_unselect_all</handler>
+	    <last_modification_time>Fri, 24 Jul 1998 20:02:13 GMT</last_modification_time>
+	  </signal>
+	  <columns>3</columns>
+	  <column_widths>80,80,80</column_widths>
+	  <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
+	  <show_titles>True</show_titles>
+	  <shadow_type>GTK_SHADOW_IN</shadow_type>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <child_name>CList:title</child_name>
+	    <name>label17</name>
+	    <label>Address</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <child_name>CList:title</child_name>
+	    <name>label18</name>
+	    <label>Type</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <child_name>CList:title</child_name>
+	    <name>label19</name>
+	    <label>Variable Name</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	  </widget>
+	</widget>
+      </widget>
+
+      <widget>
+	<class>GtkFrame</class>
+	<name>frame1</name>
+	<label_xalign>0</label_xalign>
+	<shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GtkTable</class>
+	  <name>table1</name>
+	  <border_width>4</border_width>
+	  <rows>2</rows>
+	  <columns>6</columns>
+	  <homogeneous>True</homogeneous>
+	  <row_spacing>2</row_spacing>
+	  <column_spacing>2</column_spacing>
+
+	  <widget>
+	    <class>GtkButton</class>
+	    <name>B_char</name>
+	    <sensitive>False</sensitive>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>clicked</name>
+	      <handler>on_B_char_clicked</handler>
+	      <last_modification_time>Fri, 24 Jul 1998 19:31:29 GMT</last_modification_time>
+	    </signal>
+	    <label>CHAR</label>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>1</right_attach>
+	      <top_attach>0</top_attach>
+	      <bottom_attach>1</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkButton</class>
+	    <name>B_uchar</name>
+	    <sensitive>False</sensitive>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>clicked</name>
+	      <handler>on_B_uchar_clicked</handler>
+	      <last_modification_time>Fri, 24 Jul 1998 19:31:54 GMT</last_modification_time>
+	    </signal>
+	    <label>UCHAR</label>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>1</right_attach>
+	      <top_attach>1</top_attach>
+	      <bottom_attach>2</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkButton</class>
+	    <name>B_short</name>
+	    <sensitive>False</sensitive>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>clicked</name>
+	      <handler>on_B_short_clicked</handler>
+	      <last_modification_time>Fri, 24 Jul 1998 19:31:33 GMT</last_modification_time>
+	    </signal>
+	    <label>SHORT</label>
+	    <child>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>0</top_attach>
+	      <bottom_attach>1</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkButton</class>
+	    <name>B_ushort</name>
+	    <sensitive>False</sensitive>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>clicked</name>
+	      <handler>on_B_ushort_clicked</handler>
+	      <last_modification_time>Fri, 24 Jul 1998 19:31:50 GMT</last_modification_time>
+	    </signal>
+	    <label>USHORT</label>
+	    <child>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>1</top_attach>
+	      <bottom_attach>2</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkButton</class>
+	    <name>B_long</name>
+	    <sensitive>False</sensitive>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>clicked</name>
+	      <handler>on_B_long_clicked</handler>
+	      <last_modification_time>Fri, 24 Jul 1998 19:31:36 GMT</last_modification_time>
+	    </signal>
+	    <label>LONG</label>
+	    <child>
+	      <left_attach>2</left_attach>
+	      <right_attach>3</right_attach>
+	      <top_attach>0</top_attach>
+	      <bottom_attach>1</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkButton</class>
+	    <name>B_ulong</name>
+	    <sensitive>False</sensitive>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>clicked</name>
+	      <handler>on_B_ulong_clicked</handler>
+	      <last_modification_time>Fri, 24 Jul 1998 19:31:46 GMT</last_modification_time>
+	    </signal>
+	    <label>ULONG</label>
+	    <child>
+	      <left_attach>2</left_attach>
+	      <right_attach>3</right_attach>
+	      <top_attach>1</top_attach>
+	      <bottom_attach>2</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkButton</class>
+	    <name>B_svector</name>
+	    <sensitive>False</sensitive>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>clicked</name>
+	      <handler>on_B_svector_clicked</handler>
+	      <last_modification_time>Fri, 24 Jul 1998 20:49:22 GMT</last_modification_time>
+	    </signal>
+	    <label>SVECTOR</label>
+	    <child>
+	      <left_attach>3</left_attach>
+	      <right_attach>4</right_attach>
+	      <top_attach>0</top_attach>
+	      <bottom_attach>1</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkButton</class>
+	    <name>B_vector</name>
+	    <sensitive>False</sensitive>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>clicked</name>
+	      <handler>on_B_vector_clicked</handler>
+	      <last_modification_time>Fri, 24 Jul 1998 19:31:42 GMT</last_modification_time>
+	    </signal>
+	    <label>VECTOR</label>
+	    <child>
+	      <left_attach>3</left_attach>
+	      <right_attach>4</right_attach>
+	      <top_attach>1</top_attach>
+	      <bottom_attach>2</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkButton</class>
+	    <name>B_matrix</name>
+	    <sensitive>False</sensitive>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>clicked</name>
+	      <handler>on_B_matrix_clicked</handler>
+	      <last_modification_time>Fri, 24 Jul 1998 20:49:26 GMT</last_modification_time>
+	    </signal>
+	    <label>MATRIX</label>
+	    <child>
+	      <left_attach>4</left_attach>
+	      <right_attach>5</right_attach>
+	      <top_attach>0</top_attach>
+	      <bottom_attach>1</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkButton</class>
+	    <name>B_cvector</name>
+	    <sensitive>False</sensitive>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>clicked</name>
+	      <handler>on_B_cvector_clicked</handler>
+	      <last_modification_time>Fri, 24 Jul 1998 20:49:30 GMT</last_modification_time>
+	    </signal>
+	    <label>CVECTOR</label>
+	    <child>
+	      <left_attach>4</left_attach>
+	      <right_attach>5</right_attach>
+	      <top_attach>1</top_attach>
+	      <bottom_attach>2</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkButton</class>
+	    <name>B_rect</name>
+	    <sensitive>False</sensitive>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>clicked</name>
+	      <handler>on_B_rect_clicked</handler>
+	      <last_modification_time>Fri, 24 Jul 1998 23:11:40 GMT</last_modification_time>
+	    </signal>
+	    <label>RECT</label>
+	    <child>
+	      <left_attach>5</left_attach>
+	      <right_attach>6</right_attach>
+	      <top_attach>0</top_attach>
+	      <bottom_attach>1</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkButton</class>
+	    <name>B_toggle</name>
+	    <sensitive>False</sensitive>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>clicked</name>
+	      <handler>on_B_toggle_clicked</handler>
+	      <last_modification_time>Fri, 24 Jul 1998 20:48:57 GMT</last_modification_time>
+	    </signal>
+	    <label>0/1 Toggle</label>
+	    <child>
+	      <left_attach>5</left_attach>
+	      <right_attach>6</right_attach>
+	      <top_attach>1</top_attach>
+	      <bottom_attach>2</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+	</widget>
+      </widget>
+    </widget>
+  </widget>
+
+  <widget>
+    <class>GnomeAppBar</class>
+    <child_name>GnomeApp:appbar</child_name>
+    <name>appbar1</name>
+    <has_progress>True</has_progress>
+    <has_status>True</has_status>
+    <child>
+      <padding>0</padding>
+      <expand>True</expand>
+      <fill>True</fill>
+    </child>
+  </widget>
+</widget>
+
+<widget>
+  <class>GnomeAbout</class>
+  <name>about</name>
+  <signal>
+    <name>clicked</name>
+    <handler>gtk_widget_destroy</handler>
+    <last_modification_time>Fri, 24 Jul 1998 15:38:03 GMT</last_modification_time>
+  </signal>
+  <signal>
+    <name>close</name>
+    <handler>gtk_widget_destroy</handler>
+    <last_modification_time>Fri, 24 Jul 1998 15:38:12 GMT</last_modification_time>
+  </signal>
+  <modal>True</modal>
+  <logo>logo.png</logo>
+  <copyright>Copyright (C) 1999 by Daniel Balster</copyright>
+  <authors>Daniel Balster &lt;dbalster@psxdev.de&gt;
+</authors>
+  <comments>Modify data types on a remote target in realtime</comments>
+</widget>
+
+<widget>
+  <class>GtkWindow</class>
+  <name>window_uchar</name>
+  <signal>
+    <name>delete_event</name>
+    <handler>gtk_widget_destroy</handler>
+    <last_modification_time>Fri, 24 Jul 1998 18:30:56 GMT</last_modification_time>
+  </signal>
+  <title>window_uchar</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <allow_shrink>True</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>True</auto_shrink>
+
+  <widget>
+    <class>GtkHBox</class>
+    <name>hbox5</name>
+    <homogeneous>False</homogeneous>
+    <spacing>0</spacing>
+
+    <widget>
+      <class>GtkButton</class>
+      <name>Q_uchar_reload</name>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>clicked</name>
+	<handler>on_Q_uchar_reload_clicked</handler>
+	<last_modification_time>Fri, 24 Jul 1998 20:06:11 GMT</last_modification_time>
+      </signal>
+      <label>Reload</label>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+    </widget>
+
+    <widget>
+      <class>GtkSpinButton</class>
+      <name>Q_uchar</name>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>changed</name>
+	<handler>on_Q_uchar_changed</handler>
+	<last_modification_time>Fri, 24 Jul 1998 19:06:31 GMT</last_modification_time>
+      </signal>
+      <climb_rate>1</climb_rate>
+      <digits>0</digits>
+      <numeric>False</numeric>
+      <update_policy>GTK_UPDATE_ALWAYS</update_policy>
+      <snap>False</snap>
+      <wrap>True</wrap>
+      <value>0</value>
+      <lower>0</lower>
+      <upper>255</upper>
+      <step>1</step>
+      <page>8</page>
+      <page_size>8</page_size>
+      <child>
+	<padding>0</padding>
+	<expand>True</expand>
+	<fill>True</fill>
+      </child>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkWindow</class>
+  <name>window_char</name>
+  <signal>
+    <name>delete_event</name>
+    <handler>gtk_widget_destroy</handler>
+    <last_modification_time>Fri, 24 Jul 1998 18:30:56 GMT</last_modification_time>
+  </signal>
+  <title>window_char</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <allow_shrink>True</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>True</auto_shrink>
+
+  <widget>
+    <class>GtkHBox</class>
+    <name>hbox2</name>
+    <homogeneous>False</homogeneous>
+    <spacing>0</spacing>
+
+    <widget>
+      <class>GtkButton</class>
+      <name>Q_char_reload</name>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>clicked</name>
+	<handler>on_Q_char_reload_clicked</handler>
+	<last_modification_time>Fri, 24 Jul 1998 20:06:15 GMT</last_modification_time>
+      </signal>
+      <label>Reload</label>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+    </widget>
+
+    <widget>
+      <class>GtkSpinButton</class>
+      <name>Q_char</name>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>changed</name>
+	<handler>on_Q_char_changed</handler>
+	<last_modification_time>Fri, 24 Jul 1998 19:06:22 GMT</last_modification_time>
+      </signal>
+      <climb_rate>1</climb_rate>
+      <digits>0</digits>
+      <numeric>False</numeric>
+      <update_policy>GTK_UPDATE_ALWAYS</update_policy>
+      <snap>False</snap>
+      <wrap>True</wrap>
+      <value>0</value>
+      <lower>-128</lower>
+      <upper>127</upper>
+      <step>1</step>
+      <page>8</page>
+      <page_size>8</page_size>
+      <child>
+	<padding>0</padding>
+	<expand>True</expand>
+	<fill>True</fill>
+      </child>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkWindow</class>
+  <name>window_ushort</name>
+  <signal>
+    <name>delete_event</name>
+    <handler>gtk_widget_destroy</handler>
+    <last_modification_time>Fri, 24 Jul 1998 18:30:56 GMT</last_modification_time>
+  </signal>
+  <title>window_ushort</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <allow_shrink>True</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>True</auto_shrink>
+
+  <widget>
+    <class>GtkHBox</class>
+    <name>hbox3</name>
+    <homogeneous>False</homogeneous>
+    <spacing>0</spacing>
+
+    <widget>
+      <class>GtkButton</class>
+      <name>Q_ushort_reload</name>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>clicked</name>
+	<handler>on_Q_ushort_reload_clicked</handler>
+	<last_modification_time>Fri, 24 Jul 1998 20:06:19 GMT</last_modification_time>
+      </signal>
+      <label>Reload</label>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+    </widget>
+
+    <widget>
+      <class>GtkSpinButton</class>
+      <name>Q_ushort</name>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>changed</name>
+	<handler>on_Q_ushort_changed</handler>
+	<last_modification_time>Fri, 24 Jul 1998 19:06:40 GMT</last_modification_time>
+      </signal>
+      <climb_rate>1</climb_rate>
+      <digits>0</digits>
+      <numeric>False</numeric>
+      <update_policy>GTK_UPDATE_ALWAYS</update_policy>
+      <snap>False</snap>
+      <wrap>True</wrap>
+      <value>0</value>
+      <lower>0</lower>
+      <upper>65535</upper>
+      <step>1</step>
+      <page>256</page>
+      <page_size>256</page_size>
+      <child>
+	<padding>0</padding>
+	<expand>True</expand>
+	<fill>True</fill>
+      </child>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkWindow</class>
+  <name>window_short</name>
+  <signal>
+    <name>delete_event</name>
+    <handler>gtk_widget_destroy</handler>
+    <last_modification_time>Fri, 24 Jul 1998 18:30:56 GMT</last_modification_time>
+  </signal>
+  <title>window_short</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <allow_shrink>True</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>True</auto_shrink>
+
+  <widget>
+    <class>GtkHBox</class>
+    <name>hbox4</name>
+    <homogeneous>False</homogeneous>
+    <spacing>0</spacing>
+
+    <widget>
+      <class>GtkButton</class>
+      <name>Q_short_reload</name>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>clicked</name>
+	<handler>on_Q_short_reload_clicked</handler>
+	<last_modification_time>Fri, 24 Jul 1998 20:06:24 GMT</last_modification_time>
+      </signal>
+      <label>Reload</label>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+    </widget>
+
+    <widget>
+      <class>GtkSpinButton</class>
+      <name>Q_short</name>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>changed</name>
+	<handler>on_Q_short_changed</handler>
+	<last_modification_time>Fri, 24 Jul 1998 19:06:44 GMT</last_modification_time>
+      </signal>
+      <climb_rate>1</climb_rate>
+      <digits>0</digits>
+      <numeric>False</numeric>
+      <update_policy>GTK_UPDATE_ALWAYS</update_policy>
+      <snap>False</snap>
+      <wrap>True</wrap>
+      <value>0</value>
+      <lower>-32768</lower>
+      <upper>32767</upper>
+      <step>1</step>
+      <page>256</page>
+      <page_size>256</page_size>
+      <child>
+	<padding>0</padding>
+	<expand>True</expand>
+	<fill>True</fill>
+      </child>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkWindow</class>
+  <name>window_long</name>
+  <signal>
+    <name>delete_event</name>
+    <handler>gtk_widget_destroy</handler>
+    <last_modification_time>Fri, 24 Jul 1998 18:30:56 GMT</last_modification_time>
+  </signal>
+  <title>window_long</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <allow_shrink>True</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>True</auto_shrink>
+
+  <widget>
+    <class>GtkHBox</class>
+    <name>hbox7</name>
+    <homogeneous>False</homogeneous>
+    <spacing>0</spacing>
+
+    <widget>
+      <class>GtkButton</class>
+      <name>Q_long_reload</name>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>clicked</name>
+	<handler>on_Q_long_reload_clicked</handler>
+	<last_modification_time>Fri, 24 Jul 1998 20:06:41 GMT</last_modification_time>
+      </signal>
+      <label>Reload</label>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+    </widget>
+
+    <widget>
+      <class>GtkSpinButton</class>
+      <name>Q_long</name>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>changed</name>
+	<handler>on_Q_long_changed</handler>
+	<last_modification_time>Fri, 24 Jul 1998 19:06:28 GMT</last_modification_time>
+      </signal>
+      <climb_rate>1</climb_rate>
+      <digits>0</digits>
+      <numeric>False</numeric>
+      <update_policy>GTK_UPDATE_ALWAYS</update_policy>
+      <snap>False</snap>
+      <wrap>True</wrap>
+      <value>0</value>
+      <lower>-2.14748e+09</lower>
+      <upper>2.14748e+09</upper>
+      <step>1</step>
+      <page>256</page>
+      <page_size>256</page_size>
+      <child>
+	<padding>0</padding>
+	<expand>True</expand>
+	<fill>True</fill>
+      </child>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkWindow</class>
+  <name>window_ulong</name>
+  <signal>
+    <name>delete_event</name>
+    <handler>gtk_widget_destroy</handler>
+    <last_modification_time>Fri, 24 Jul 1998 18:30:56 GMT</last_modification_time>
+  </signal>
+  <title>window_ulong</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <allow_shrink>True</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>True</auto_shrink>
+
+  <widget>
+    <class>GtkHBox</class>
+    <name>hbox6</name>
+    <homogeneous>False</homogeneous>
+    <spacing>0</spacing>
+
+    <widget>
+      <class>GtkButton</class>
+      <name>Q_ulong_reload</name>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>clicked</name>
+	<handler>on_Q_ulong_reload_clicked</handler>
+	<last_modification_time>Fri, 24 Jul 1998 20:06:08 GMT</last_modification_time>
+      </signal>
+      <label>Reload</label>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>True</fill>
+      </child>
+    </widget>
+
+    <widget>
+      <class>GtkSpinButton</class>
+      <name>Q_ulong</name>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>changed</name>
+	<handler>on_Q_ulong_changed</handler>
+	<last_modification_time>Fri, 24 Jul 1998 19:06:35 GMT</last_modification_time>
+      </signal>
+      <climb_rate>1</climb_rate>
+      <digits>0</digits>
+      <numeric>False</numeric>
+      <update_policy>GTK_UPDATE_ALWAYS</update_policy>
+      <snap>False</snap>
+      <wrap>True</wrap>
+      <value>0</value>
+      <lower>0</lower>
+      <upper>4.29497e+09</upper>
+      <step>1</step>
+      <page>10</page>
+      <page_size>10</page_size>
+      <child>
+	<padding>0</padding>
+	<expand>True</expand>
+	<fill>True</fill>
+      </child>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkWindow</class>
+  <name>window_svector</name>
+  <signal>
+    <name>delete_event</name>
+    <handler>gtk_widget_destroy</handler>
+    <last_modification_time>Fri, 24 Jul 1998 18:30:56 GMT</last_modification_time>
+  </signal>
+  <title>window_svector</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <allow_shrink>True</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>True</auto_shrink>
+
+  <widget>
+    <class>GtkVBox</class>
+    <name>vbox8</name>
+    <homogeneous>False</homogeneous>
+    <spacing>0</spacing>
+
+    <widget>
+      <class>GtkButton</class>
+      <name>Q_svector_reload</name>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>clicked</name>
+	<handler>on_Q_svector_reload_clicked</handler>
+	<last_modification_time>Fri, 24 Jul 1998 20:06:32 GMT</last_modification_time>
+      </signal>
+      <label>Reload</label>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+    </widget>
+
+    <widget>
+      <class>GtkSpinButton</class>
+      <name>Q_svector_x</name>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>changed</name>
+	<handler>on_Q_svector_changed</handler>
+	<last_modification_time>Fri, 24 Jul 1998 19:06:01 GMT</last_modification_time>
+      </signal>
+      <climb_rate>1</climb_rate>
+      <digits>0</digits>
+      <numeric>False</numeric>
+      <update_policy>GTK_UPDATE_ALWAYS</update_policy>
+      <snap>False</snap>
+      <wrap>True</wrap>
+      <value>0</value>
+      <lower>-32768</lower>
+      <upper>32767</upper>
+      <step>1</step>
+      <page>256</page>
+      <page_size>256</page_size>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+    </widget>
+
+    <widget>
+      <class>GtkSpinButton</class>
+      <name>Q_svector_y</name>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>changed</name>
+	<handler>on_Q_svector_changed</handler>
+	<last_modification_time>Fri, 24 Jul 1998 19:06:05 GMT</last_modification_time>
+      </signal>
+      <climb_rate>1</climb_rate>
+      <digits>0</digits>
+      <numeric>False</numeric>
+      <update_policy>GTK_UPDATE_ALWAYS</update_policy>
+      <snap>False</snap>
+      <wrap>True</wrap>
+      <value>0</value>
+      <lower>-32768</lower>
+      <upper>32767</upper>
+      <step>1</step>
+      <page>256</page>
+      <page_size>256</page_size>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+    </widget>
+
+    <widget>
+      <class>GtkSpinButton</class>
+      <name>Q_svector_z</name>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>changed</name>
+	<handler>on_Q_svector_changed</handler>
+	<last_modification_time>Fri, 24 Jul 1998 19:06:09 GMT</last_modification_time>
+      </signal>
+      <climb_rate>1</climb_rate>
+      <digits>0</digits>
+      <numeric>False</numeric>
+      <update_policy>GTK_UPDATE_ALWAYS</update_policy>
+      <snap>False</snap>
+      <wrap>True</wrap>
+      <value>0</value>
+      <lower>-32768</lower>
+      <upper>32767</upper>
+      <step>1</step>
+      <page>256</page>
+      <page_size>256</page_size>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkWindow</class>
+  <name>window_vector</name>
+  <signal>
+    <name>delete_event</name>
+    <handler>gtk_widget_destroy</handler>
+    <last_modification_time>Fri, 24 Jul 1998 18:30:56 GMT</last_modification_time>
+  </signal>
+  <title>window_vector</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <allow_shrink>True</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>True</auto_shrink>
+
+  <widget>
+    <class>GtkVBox</class>
+    <name>vbox9</name>
+    <homogeneous>False</homogeneous>
+    <spacing>0</spacing>
+
+    <widget>
+      <class>GtkButton</class>
+      <name>Q_vector_reload</name>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>clicked</name>
+	<handler>on_Q_vector_reload_clicked</handler>
+	<last_modification_time>Fri, 24 Jul 1998 20:06:28 GMT</last_modification_time>
+      </signal>
+      <label>Reload</label>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+    </widget>
+
+    <widget>
+      <class>GtkSpinButton</class>
+      <name>Q_vector_x</name>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>changed</name>
+	<handler>on_Q_vector_changed</handler>
+	<last_modification_time>Fri, 24 Jul 1998 19:05:39 GMT</last_modification_time>
+      </signal>
+      <climb_rate>1</climb_rate>
+      <digits>0</digits>
+      <numeric>False</numeric>
+      <update_policy>GTK_UPDATE_ALWAYS</update_policy>
+      <snap>False</snap>
+      <wrap>True</wrap>
+      <value>0</value>
+      <lower>-2.14748e+09</lower>
+      <upper>2.14748e+09</upper>
+      <step>1</step>
+      <page>256</page>
+      <page_size>256</page_size>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+    </widget>
+
+    <widget>
+      <class>GtkSpinButton</class>
+      <name>Q_vector_y</name>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>changed</name>
+	<handler>on_Q_vector_changed</handler>
+	<last_modification_time>Fri, 24 Jul 1998 19:05:43 GMT</last_modification_time>
+      </signal>
+      <climb_rate>1</climb_rate>
+      <digits>0</digits>
+      <numeric>False</numeric>
+      <update_policy>GTK_UPDATE_ALWAYS</update_policy>
+      <snap>False</snap>
+      <wrap>True</wrap>
+      <value>0</value>
+      <lower>-2.14748e+09</lower>
+      <upper>2.14748e+09</upper>
+      <step>1</step>
+      <page>256</page>
+      <page_size>256</page_size>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+    </widget>
+
+    <widget>
+      <class>GtkSpinButton</class>
+      <name>Q_vector_z</name>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>changed</name>
+	<handler>on_Q_vector_changed</handler>
+	<last_modification_time>Fri, 24 Jul 1998 19:05:47 GMT</last_modification_time>
+      </signal>
+      <climb_rate>1</climb_rate>
+      <digits>0</digits>
+      <numeric>False</numeric>
+      <update_policy>GTK_UPDATE_ALWAYS</update_policy>
+      <snap>False</snap>
+      <wrap>True</wrap>
+      <value>0</value>
+      <lower>-2.14748e+09</lower>
+      <upper>2.14748e+09</upper>
+      <step>1</step>
+      <page>256</page>
+      <page_size>256</page_size>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkWindow</class>
+  <name>window_matrix</name>
+  <signal>
+    <name>delete_event</name>
+    <handler>gtk_widget_destroy</handler>
+    <last_modification_time>Fri, 24 Jul 1998 18:30:56 GMT</last_modification_time>
+  </signal>
+  <title>window_matrix</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <allow_shrink>True</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>True</auto_shrink>
+
+  <widget>
+    <class>GtkVBox</class>
+    <name>vbox10</name>
+    <homogeneous>False</homogeneous>
+    <spacing>0</spacing>
+
+    <widget>
+      <class>GtkButton</class>
+      <name>Q_matrix_reload</name>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>clicked</name>
+	<handler>on_Q_matrix_reload_clicked</handler>
+	<last_modification_time>Fri, 24 Jul 1998 20:06:45 GMT</last_modification_time>
+      </signal>
+      <label>Reload</label>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+    </widget>
+
+    <widget>
+      <class>GtkTable</class>
+      <name>table2</name>
+      <rows>3</rows>
+      <columns>3</columns>
+      <homogeneous>True</homogeneous>
+      <row_spacing>0</row_spacing>
+      <column_spacing>0</column_spacing>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+
+      <widget>
+	<class>GtkSpinButton</class>
+	<name>Q_matrix_a13</name>
+	<can_focus>True</can_focus>
+	<signal>
+	  <name>changed</name>
+	  <handler>on_Q_matrix_changed</handler>
+	  <last_modification_time>Fri, 24 Jul 1998 19:05:13 GMT</last_modification_time>
+	</signal>
+	<climb_rate>1</climb_rate>
+	<digits>0</digits>
+	<numeric>False</numeric>
+	<update_policy>GTK_UPDATE_ALWAYS</update_policy>
+	<snap>False</snap>
+	<wrap>True</wrap>
+	<value>0</value>
+	<lower>-32768</lower>
+	<upper>32767</upper>
+	<step>1</step>
+	<page>256</page>
+	<page_size>256</page_size>
+	<child>
+	  <left_attach>2</left_attach>
+	  <right_attach>3</right_attach>
+	  <top_attach>0</top_attach>
+	  <bottom_attach>1</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>True</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkSpinButton</class>
+	<name>Q_matrix_a33</name>
+	<can_focus>True</can_focus>
+	<signal>
+	  <name>changed</name>
+	  <handler>on_Q_matrix_changed</handler>
+	  <last_modification_time>Fri, 24 Jul 1998 19:05:20 GMT</last_modification_time>
+	</signal>
+	<climb_rate>1</climb_rate>
+	<digits>0</digits>
+	<numeric>False</numeric>
+	<update_policy>GTK_UPDATE_ALWAYS</update_policy>
+	<snap>False</snap>
+	<wrap>True</wrap>
+	<value>0</value>
+	<lower>-32768</lower>
+	<upper>32767</upper>
+	<step>1</step>
+	<page>256</page>
+	<page_size>256</page_size>
+	<child>
+	  <left_attach>2</left_attach>
+	  <right_attach>3</right_attach>
+	  <top_attach>2</top_attach>
+	  <bottom_attach>3</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>True</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkSpinButton</class>
+	<name>Q_matrix_a23</name>
+	<can_focus>True</can_focus>
+	<signal>
+	  <name>changed</name>
+	  <handler>on_Q_matrix_changed</handler>
+	  <last_modification_time>Fri, 24 Jul 1998 19:05:17 GMT</last_modification_time>
+	</signal>
+	<climb_rate>1</climb_rate>
+	<digits>0</digits>
+	<numeric>False</numeric>
+	<update_policy>GTK_UPDATE_ALWAYS</update_policy>
+	<snap>False</snap>
+	<wrap>True</wrap>
+	<value>0</value>
+	<lower>-32768</lower>
+	<upper>32767</upper>
+	<step>1</step>
+	<page>256</page>
+	<page_size>256</page_size>
+	<child>
+	  <left_attach>2</left_attach>
+	  <right_attach>3</right_attach>
+	  <top_attach>1</top_attach>
+	  <bottom_attach>2</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>True</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkSpinButton</class>
+	<name>Q_matrix_a12</name>
+	<can_focus>True</can_focus>
+	<signal>
+	  <name>changed</name>
+	  <handler>on_Q_matrix_changed</handler>
+	  <last_modification_time>Fri, 24 Jul 1998 19:05:02 GMT</last_modification_time>
+	</signal>
+	<climb_rate>1</climb_rate>
+	<digits>0</digits>
+	<numeric>False</numeric>
+	<update_policy>GTK_UPDATE_ALWAYS</update_policy>
+	<snap>False</snap>
+	<wrap>True</wrap>
+	<value>0</value>
+	<lower>-32768</lower>
+	<upper>32767</upper>
+	<step>1</step>
+	<page>256</page>
+	<page_size>256</page_size>
+	<child>
+	  <left_attach>1</left_attach>
+	  <right_attach>2</right_attach>
+	  <top_attach>0</top_attach>
+	  <bottom_attach>1</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>True</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkSpinButton</class>
+	<name>Q_matrix_a22</name>
+	<can_focus>True</can_focus>
+	<signal>
+	  <name>changed</name>
+	  <handler>on_Q_matrix_changed</handler>
+	  <last_modification_time>Fri, 24 Jul 1998 19:05:06 GMT</last_modification_time>
+	</signal>
+	<climb_rate>1</climb_rate>
+	<digits>0</digits>
+	<numeric>False</numeric>
+	<update_policy>GTK_UPDATE_ALWAYS</update_policy>
+	<snap>False</snap>
+	<wrap>True</wrap>
+	<value>0</value>
+	<lower>-32768</lower>
+	<upper>32767</upper>
+	<step>1</step>
+	<page>256</page>
+	<page_size>256</page_size>
+	<child>
+	  <left_attach>1</left_attach>
+	  <right_attach>2</right_attach>
+	  <top_attach>1</top_attach>
+	  <bottom_attach>2</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>True</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkSpinButton</class>
+	<name>Q_matrix_a32</name>
+	<can_focus>True</can_focus>
+	<signal>
+	  <name>changed</name>
+	  <handler>on_Q_matrix_changed</handler>
+	  <last_modification_time>Fri, 24 Jul 1998 19:05:09 GMT</last_modification_time>
+	</signal>
+	<climb_rate>1</climb_rate>
+	<digits>0</digits>
+	<numeric>False</numeric>
+	<update_policy>GTK_UPDATE_ALWAYS</update_policy>
+	<snap>False</snap>
+	<wrap>True</wrap>
+	<value>0</value>
+	<lower>-32768</lower>
+	<upper>32767</upper>
+	<step>1</step>
+	<page>256</page>
+	<page_size>256</page_size>
+	<child>
+	  <left_attach>1</left_attach>
+	  <right_attach>2</right_attach>
+	  <top_attach>2</top_attach>
+	  <bottom_attach>3</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>True</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkSpinButton</class>
+	<name>Q_matrix_a11</name>
+	<can_focus>True</can_focus>
+	<signal>
+	  <name>changed</name>
+	  <handler>on_Q_matrix_changed</handler>
+	  <last_modification_time>Fri, 24 Jul 1998 19:04:45 GMT</last_modification_time>
+	</signal>
+	<climb_rate>1</climb_rate>
+	<digits>0</digits>
+	<numeric>False</numeric>
+	<update_policy>GTK_UPDATE_ALWAYS</update_policy>
+	<snap>False</snap>
+	<wrap>True</wrap>
+	<value>0</value>
+	<lower>-32768</lower>
+	<upper>32767</upper>
+	<step>1</step>
+	<page>256</page>
+	<page_size>256</page_size>
+	<child>
+	  <left_attach>0</left_attach>
+	  <right_attach>1</right_attach>
+	  <top_attach>0</top_attach>
+	  <bottom_attach>1</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>True</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkSpinButton</class>
+	<name>Q_matrix_a21</name>
+	<can_focus>True</can_focus>
+	<signal>
+	  <name>changed</name>
+	  <handler>on_Q_matrix_changed</handler>
+	  <last_modification_time>Fri, 24 Jul 1998 19:04:54 GMT</last_modification_time>
+	</signal>
+	<climb_rate>1</climb_rate>
+	<digits>0</digits>
+	<numeric>False</numeric>
+	<update_policy>GTK_UPDATE_ALWAYS</update_policy>
+	<snap>False</snap>
+	<wrap>True</wrap>
+	<value>0</value>
+	<lower>-32768</lower>
+	<upper>32767</upper>
+	<step>1</step>
+	<page>256</page>
+	<page_size>256</page_size>
+	<child>
+	  <left_attach>0</left_attach>
+	  <right_attach>1</right_attach>
+	  <top_attach>1</top_attach>
+	  <bottom_attach>2</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>True</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkSpinButton</class>
+	<name>Q_matrix_a31</name>
+	<can_focus>True</can_focus>
+	<signal>
+	  <name>changed</name>
+	  <handler>on_Q_matrix_changed</handler>
+	  <last_modification_time>Fri, 24 Jul 1998 19:04:59 GMT</last_modification_time>
+	</signal>
+	<climb_rate>1</climb_rate>
+	<digits>0</digits>
+	<numeric>False</numeric>
+	<update_policy>GTK_UPDATE_ALWAYS</update_policy>
+	<snap>False</snap>
+	<wrap>True</wrap>
+	<value>0</value>
+	<lower>-32768</lower>
+	<upper>32767</upper>
+	<step>1</step>
+	<page>256</page>
+	<page_size>256</page_size>
+	<child>
+	  <left_attach>0</left_attach>
+	  <right_attach>1</right_attach>
+	  <top_attach>2</top_attach>
+	  <bottom_attach>3</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>True</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkWindow</class>
+  <name>window_cvector</name>
+  <signal>
+    <name>delete_event</name>
+    <handler>gtk_widget_destroy</handler>
+    <last_modification_time>Fri, 24 Jul 1998 18:30:56 GMT</last_modification_time>
+  </signal>
+  <title>window_cvector</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <allow_shrink>True</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>True</auto_shrink>
+
+  <widget>
+    <class>GtkVBox</class>
+    <name>vbox11</name>
+    <homogeneous>False</homogeneous>
+    <spacing>0</spacing>
+
+    <widget>
+      <class>GtkButton</class>
+      <name>Q_cvector_reload</name>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>clicked</name>
+	<handler>on_Q_cvector_reload_clicked</handler>
+	<last_modification_time>Fri, 24 Jul 1998 21:03:46 GMT</last_modification_time>
+      </signal>
+      <label>Reload</label>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+    </widget>
+
+    <widget>
+      <class>GtkColorSelection</class>
+      <name>Q_colorwheel</name>
+      <signal>
+	<name>color_changed</name>
+	<handler>on_Q_colorwheel_color_changed</handler>
+	<last_modification_time>Fri, 24 Jul 1998 19:07:16 GMT</last_modification_time>
+      </signal>
+      <policy>GTK_UPDATE_CONTINUOUS</policy>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkWindow</class>
+  <name>window_toggle</name>
+  <signal>
+    <name>delete_event</name>
+    <handler>gtk_widget_destroy</handler>
+    <last_modification_time>Fri, 24 Jul 1998 20:47:09 GMT</last_modification_time>
+  </signal>
+  <title>window_toggle</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <allow_shrink>True</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>True</auto_shrink>
+
+  <widget>
+    <class>GtkHBox</class>
+    <name>hbox1</name>
+    <homogeneous>False</homogeneous>
+    <spacing>0</spacing>
+
+    <widget>
+      <class>GtkButton</class>
+      <name>Q_toggle_reload</name>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>clicked</name>
+	<handler>on_Q_toggle_reload_clicked</handler>
+	<last_modification_time>Fri, 24 Jul 1998 22:18:28 GMT</last_modification_time>
+      </signal>
+      <label>Reload</label>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+    </widget>
+
+    <widget>
+      <class>GtkToggleButton</class>
+      <name>Q_toggle</name>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>toggled</name>
+	<handler>on_Q_toggle_toggled</handler>
+	<last_modification_time>Fri, 24 Jul 1998 20:48:09 GMT</last_modification_time>
+      </signal>
+      <label>0/1</label>
+      <active>False</active>
+      <child>
+	<padding>0</padding>
+	<expand>True</expand>
+	<fill>True</fill>
+      </child>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkWindow</class>
+  <name>window_rect</name>
+  <title>window_rect</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <allow_shrink>True</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>True</auto_shrink>
+
+  <widget>
+    <class>GtkVBox</class>
+    <name>vbox13</name>
+    <homogeneous>False</homogeneous>
+    <spacing>0</spacing>
+
+    <widget>
+      <class>GtkButton</class>
+      <name>Q_rect_reload</name>
+      <can_focus>True</can_focus>
+      <signal>
+	<name>clicked</name>
+	<handler>on_Q_rect_reload_clicked</handler>
+	<last_modification_time>Fri, 24 Jul 1998 23:09:19 GMT</last_modification_time>
+      </signal>
+      <label>Reload</label>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+    </widget>
+
+    <widget>
+      <class>GtkTable</class>
+      <name>table4</name>
+      <rows>2</rows>
+      <columns>2</columns>
+      <homogeneous>False</homogeneous>
+      <row_spacing>0</row_spacing>
+      <column_spacing>0</column_spacing>
+      <child>
+	<padding>0</padding>
+	<expand>True</expand>
+	<fill>True</fill>
+      </child>
+
+      <widget>
+	<class>GtkSpinButton</class>
+	<name>Q_rect_h</name>
+	<can_focus>True</can_focus>
+	<signal>
+	  <name>changed</name>
+	  <handler>on_Q_rect_changed</handler>
+	  <last_modification_time>Fri, 24 Jul 1998 23:09:01 GMT</last_modification_time>
+	</signal>
+	<climb_rate>1</climb_rate>
+	<digits>0</digits>
+	<numeric>False</numeric>
+	<update_policy>GTK_UPDATE_ALWAYS</update_policy>
+	<snap>False</snap>
+	<wrap>True</wrap>
+	<value>0</value>
+	<lower>0</lower>
+	<upper>65535</upper>
+	<step>1</step>
+	<page>256</page>
+	<page_size>256</page_size>
+	<child>
+	  <left_attach>1</left_attach>
+	  <right_attach>2</right_attach>
+	  <top_attach>1</top_attach>
+	  <bottom_attach>2</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>True</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkSpinButton</class>
+	<name>Q_rect_w</name>
+	<can_focus>True</can_focus>
+	<signal>
+	  <name>changed</name>
+	  <handler>on_Q_rect_changed</handler>
+	  <last_modification_time>Fri, 24 Jul 1998 23:08:58 GMT</last_modification_time>
+	</signal>
+	<climb_rate>1</climb_rate>
+	<digits>0</digits>
+	<numeric>False</numeric>
+	<update_policy>GTK_UPDATE_ALWAYS</update_policy>
+	<snap>False</snap>
+	<wrap>True</wrap>
+	<value>0</value>
+	<lower>0</lower>
+	<upper>65535</upper>
+	<step>1</step>
+	<page>256</page>
+	<page_size>256</page_size>
+	<child>
+	  <left_attach>1</left_attach>
+	  <right_attach>2</right_attach>
+	  <top_attach>0</top_attach>
+	  <bottom_attach>1</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>True</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkSpinButton</class>
+	<name>Q_rect_y</name>
+	<can_focus>True</can_focus>
+	<signal>
+	  <name>changed</name>
+	  <handler>on_Q_rect_changed</handler>
+	  <last_modification_time>Fri, 24 Jul 1998 23:08:54 GMT</last_modification_time>
+	</signal>
+	<climb_rate>1</climb_rate>
+	<digits>0</digits>
+	<numeric>False</numeric>
+	<update_policy>GTK_UPDATE_ALWAYS</update_policy>
+	<snap>False</snap>
+	<wrap>True</wrap>
+	<value>0</value>
+	<lower>-32768</lower>
+	<upper>32767</upper>
+	<step>1</step>
+	<page>256</page>
+	<page_size>256</page_size>
+	<child>
+	  <left_attach>0</left_attach>
+	  <right_attach>1</right_attach>
+	  <top_attach>1</top_attach>
+	  <bottom_attach>2</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>True</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkSpinButton</class>
+	<name>Q_rect_x</name>
+	<can_focus>True</can_focus>
+	<signal>
+	  <name>changed</name>
+	  <handler>on_Q_rect_changed</handler>
+	  <last_modification_time>Fri, 24 Jul 1998 23:08:44 GMT</last_modification_time>
+	</signal>
+	<climb_rate>1</climb_rate>
+	<digits>0</digits>
+	<numeric>False</numeric>
+	<update_policy>GTK_UPDATE_ALWAYS</update_policy>
+	<snap>False</snap>
+	<wrap>True</wrap>
+	<value>0</value>
+	<lower>-32768</lower>
+	<upper>32767</upper>
+	<step>1</step>
+	<page>256</page>
+	<page_size>256</page_size>
+	<child>
+	  <left_attach>0</left_attach>
+	  <right_attach>1</right_attach>
+	  <top_attach>0</top_attach>
+	  <bottom_attach>1</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>True</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+    </widget>
+  </widget>
+</widget>
+
+</GTK-Interface>

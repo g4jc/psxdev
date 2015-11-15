@@ -1,0 +1,32 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.61 [en] (X11; I; Linux 2.2.13 i586) [Netscape]">
+   <title>Shell input/output</title>
+</head>
+<body text="#330000" bgcolor="#FFFFFF" link="#0000EF" vlink="#51188E" alink="#FF0000">
+
+<h1>
+Shell input/output</h1>
+
+<h2>
+Shell Window</h2>
+All subprocesses of <i>PSXDEV&nbsp;CD Maker</i> are real subprocesses and
+are running concurrently to the main application. All their shell output
+is collected in <a href="tab:6">this</a> terminal emulation. You have a
+huge scrollback buffer to analyse the command output and the possibility
+to interact with a command (like pressing <b>CTRL-C</b> to abort it!).
+<h2>
+Process management</h2>
+Once the <b>Master</b> or <b>Write</b> button was pressed, the shell is
+busy processing a shell command (mkisofs or cdrdao). During this time you
+can still work with the complete application, but the above mentioned buttons
+are ghosted as long a shell process is working. If you launched a process
+by mistake, simply press <b>CTRL-C</b> to abort it! If a shell process
+is still running while you are quitting the application, the subprocess
+is immediately killed. If you like some Ok/Cancel dialog boxes before each
+operation, please let me know.
+<br>&nbsp;
+</body>
+</html>

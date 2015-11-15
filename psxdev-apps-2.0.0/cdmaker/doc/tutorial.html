@@ -1,0 +1,53 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.61 [en] (X11; I; Linux 2.2.13 i586) [Netscape]">
+   <title>Tutorial</title>
+</head>
+<body text="#330000" bgcolor="#FFFFFF" link="#0000EF" vlink="#51188E" alink="#FF0000">
+
+<h1>
+Tutorial</h1>
+This small tutorial should help you understanding this application.
+<h2>
+Preparation of your input files</h2>
+PSXDEV&nbsp;CD&nbsp;Maker uses a master directory to create an ISO&nbsp;image
+from it, so you have to populate a directory with files. All these files
+should already fulfill some&nbsp;limitations, which are
+<ul>
+<li>
+all filenames must be <b>lowercase</b></li>
+
+<li>
+all filenames must be 8+3 (<b>filename.dat</b>)</li>
+
+<li>
+a maximum of <b>30 files</b> per directory (including directories)</li>
+
+<li>
+a maximum of <b>45 directories</b> per disc</li>
+</ul>
+
+<h2>
+Mastering an image</h2>
+If your master directory is filled with files, ensure they are fulfilling
+the above limitations (there is currently no check option in this application).
+Fill out all the register cards regarding the image, which are <a href="tab:1">Paths</a>,
+<a href="tab:2">ISO9660</a>, <a href="tab:3">PSX</a> and <a href="tab:4">Audio</a>.
+Make sure your input path points to your master directory and that it does
+not use more than 660MB (use the disk usage button). Make sure your output
+path points to a user writable directory with at least 660MB free disk
+space (look at the gauge). Now press the Master button and analyse the
+process output. If you find error messages here you have to correct them
+first before proceeding to the write process!
+<h2>
+Writing an image</h2>
+The master process did not waste your CD recordables, but this process
+can. So you should always test this process with the simulate option! Please
+study the CDRDAO&nbsp;documentation to understand all the options in the
+<a href="tab:5">CD-Writer</a> register card. Press the Write button to
+start the write process.
+<br>&nbsp;
+</body>
+</html>

@@ -1,0 +1,14 @@
+- 24 bit support does not work
+- error handling could be better
+
+TIM plug-in
+- read
+- write
+
+BS plug-in
+- read              !!
+- write
+
+LAYOUT plug-in
+
+X

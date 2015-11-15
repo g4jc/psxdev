@@ -1,0 +1,20 @@
+include(welcome.html)
+
+<section>
+A simple Tutorial
+include(basics.html)
+include(advanced.html)
+include(tutorial.html)
+</section>
+
+<section>
+Online Documentation
+include(pathsetup.html)
+include(datatrack.html)
+include(systemcnf.html)
+include(xafiles.html)
+include(audiotracks.html)
+include(cdrdao.html)
+include(shell.html)
+include(config.html)
+</section>

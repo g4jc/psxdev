@@ -1,0 +1,1524 @@
+CAPR_eng.TXT (translated by Kazuki Sakamoto)
+
+==============================================================================
+
+	caetla protocol (caetla version 0.32)
+
+							K-Communications
+
+==============================================================================
+
+
+******************************************************************************
+*		Contents
+******************************************************************************
+
+*1	Beginning
++1-1	The communication protocol which can be used with caetla
++1-2	Notation in this text
+
+*2	Protocol to do basic control of caetla
++2-1	Basic concept
++2-2	Common procedure in each command
++2-3	Basic command list
++2-4	M.M. command list
++2-5	M.C.M. command list
++2-6	F.B.V. command list
++2-7	C.D.M. command list
++2-8	D.U. commadn list(ver.0.30 later)
+
+*3	Protocol to use console-file server
++3-1	Basic concept
++3-2	Common procedure in each command
++3-3	About parameters
++3-4	List of demand processing from caetla
+
+*4	Others
++4-1	About the pure PS-PAR protocol which can be used by caetla
++4-2	Difference during before game starts and game execution
++4-3	Execution of N.Y. program
++4-4	About $0B command(Get register list) of PS-PAR protocol
++4-5	Communication procedure after stop by hardware break point
++4-6	About handling break instruction
++4-7	Method of distinction between caetla and PS-PAR
+
+*A	ChangeLog
+
+
+******************************************************************************
+*1		Beginning
+******************************************************************************
+
+==============================================================================
++1-1	The communication protocol which can be used with caetla
+==============================================================================
+
+The communication protocol to control caetla has three kinds 
+of one of present versions when largely dividing. They are shown below.
+
+-common with pure PS-PAR commands
+-to basic control caetla
+-to use console/file server functions
+
+First, common with pure PS-PAR commands isn't introduced in this text.
+Please refer to my "PS-PAR technical note". However, there is a command
+which can use with pure PS-PAR, and cannot be used by caetla,
+This is described later (4-1).
+
+Second, commands to basic control caetla. These aim the control of each
+selection item by the one used with a main menu chiefly displayed
+(the condition before starting a game). Needless to say, 
+some commands can be used in game operation.
+
+Finally, to use console/file server functions, one.
+Because the procedure of the processing was somewhat different, 
+divided with them though these might have been allowed
+to be included to the communication protocol by which a 
+basic control of above-mentioned caetla was done.
+
+==============================================================================
++1-2	Notation in this text
+==============================================================================
+
+-Notation of transmitting and receiving the data
+
+The data is basically transmitted and received by every 1 byte,
+2 bytes, and 4 bytes in caetla. when the value of 2 bytes and 4 bytes
+is sent in this case, the data is supposed to be forwarded from
+a high-ranking byte though the data. For example, when the value of
+$12345678 is transferred, be transferred $12, $34, $56, $78
+in that order(i.e. big endian).
+
+This method is unnatural with PS R3000(execute with little endian).
+Because pure PS-PAR use this method, and by inertia.
+Moreover, either is supposed to be processed to transmission 
+phase -- reception phase as well as this and pure PS-PAR 
+though the transmission and the reception of the data can 
+be done at the same time when saying from the operation 
+of the communication port (Transmitting and receiving the 
+confirmation character is excluded).
+
+Base on above, this text use notation the following.
+Reception phase(PS->PC) is "IN".
+Transmission phase(PC->PS) is "OUT".
+Data size "1B", "2B", "4B" (Notice, "2B", "4B" is big endian order).
+
+-Abbreviation
+
+Main Menu:		M.M.
+Code Selector:		C.S.
+Memory Card Manager:	M.C.M.
+Frame Buffer Viewer:	F.B.V.
+CD-ROM Manager:		C.D.M.
+Debug Utility:		D.U. (ver.0.30 later)
+
+******************************************************************************
+*2		Protocol to do basic control of caetla
+******************************************************************************
+
+==============================================================================
++2-1	Basic concept
+==============================================================================
+
+In caetla, when the processing of each mode (such as M.C.M . F.B.V .)
+is controlled respectively as another program and each processing
+is done, those programs are executed in every case.
+Therefore, it should be a state that the program of the 
+mode to be able to do the thing to execute the command operates 
+when the command of something is sent from PC to caetla.
+
+It may be a little hard to understand. For instance, to download
+the screen data in F.B.V, it is necessary to call once F.B.V
+(if F.B.V doesn't execute, need to execute to F.B.V),
+and then download the screen data.
+
+The command of caetla control is a little irregularity from the above
+reason. Concretely, the command which does not depend on each item
+(can be used basically for caetla which in any condition) is allocated in
+command number $00-$0F and the command of each item
+(A function varies in each item) is allocated in command number $10-.
+
+==============================================================================
++2-2	Common procedure in each command
+==============================================================================
+
+It is basically the same as the protocol of pure PS-PAR. The code for
+the confirmation is transmitted and received first and the command
+number is sent. Afterwards, the parameter of each individual command is 
+transmitted and received.
+ 
+-Common procedure
+
+	PC					PS
+(1)	'C'				->	
+					<-	'd'
+(2)	'L'				->	
+					<-	'o'
+(3)	command number(1byte)		->	
+					<-	$00
+(4)	transmitting and receiving parameters or data or etc
+	 :
+
+
+==============================================================================
++2-3	Basic command list
+==============================================================================
+
+$00-$0F are basic command, and even if which item executes on caetla,
+these command can be used.
+
+These commands are included, the function to execute a specified item and 
+pass the control to PC(The pad on the PS side cannot be operated),
+the function to return control to caetla(The pad operation revives), and etc.
+
+Please execute the command by which the control is always moved to PC
+when you control caetla with PC. and execute the command by which the
+control is returned to PS as much as possible when the processing of the PC 
+side ends.
+
+------------------------------------------------------------------------------
+$00	NOP
+------------------------------------------------------------------------------
+
+-Procedure
+
+nothing.
+
+-Function
+
+It is for connected confirmation. Nothing is done.
+
+
+------------------------------------------------------------------------------
+$01	Get control of caetla with PC
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(1B): Item number	$00:M.M.
+				$01:M.C.M.
+				$02:F.B.V.
+				$03:Reserve
+				$04:C.D.M.
+				$05:Reserve
+				$06:D.U.
+(2) IN(1B) : Result	$00:Succeed
+			$01:Request retry
+			$FF:Failed
+			$FE:Invalid item number
+Or
+
+(1) OUT(1B): $FF
+(2) IN(1B) : Item number of current execution	$00:M.M.
+						$01:M.C.M.
+						$02:F.B.V.
+						$03:C.S.
+						$04:C.D.M.
+						$05:Config.
+						$06:D.U.
+(3) IN(1B) : Result	$00:Succeed
+			$FF:Failed
+
+-Function
+
+Get control of caetla by a specified item number.
+Basically, can't control on PS when PC has control of caetla.
+
+When $01 returns as a value of the result, it is necessary to
+execute this command again. Concretely, caetla return to M.M.
+and return result $01 when executed an item different from a specified item.
+Therefore, it is necessary to execute this command again.
+Caetla can only execute even item from M.M.
+
+	M.M <----------------> M.C.M.
+	    <----------------> F.B.V.
+	    <----------------> C.D.M.
+	    <----------------> D.U.
+
+	e.g.
+	         PC               Caetla
+             $01 F.B.V. ---------> (executing M.M.)
+	           <----Result $00 (execute F.B.V.)
+			Succeed!
+
+             $01 F.B.V. ---------> (executing C.D.M.)
+	           <----Result $01 (return M.M.)
+			need retry
+             $01 F.B.V. ---------> (executing M.M.)
+	           <----Result $00 (execute F.B.V.)
+			Succeed!
+
+When $FF returns as a value of the result, the control is shifted
+in impossibility. Moreover, when $FE returned, an invalid item number
+was specified. $00, $01, $02, and $04 can be specified for an item
+number while caetla is operating and $02 and $06 can be used in 
+the game operation (The PAR hook is hung). When $FF is specified for
+a called item number, the item under the operation moves the control
+to PC as it is. At this time, the item number under the operation is returned.
+
+
+------------------------------------------------------------------------------
+$02	Return control of caetla to PS
+------------------------------------------------------------------------------
+
+-Procedure
+
+Nothing.
+
+-Function
+
+Return control of caetla to PS.
+
+
+------------------------------------------------------------------------------
+$03	Reset PS
+------------------------------------------------------------------------------
+
+-Procedure
+
+Nothing.
+
+-Function
+
+Reset PS.
+
+
+------------------------------------------------------------------------------
+$04	Console mode ON/OFF
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(1B): ON/OFF  $00:OFF $01:ON
+
+-Function
+
+It to be effective or invalidating of this function.
+However, if the hook for the console mode is not hung, the console
+mode cannot be used even if keeping effective by this command.
+It is time when hang the hook for the console mode executed 
+the program execution command of the protocol with the hook 
+at a main menu when "Game start with PAR+" is selected from caetla.
+Of course, each function should be effective in item "CONFIG".
+
+
+------------------------------------------------------------------------------
+$05	Setup of the way of detecting H.B.P.,Break stop(ver.0.30-)
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(1B): bit0:for HBP stop
+	     bit1:for break instruction stop
+(2) IN(1B) : previous value
+
+-Function
+
+The method of detecting HBP stop or break instruction stop on the
+PC side is set.
+bit value = 0: enters the state of the communication standby without
+	notifying the PC side.
+bit value = 1: save as PS-PAR (Refer to 4-5).
+
+default:
+	bit0 = 1	notify by HBP stop
+	bit1 = 0	nothing by Break instruction stop
+
+
+------------------------------------------------------------------------------
+$06,$07	reserve
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+$08	Read status of execution (PS-PAR compat)
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) IN(1B) : Status	$00:before exec game(caetla working)
+			$02:executing game(with code)
+			$04:executing game(without code)
+
+-Function
+
+Read status of execution.
+
+
+------------------------------------------------------------------------------
+$09	Read status of execution (caetla)
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) IN(1B) : Status	bit0:Internal use(always 1 by this command)
+			bit1:Controlled by 0:own 1:PC
+			bit2:Console mode 0:OFF 1:ON
+			bit3:Console/File server communication
+				0:don't manage 1:wait communication
+			bit4:H.B.P. stop
+				0:running 1:stopped(wait communication)
+			bit5:Break instruction stop
+				0:running 1:stopped(wait communication)
+			bit6:Notify H.B.P. stop 0:NO 1:YES
+			bit7:Notify Break instruction stop 0:NO 1:YES
+			
+
+-Function
+
+Read status of execution on caetla.
+Supplementary explanation of bit1
+	before exec game
+		0: can control on PS
+		1: controled by PC
+	executing game
+		0: executing game
+		1: controled by PC, stopping game
+
+  (bit3-7 added at ver.0.30)
+
+------------------------------------------------------------------------------
+$0A	Read flag by executing game with PAR+, M.M. $11,$16(ver.0.30-)
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) IN(1B) : Flag	bit0:Watching exception
+			bit1:PCDRV
+			bit2:Request fileserver function by Break instruction
+			bit3:STDIN/STDOUT
+			bit4:Handling Break instruction
+			(value of each bit 0:disable 1:enable)
+			(all flags setted by "CONFIG" menu)
+
+-Function
+
+Read flag.
+
+
+------------------------------------------------------------------------------
+$0B-$0E	reserve
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+$0F	Get version of caetla(ver.0.30-)
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) IN(2B) : Version number
+
+-Function
+
+Get version of caetla. e.g. Version number of Version.0.30 is $0030.
+
+
+==============================================================================
++2-4	M.M. command list
+==============================================================================
+
+Mainmenu is to be displayed the item selection screen which goes out
+first by starting caetla. The commands related to the system such as
+execute program, uploading/downloading data in memory, and writing
+EEP-ROM, and so on. Functions which other items should not contain are
+only collected here.
+
+------------------------------------------------------------------------------
+$10	Get version of caetla
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) IN(2B) : Version number
+
+-Function
+
+Get version of caetla. e.g. Version number of Version.0.30 is $0030.
+
+
+------------------------------------------------------------------------------
+$11	Transmit program to PS memory, and execute program on OS of PS
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(4B): TCB number
+(2) OUT(4B): EVENT number
+(3) OUT(4B): STACK address
+(4) OUT(4Bx$F): EXEC parameter $0〜$E
+
+(5) OUT(4B): forwarding address
+(6) OUT(4B): transfer size
+(7) OUT(?B): data
+
+(8) OUT(1B): execution mode $00:Hook $01:Normal
+
+-Function
+
+Transmit program to PS memory, and execute program on OS of PS,
+same(maybe) as executed from CD-ROM.
+
+TCB, EVENT, and STACK are the same as the one specified with SYSTEM.CNF
+in a normal game CD-ROM. By the way, default (There is no SYSTEM.CNF
+in CD-ROM) setting when the kernel of PS main body BIOS is set up is
+TCB=$04, EVENT=$10, and STACK=$801FFF00.
+Setting here actually becomes effective though there is stack address
+specification also in the EXEC parameter concerning the stack address.
+Please set here if you want to make effective described in header, etc
+of the execution file.
+
+In the EXEC parameter, the meaning of each value the same to the value
+in offset $0010-$004B of header of "PS-X EXE" form is as follows.
+
+-Details of EXEC parameter
+  *"PS-X EXE" header offser $0010-$004B
+ ofs$0000 PC
+ ofs$0004 GP
+ ofs$0008 TEXT START
+ ofs$000C TEXT SIZE
+ ofs$0010 ?
+ ofs$0014 ?
+ ofs$0018 BSS START
+ ofs$001C BSS SIZE
+ ofs$0020 SP
+ ofs$0024 $00000000
+ ofs$0028 ?
+ ofs$002C ?
+ ofs$0030 ?
+ ofs$0034 ?
+ ofs$0038 ?
+
+
+------------------------------------------------------------------------------
+$12	Reset PS
+------------------------------------------------------------------------------
+
+-Procedure
+
+Nothing.
+
+-Function
+
+Reset PS (same as basic command $03)
+
+
+------------------------------------------------------------------------------
+$13	limit caetla execution
+------------------------------------------------------------------------------
+
+-Procedure
+
+Nothing.
+
+-Function
+
+The operation of caetla is limited only to the command acceptance 
+with the communication port. Please execute this command beforehand
+to prevent caetla from malfunctioning when the operation by which
+the work of caetla like the data transfer etc. on the memory of PS 
+described later might be destroyed is done.
+When the operation of caetla is limited by this command, 
+it is not possible to return. Please send the reset command
+to return by all means.
+
+
+------------------------------------------------------------------------------
+$14	Transmit data to PS memory
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(4B): forwarding address
+(2) OUT(4B): transfer size
+(3) OUT(transfer size): data
+(4) IN(1B) : Checksum
+
+-Function
+
+The specified size data is forwarded on the memory of PS.
+It is subordinate position 8bit though returning checksum
+added up the data row of each byte.
+
+
+------------------------------------------------------------------------------
+$15	Receive data from PS memory
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(4B): data address
+(2) OUT(4B): data size
+(3) OUT(data size): data
+(4) IN(1B) : Checksum
+
+-Function
+
+The specified size in memory of PS data is forwarded to PC.
+It is subordinate position 8bit though returning checksum
+added up the data row of each byte.
+
+
+------------------------------------------------------------------------------
+$16	Execute program on OS of PS
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(4B): TCB number
+(2) OUT(4B): EVENT number
+(3) OUT(4B): STACK address
+(4) OUT(4Bx$F): EXEC parameter $0〜$E
+(5) OUT(1B): execution mode $00:Hook $01:Normal
+
+-Function
+
+Execute program on OS of PS, same as M.M. command $11 except data transfer.
+
+
+------------------------------------------------------------------------------
+$17	Call specified address on PS
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(4B): Call address
+
+-Function
+
+Call(jal) specified address on PS.
+
+
+------------------------------------------------------------------------------
+$18	Write EEP-ROM (obsoleted by ver.0.31)
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(1B): action after write $00: Reset PS $01: Return to caetla
+(2) OUT(4B): write address($1F000000〜$1F01FFFF)
+(3) OUT(4B): write data size
+(4) OUT(data size): data
+(5) OUT(2B): Checksum
+(6) IN(1B) : Result $00:Succeed
+		    $FF:Didn't correspond checksum
+		    $FE:Didn't recognize EEP-ROM
+		    $FD:Failed write EEP-ROM
+
+-Function
+
+The data is written in EEP-ROM of PS-PAR.
+Please the program of caetla is destroyed when carelessly 
+using and note cannot restoration in the PS-PAR unit.
+
+*ALWAYS THIS COMMAND IS FAILED FROM VER.0.31*
+The purpose of this is to use with an old tool which 
+uses this command without it is possible to do by changing 
+the specification of the remodeling code preservation area.
+The returned error is $FD. Moreover, if checksum is not
+corresponding, $FF is returned (This is the same ahead).
+
+
+------------------------------------------------------------------------------
+$19	reserve
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+$1A	Write to the code preservation area (ver.0.31-)
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) IN(4B) : preservation area size for code
+(2) OUT(4B): code size (0 means completion of command)
+(3) OUT(?B): code data
+(4) OUT(2B): Checksum
+(5) IN(1B) : Result $00:Succeed
+		    $FF:Didn't correspond checksum
+		    $FE:Didn't recognize EEP-ROM
+		    $FD:Failed write EEP-ROM
+
+-Function
+
+The remodeling code data is written in the area of the preservation 
+of the remodeling code of caetla. Please do not forward the data not
+installed on the remodeling code preservation area obtained first.
+Please check the size absolutely because there is a possibility 
+to be going to be changed in the future though 16KB in ver.0.31, too.
+Please refer to PS-PAR technical note for the format of the remodeling
+code data.
+
+
+------------------------------------------------------------------------------
+$1B	Read from the code preservation area (ver.0.31-)
+------------------------------------------------------------------------------
+-Procedure
+
+(1) IN(4B) : preservation area size for code
+(2) IN(?B) : code data
+(3) IN(1B) : Checksum
+
+The remodeling code data written in the area of the preservation 
+of the remodeling code of caetla is read. It is subordinate position
+8bit though returning checksum added up the data row of each byte.
+Please use this command absolutely because there is a possibility 
+to be going to be changed in the future in ver0.31 though the
+remodeling code preservation area is $1F01C000-$1F01FFFF.
+Please refer to PS-PAR technical note for the format of the remodeling
+code data.
+
+
+------------------------------------------------------------------------------
+$1C	Write EEP-ROM (ver.0.31-)
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(1B): action after write $00: Reset PS $01: Return to caetla
+(2) OUT(4B): write address($1F000000〜$1F01FFFF)
+(3) OUT(4B): write data size
+(4) OUT(data size): data
+(5) OUT(2B): Checksum
+(6) IN(1B) : Result $00:Succeed
+		    $FF:Didn't correspond checksum
+		    $FE:Didn't recognize EEP-ROM
+		    $FD:Failed write EEP-ROM
+
+-Function
+
+Same as $18 command.
+
+The data is written in EEP-ROM of PS-PAR.
+Please the program of caetla is destroyed when carelessly 
+using and note cannot restoration in the PS-PAR unit.
+
+
+------------------------------------------------------------------------------
+$1D	Set arguments for program (ver.0.32-)
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(4B): arguments address
+(2) OUT(4B): argv
+(3) OUT(4B): argc
+
+-Function
+
+Set arguments for program.
+Default arguments is argc=1, argv=NULL.
+
+
+==============================================================================
++2-5	M.C.M. command list
+==============================================================================
+
+Command which can be used while executing M.C.M.
+Basically, the result value is returned at the end and the 
+meaning of the result value is common to each command each 
+command. Checksum in some commands adds the data group by each 
+byte and uses the value of subordinate position 16bit of
+the calculation result.
+
+
+------------------------------------------------------------------------------
+$10	Get version of M.C.M.
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) IN(2B) : Version number
+
+-Function
+
+Get version of M.C.M.
+
+This command is prepared to expand in the future.
+However, it is not necessary to check now because is not expanded so far.
+
+
+------------------------------------------------------------------------------
+$11	Lock memory card slot
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(1B): Slot $00:SLOT1 $01:SLOT2
+(2) IN(2B) : Result
+
+-Function
+
+The error occurs when the command is executed other than 
+$11 (Lock slot) and $12 (Unlock slot) when there is a pulling out
+opening the card after executing this command.
+It is invalid to execute this command with the card not inserted.
+
+
+------------------------------------------------------------------------------
+$12	Unlock memory card slot
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(1B): Slot $00:SLOT1 $01:SLOT2
+(2) IN(2B) : Result
+
+-Function
+
+Unlock memory card slot locked by command $11.
+
+
+------------------------------------------------------------------------------
+$13	Get status of memory card slot
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(1B): Slot $00:SLOT1 $01:SLOT2
+(2) IN(2B) : Result
+
+-Function
+
+Get status of memory card slot.
+
+
+------------------------------------------------------------------------------
+$14	Physical read from memory card
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(1B): Slot $00:SLOT1 $01:SLOT2
+(2) OUT(2B): Sector
+(3) OUT(4B): Size
+(4) IN(size): Data
+(5) IN(2B) : Checksum
+(6) IN(2B) : Result
+
+-Function
+
+Physical read from memory card.
+
+
+------------------------------------------------------------------------------
+$15	Physical write to memory card
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(1B): Slot $00:SLOT1 $01:SLOT2
+(2) OUT(2B): Sector
+(3) OUT(4B): Size
+(4) OUT(size): Data
+(5) OUT(2B): Checksum
+(6) IN(2B) : Result
+
+-Function
+
+Physical write to memory card.
+
+
+------------------------------------------------------------------------------
+$16	Reload file table
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(1B): Slot $00:SLOT1 $01:SLOT2
+(2) IN(2B) : Result
+
+-Function
+
+Present the file table (information on the file recorded on the card)
+in internal M.C.M. buffer read to the buffer is annulled, and the file
+table is read again.  At this time, the format is confirmed.
+
+
+------------------------------------------------------------------------------
+$17	Get information of file
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(1B): Slot $00:SLOT1 $01:SLOT2
+(2) IN(2B) : Number of files
+(3) IN(Number of files*128B) : information of file(128bytes per file)
+(4) IN(2B) : Checksum
+(5) IN(2B) : Result
+
+-Function
+
+Get information of file from internal M.C.M. buffer.
+
+There is 128-byte file information per file.
+Useless information is included by skimp making M.C.M.
+Concretely, it is a part of header of a pertinent part 
+of information on the first block of a pertinent file (32 
+bytes) in the control area of the memory card + file (96 bytes).
+Information necessary for exchanging the file of caetla<->PC 
+among these is shown below. Please refer to memory card analysis
+information etc. which exist on the net to know this other details.
+
+
+-Information of file
+　* $0000-$001F information of file in management block (top 32 bytes)
+　* $0020-$007F header of file (top 96 bytes)
+
+ofs$0004-$0006 filesize(little endian)
+ofs$000A-      filename(ASCIZ)
+ofs$0024-      comment(ASCIZ)
+
+(filesize is maybe multiples of $2000.)
+
+
+------------------------------------------------------------------------------
+$18	Read file
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(1B): Slot $00:SLOT1 $01:SLOT2
+(2) OUT(1B): file number
+(3) IN(1B) : size(number of blocks)
+(4) IN(number of blocks*8192B): data
+(5) IN(2B) : Checksum
+(6) IN(2B) : Result
+
+-Function
+
+The file shown by specified file number (0-14) is read.
+The file number corresponds to the table obtained by command 
+$17 (acquisition of file information).
+Even when the error occurs while executing the command, 
+the data is forwarded to the last minute.
+At this time, please note because the content of the 
+data is garbage in the buffer. Moreover, when 0 returns to
+the size which has been sent from caetla, it is a thing which
+is that the error turned out before begin to be forwarded.
+In this case, the data transfer part and checksum disappear.
+
+------------------------------------------------------------------------------
+$19	Create file
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(1B): Slot $00:SLOT1 $01:SLOT2
+(2) OUT(?B): filename string(ASCIZ)
+(3) OUT(4B): size
+(4) IN(1B) : size(number of blocks)
+(5) OUT(number of blocks)*8192B): data
+(6) OUT(2B): checksum
+(7) IN(2B) : Result
+
+-Function
+
+Create new file. Please acquire file information again by
+command $17 because the file table buffer in the inside is renewed.
+When same filename has already existed, becomes an error.
+Please delete file to create same filename beforehand.
+
+The size of the file sent from PC is a size of the file written in
+the control area of the memory card. Making to the size of the unit
+of the block (unit of 8K) might be safe.
+
+The numbers of blocks sent from PS are the values by which 
+the size of the file sent from PC is calculated in the origin.
+However, please confirm filesize because 0 returns when the error turns out
+begin to forward (existence of this name file etc.).
+In this case, the data transfer part and checksum disappear.
+Though the error occurs during writing, the data is transfered complete
+(writing interrupted).
+
+
+------------------------------------------------------------------------------
+$1A	Delete file
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(1B): Slot $00:SLOT1 $01:SLOT2
+(2) OUT(1B): file number
+(3) IN(2B) : Result
+
+-Function
+
+Delete file by specified file number (0-14).
+Please acquire file information again by command $17 because
+the file table buffer in the inside is renewed.
+
+
+------------------------------------------------------------------------------
+$1B	Format card
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(1B): Slot $00:SLOT1 $01:SLOT2
+(2) IN(2B) : Result
+
+-Function
+
+Format memory card.
+Please acquire file information again by command $17 because
+the file table buffer in the inside is renewed.
+
+
+------------------------------------------------------------------------------
+Result
+------------------------------------------------------------------------------
+
+	Bit0:	0=Card does'nt exist 1=Card exist
+	Bit1:	0=Unknown format or unformatted 1=Known format
+	Bit2:	1=The state transition occurred after having executed
+		the last command.
+
+	Bit10:	1=Error:Inconsistency checksum
+	Bit11:	1=Error:Invalid parameter
+	Bit12:	1=Error:File exists(only Create and Write File)
+	Bit13:	1=Error:Fails in communication with memory card.
+	Bit14:	1=Error:The state transition occurred after LockSlot
+	Bit15:	1=Error:The state transition occurred while executing command
+
+
+==============================================================================
++2-6	F.B.V. command list
+==============================================================================
+
+Command which can be used while executing F.B.V.
+
+
+------------------------------------------------------------------------------
+$10	Get version of F.B.V.
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) IN(2B) :	Version number
+
+-Function
+
+Get version of F.B.V.
+
+
+------------------------------------------------------------------------------
+$11	Download from VRAM buffer
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(2B):	Starting point X coordinates (top-left)
+(2) OUT(2B):	Starting porint Y coordinates (top-left)
+(3) OUT(2B):	X size (width)
+(4) OUT(2B):	Y size (height)
+(5) IN(XSIZE*YSIZE*2B):	VRAM data(X size * Y size * 2 byte)
+
+-Function
+
+Download from VRAM buffer. Please set coordinates and the size in
+the starting point in the mode of 16bit.
+
+Following, it is a function from version $0002 of FBV.
+Screen converted into 16bit mode is send,
+when F.B.V. screen mode is 4bit/8bit.
+In this case, one dot corresponds to 2 dots (8bit mode) 
+or 4 dots (4bit mode) as for starting point X coordinates.
+
+For instance, the ninth dot from the left after the image on VRAM
+is assumed to be an image of 4bit mode in case of 4bit mode when
+starting point X coordinates are specified two and the image is
+converted into the image of 16bit will be forwarded.
+Please note that starting point Y coordinates, X size, and Y size
+correspond to one dot as it is. If it is a tool which corresponds
+to FBV of an old version because of the expansion of the function
+in expansion of these functions and command $13, the thing to download 
+the image moved to the television screen with FBV can be
+done without the thing to change anything.
+
+
+------------------------------------------------------------------------------
+$12	Upload to VRAM buffer
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(2B):	Starting point X coordinates (top-left)
+(2) OUT(2B):	Starting porint Y coordinates (top-left)
+(3) OUT(2B):	X size (width)
+(4) OUT(2B):	Y size (height)
+(5) IN(XSIZE*YSIZE*2B):	VRAM data(X size * Y size * 2 byte)
+
+-Function
+
+Upload to VRAM buffer.
+Moreover, the update result of this buffer is reflected in an actual screen.
+Please set the starting point coordinates and the size in the mode of 16bit.
+
+
+------------------------------------------------------------------------------
+$13	Read status of F.B.V.
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) IN(2B):	Starting point X coordinates (top-left)
+(2) IN(2B):	Starting porint Y coordinates (top-left)
+(3) IN(2B):	X size (width)
+(4) IN(2B):	Y size (height)
+(5) IN(2B) :	Color mode  0:16bit 1:24bit
+
+-Function
+
+Read status of F.B.V.
+
+Following, it is a function from version $0002 of FBV.
+
+Moreover, 0(16bit) returns to the value as the display color 
+mode when the display situation is acquired by this command 
+even when the display of FBV is 4bit/8bit color mode.
+Without the thing to change anything if it is a tool which 
+corresponds to FBV of an old version because of the expansion 
+of this function and the expansion of the function in command 
+$11 The thing to download the image moved to the television 
+screen with FBV can be done.
+
+
+------------------------------------------------------------------------------
+$14	reserve
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+$15	Download from VRAM buffer (FBV ver. 0002-)
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(2B):	Starting point X coordinates (top-left)
+(2) OUT(2B):	Starting porint Y coordinates (top-left)
+(3) OUT(2B):	X size (width)
+(4) OUT(2B):	Y size (height)
+(5) IN(XSIZE*YSIZE*2B):	VRAM data(X size * Y size * 2 byte)
+
+-Function
+
+Download from VRAM buffer. Please set coordinates and
+the size in the starting point in the mode of 16bit.
+
+It is a point of purely forwarding the image of VRAM in 
+this command while $11 forwards what selfishly converted 
+into the image of 16bit to the difference with command $11 
+when the display situation of FBV is 4/8bit image.
+
+
+------------------------------------------------------------------------------
+$16	Read status of F.B.V. (FBV ver. 0002-)
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) IN(2B):	Starting point X coordinates (top-left)
+(2) IN(2B):	Starting porint Y coordinates (top-left)
+(3) IN(2B):	X size (width)
+(4) IN(2B):	Y size (height)
+(5) IN(2B) :	Color mode  0:16bit 1:24bit 2:4bit 3:8bit
+(6) IN(2B) :	Starting point X coordinates (top-left) of CLUT/16
+(7) IN(2B) :	Starting porint Y coordinates (top-left) of CLUT
+(6) IN(2B) :	End point X coordinates (bottom-right) of CLUT/16
+(7) IN(2B) :	End point Y coordinates (bottom-right) of CLUT
+(8) IN(2B) :	Selecting point of CLUT (X/16) | (Y<<5)
+
+-Function
+
+Get status of FBV. The one displayed in the information window
+of the FBV operation is sent as it is.
+
+If command $11 and $15 are used for the origin of obtained 
+information in this if displayed in 24bit color mode, the correction
+etc. by which 1.5 X sizes are multiplied for instance are needed
+(Command $11 and $15 are fixed in 1dot=16bit).
+The starting point coordinates are able to use as is,
+because F.B.V process same as 16bit mode.
+
+It is a point to notify a present display situation correctly 
+in this command while $13 notifies the difference with command 
+$13 as 16bit mode when the display situation of FBV is 4/8bit mode.
+Moreover, information on the CLUT area being specified with 
+FBV by this command now can be obtained.
+
+
+------------------------------------------------------------------------------
+$17	Configure F.B.V. (FBV ver. 0002-)
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(2B):	Starting point X coordinates (top-left)
+(2) OUT(2B):	Starting porint Y coordinates (top-left)
+(3) OUT(2B):	X size (width) 0:256 1:320 2:384 3:512 4:640
+(4) OUT(2B):	Y size (height) 0:240 1:480
+(5) OUT(2B) :	Color mode  0:16bit 1:24bit
+
+-Function
+
+Configure F.B.V.
+
+
+==============================================================================
++2-7	C.D.M. command list
+==============================================================================
+
+Command which can be used while executing C.D.M.
+
+
+------------------------------------------------------------------------------
+$10	Get version of C.D.M.
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) IN(2B): Version number
+
+-Function
+
+Get version of C.D.M.
+
+
+------------------------------------------------------------------------------
+$11	reserve
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+$12	Download XAL data
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) IN(4B) : data size (included header)
+(2) IN(?B) : data
+
+-Function
+
+Download CD analysis information in the buffer of C.D.M.
+Header (confirmation character string + checksum) 
+is included in the data sent by this command.
+
+
+------------------------------------------------------------------------------
+$13	Upload XAL data
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(?B): XAL data(included header)
+(2) IN(1B) : Result $00:Succeed
+		    $FF:Invalid header
+		    $FE:unsupported version
+		    $FD:over size
+		    $FC:Inconsistency checksum
+-Function
+
+Upload XAL data to C.D.M. buffer.
+As for the forwarding size etc., the one described in header is used.
+When abnormal header etc. are recognized on the caetla side,
+the data receipt to have assumed data (ofs$0010) which 
+corresponds to the size part to be a size is done.
+
+
+------------------------------------------------------------------------------
+XAL data format
+------------------------------------------------------------------------------
+(*) .dc.b=1byte, .dc.w=2byte, .dc.l=4byte
+
+-header-
+$0000	.dc.b	'caetla XA-List',0	;confirmation character string
+$000F	.dc.b	0			;version
+$0010	.dc.l	size of data
+$0014	.dc.l	checkdum of header
+
+-data-
+
+	.dc.b	volume,0		;CD Volume
+	.dc.l	CheckSum		;Volume descriptor checksum
+--
+	.dc.b	FileName,0		;full path
+	.dc.l	FileSize		;filesize(for confirm)
+--
+
+	.dc.b	00(Audio)
+	.dc.w	id
+	.dc.b	Offset of starting sector(l)
+	.dc.b	Offset of starting sector(m)
+	.dc.b	Offset of starting sector(h)
+	.dc.b	Offset of end sector(l)
+	.dc.b	Offset of end sector(m)
+	.dc.b	Offset of end sector(h)
+	.dc.b	Speed(00:x1 01:x2)
+	.dc.b	Number of interleave
+
+	.dc.b	01(Movie)
+	.dc.w	id
+	.dc.b	Offset of starting sector(l)
+	.dc.b	Offset of starting sector(m)
+	.dc.b	Offset of starting sector(h)
+	.dc.b	Offset of end sector(l)
+	.dc.b	Offset of end sector(m)
+	.dc.b	Offset of end sector(h)
+	.dc.l	Final flame
+
+		:
+
+	.dc.b	$FF(audio/movie header is $FF)	;No more contents
+--
+		:
+
+	.dc.b	$00(no filename)		;No more file
+
+--
+		:
+
+	.dc.b	$00(no CdVolume)		;No more CD
+--
+
+
+-TERM
+
+.dc.l   CheckSum                ;Volume descriptor checksum
+The data for check on volume descriptor (information sector of CD-ROM).
+Added by word unit(4byte, little endian) of $800 bytes data of sector 0:2:16,
+and xor-ed one are added. This is used to identify CD-ROM.
+
+.dc.w   id
+Case of XA audio, this is channel id of sector header,
+used to play XA audio. Case of movie, this is id of header per 1 flame,
+for interleaved movie
+
+.dc.b   Number of interleave
+Number of interleave of XA audio.
+XA audio is recorded every a few sector(depend on sampling rate or
+CD rotation speed). This value is used for rescan by caetla.
+
+.dc.l   Final flame
+This value is to check end of movie, with Offset of end sector.
+
+
+==============================================================================
++2-8	D.U. commadn list(ver.0.30-)
+==============================================================================
+
+Command which can be used while executing D.U.
+D.U. is able to use while program executing.
+
+
+------------------------------------------------------------------------------
+$10	Get version of D.U.
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) IN(2B) : Version number
+
+-Function
+
+Get version of D.U.
+
+
+------------------------------------------------------------------------------
+$11	Get registers
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) IN(4Bx36) : Registers
+
+-Function
+
+The list of the state of the R3000 register of point by 
+which the control is moved to PC is acquired.
+The content of the register is acquired in following the order.
+
+	at,v0,v1,a0,a1,a2,a3,t0,t1,t2,t3,t4,t5,t6,t7,s0,s1,s2,s3,s4,s5,s6,s7,
+	t8,t9,k0,k1,gp,sp,fp,ra,epc,hi,lo,sr,cr
+
+There is a communication standby for the VSync interruption 
+generation, the HBP exception generation, the BREAK instruction 
+exception generation, the console/the file server functions 
+and the correct function stripes corks of this command (All 
+the values become 0) as timing to be able to move the control 
+to PC with caetla when the control is shifted to PC at the 
+communication standby state for the console/the file server function.
+Please confirm the caetla operation by acquiring.
+Because the console/the file server function is sure 
+to be basically turning off even if says,
+no do be known of a no squid too much either.
+Among these content of the register, there is an invalid 
+value (for use in exception handler) in k0 register
+
+
+------------------------------------------------------------------------------
+$12	Set register
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(4B): register number
+(2) OUT(4B): Value
+
+-Function
+
+The content of the register list buffer which caetla secures 
+is rewritten in a specified value. The value rewritten by this
+command is referred when the control is returned to PS and the
+content of the register is rewritten. The correspondence of a
+register number and an actual register is as follows.
+
+	$00:at $01:v0 $02:v1 $03:a0 $04:a1 $05:a2 $06:a3 $07:t0
+	$08:t1 $09:t2 $0A:t3 $0B:t4 $0C:t5 $0D:t6 $0E:t7 $0F:s0
+	$10:s1 $11:s2 $12:s3 $13:s4 $14:s5 $15:s6 $16:s7 $17:t8
+	$18:t9 $19:k0 $1A:k1 $1B:gp $1C:sp $1D:fp $1E:ra $1F:epc
+	$20:hi $21:lo $22:sr $23:cr
+
+Among these, a set value to the k0 register and the cr register 
+is not reflected in an actual register.
+
+
+------------------------------------------------------------------------------
+$13	Get CpCond value
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) IN(1B) : CpCond bit0:cop0 bit1:cop1 bit2:cop2 bit3:cop3
+		0:TRUE 1:FALSE
+
+-Function
+
+Get CpCond value.
+
+
+------------------------------------------------------------------------------
+$14	Flush I-cache
+------------------------------------------------------------------------------
+
+-Procedure
+
+Nothing.
+
+-Function
+
+Flush instruction cache of R3000.
+
+
+------------------------------------------------------------------------------
+$15	Configure H.B.P.
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(4B): data to cop0 register $03,$05,$06
+(2) OUT(4B): data to cop0 register $07
+(3) OUT(4B): data to cop0 register $09
+(4) OUT(4B): data to cop0 register $0B
+
+-Function
+
+Configure H.B.P. by using cop0.
+Same as $0C of PS-PAR protocol.
+
+(1) Break point address
+(2) Watching condtion
+    No            : E0800000            On Write      : EA800000
+    On Execute    : E1800000            Write+Execute : EB800000
+(3) Mask of data address
+(4) Mask of executiong address
+
+
+------------------------------------------------------------------------------
+$16	Disable H.B.P.
+------------------------------------------------------------------------------
+
+-Procedure
+
+Nothing.
+
+-Function
+
+Disable H.B.P. same as cop0 register $07 is set 0 (set 0 in $15-(2)).
+
+
+------------------------------------------------------------------------------
+$17	Download memory from PS
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) IN(4B) : any
+(2) OUT(4B): data address
+(3) OUT(4B): data size (byte) (if 0, goto (6))
+(4) IN(?B) : data
+(5) IN(1B) : checksum
+(*) return to (2)
+(6) IN(1B) : 'O'
+(7) IN(1B) : 'K'
+
+-Function
+
+Download memory from PS, same as $01 of PS-PAR protocol.
+
+
+------------------------------------------------------------------------------
+$18	Upload memory to PS
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(4B): data address
+(2) OUT(4B): data size (byte) (if 0, goto (6))
+(3) OUT(1B): any
+(4) IN(?B) : data
+
+-Function
+
+Upload memory to PS, same as $09 of PS-PAR protocol.
+
+
+------------------------------------------------------------------------------
+$19	Write 1 byte
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(4B): address
+(2) OUT(1B): data
+
+-Function
+
+Write 1 byte data, same as $08 of PS-PAR protocol.
+
+
+------------------------------------------------------------------------------
+$1A	Write 1 word
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(4B): address
+(2) OUT(4B): data
+
+-Function
+
+Write 1 word data, same as $11 of PS-PAR protocol.
+
+
+------------------------------------------------------------------------------
+$1A	Read 1 word
+------------------------------------------------------------------------------
+
+-Procedure
+
+(1) OUT(4B): address
+(2) IN(4B): data
+
+-Function
+
+Read 1 word data.
+

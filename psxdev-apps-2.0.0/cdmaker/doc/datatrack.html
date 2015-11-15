@@ -1,0 +1,32 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.61 [en] (X11; I; Linux 2.2.13 i586) [Netscape]">
+   <title>The Data Track</title>
+</head>
+<body text="#330000" bgcolor="#FFFFFF" link="#0000EF" vlink="#51188E" alink="#FF0000">
+
+<h1>
+The Data Track</h1>
+
+<h2>
+ISO 9660 filesystem</h2>
+Refer to an ISO&nbsp;9660 filesystem documentation first, then fill out
+the fields. It is important that the application ID&nbsp;and the system
+ID&nbsp;are uppercase <b>PLAYSTATION</b>.
+<h2>
+Information files</h2>
+These files are completely optional and are rarely used. You can specify
+some files on the volume to be created, please refer to an ISO&nbsp;9660
+documentation for more details.
+<h2>
+Miscellaneous</h2>
+The only currently supported option is <b>Follow Symbolic Links</b>. If
+this option is set all links are followed and the original content is written.
+So you could soft link all files into one directory with this option and
+the real files will be written. If not set all links will be ignored.
+<p>All inactive options are currently disabled, because they would confuse
+the user and could lead to incorrect mastered images if set by mistake.
+</body>
+</html>

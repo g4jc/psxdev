@@ -1,0 +1,147 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2001-05-18 00:08+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+
+#: src/anytotim.c:56 src/timmontage.c:60 src/timsetpos.c:58 src/timtoppm.c:54
+msgid "be quiet"
+msgstr ""
+
+#: src/anytotim.c:57 src/timmontage.c:61 src/timsetpos.c:59 src/timtoppm.c:55
+msgid "print this text"
+msgstr ""
+
+#: src/anytotim.c:58 src/timmontage.c:62 src/timsetpos.c:60 src/timtoppm.c:56
+msgid "be verbose"
+msgstr ""
+
+#: src/anytotim.c:59 src/timmontage.c:63 src/timsetpos.c:61 src/timtoppm.c:57
+msgid "print binary version"
+msgstr ""
+
+#: src/anytotim.c:60 src/timtoppm.c:58
+msgid "set output file"
+msgstr ""
+
+#: src/anytotim.c:61
+msgid "set image type (0=4-bit,1=8-bit,2=15-bit,3=24-bit)"
+msgstr ""
+
+#: src/anytotim.c:62
+msgid "scale to new width (default: do not scale)"
+msgstr ""
+
+#: src/anytotim.c:63
+msgid "scale to new height (default: do not scale)"
+msgstr ""
+
+#: src/anytotim.c:71
+#, c-format
+msgid ""
+"%s - any to tim image converter\n"
+"Copyright (C) 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+
+#: src/anytotim.c:127 src/timmontage.c:137 src/timsetpos.c:130
+#: src/timtoppm.c:124
+#, c-format
+msgid "Usage: %s [options] <filename>\n"
+msgstr ""
+
+#: src/anytotim.c:193
+#, c-format
+msgid "%s: input dimension: %dx%d\n"
+msgstr ""
+
+#: src/anytotim.c:203
+#, c-format
+msgid "%s: scaled to: %dx%d\n"
+msgstr ""
+
+#: src/timmontage.c:64
+msgid "width"
+msgstr ""
+
+#: src/timmontage.c:65
+msgid "height"
+msgstr ""
+
+#: src/timmontage.c:66
+msgid "mode (0..3)"
+msgstr ""
+
+#: src/timmontage.c:67
+msgid "output"
+msgstr ""
+
+#: src/timmontage.c:68
+msgid "number of cluts"
+msgstr ""
+
+#: src/timmontage.c:76
+#, c-format
+msgid ""
+"%s - montage of multiple TIM images to one new image\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+
+#: src/timmontage.c:201 src/timsetpos.c:181
+msgid "input filename missing"
+msgstr ""
+
+#: src/timmontage.c:209 src/timsetpos.c:189
+msgid "input file has zero length"
+msgstr ""
+
+#: src/timsetpos.c:62
+msgid "clut x"
+msgstr ""
+
+#: src/timsetpos.c:63
+msgid "clut y"
+msgstr ""
+
+#: src/timsetpos.c:64
+msgid "pixel x"
+msgstr ""
+
+#: src/timsetpos.c:65
+msgid "pixel y"
+msgstr ""
+
+#: src/timsetpos.c:73
+#, c-format
+msgid ""
+"%s - set position of TIM contents\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+
+#: src/timtoppm.c:59
+msgid "shift 15-bit to full 24-bit (brighter colors)"
+msgstr ""
+
+#: src/timtoppm.c:67
+#, c-format
+msgid ""
+"%s - RAW BINARY to PS-X EXE converter\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""

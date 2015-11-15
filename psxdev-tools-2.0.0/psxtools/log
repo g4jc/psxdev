@@ -1,0 +1,86 @@
+execve("/tmp/test/bin/psx-reset", ["/tmp/test/bin/psx-reset", "--help"], [/* 44 vars */]) = 0
+brk(0)                                  = 0x804cb3c
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x40013000
+open("/etc/ld.so.preload", O_RDONLY)    = -1 ENOENT (No such file or directory)
+open("/opt/psxdev/lib/i686/mmx/libpsxdev.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/opt/psxdev/lib/i686/mmx", 0xbffff0e4) = -1 ENOENT (No such file or directory)
+open("/opt/psxdev/lib/i686/libpsxdev.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/opt/psxdev/lib/i686", 0xbffff0e4) = -1 ENOENT (No such file or directory)
+open("/opt/psxdev/lib/mmx/libpsxdev.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat("/opt/psxdev/lib/mmx", 0xbffff0e4) = -1 ENOENT (No such file or directory)
+open("/opt/psxdev/lib/libpsxdev.so.2", O_RDONLY) = 4
+fstat(4, {st_mode=S_IFREG|0644, st_size=15231, ...}) = 0
+read(4, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\0\17\0"..., 4096) = 4096
+mmap(NULL, 13860, PROT_READ|PROT_EXEC, MAP_PRIVATE, 4, 0) = 0x40014000
+mprotect(0x40017000, 1572, PROT_NONE)   = 0
+mmap(0x40017000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED, 4, 0x2000) = 0x40017000
+close(4)                                = 0
+open("/opt/psxdev/lib/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/opt/psxdev/lib/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/etc/ld.so.cache", O_RDONLY)      = 4
+fstat(4, {st_mode=S_IFREG|0644, st_size=29596, ...}) = 0
+mmap(NULL, 29596, PROT_READ, MAP_PRIVATE, 4, 0) = 0x40018000
+close(4)                                = 0
+open("/lib/libc.so.6", O_RDONLY)        = 4
+fstat(4, {st_mode=S_IFREG|0755, st_size=5195054, ...}) = 0
+read(4, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\270\212"..., 4096) = 4096
+mmap(NULL, 939868, PROT_READ|PROT_EXEC, MAP_PRIVATE, 4, 0) = 0x40020000
+mprotect(0x400fe000, 30556, PROT_NONE)  = 0
+mmap(0x400fe000, 16384, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED, 4, 0xdd000) = 0x400fe000
+mmap(0x40102000, 14172, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x40102000
+close(4)                                = 0
+munmap(0x40018000, 29596)               = 0
+personality(PER_LINUX)                  = 0
+getpid()                                = 30727
+brk(0)                                  = 0x804cb3c
+brk(0x804cb74)                          = 0x804cb74
+brk(0x804d000)                          = 0x804d000
+open("/usr/share/locale/locale.alias", O_RDONLY) = 4
+fstat(4, {st_mode=S_IFREG|0644, st_size=2174, ...}) = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x40018000
+read(4, "# Locale name alias data base.\n#"..., 4096) = 2174
+brk(0x804e000)                          = 0x804e000
+read(4, "", 4096)                       = 0
+close(4)                                = 0
+munmap(0x40018000, 4096)                = 0
+open("/usr/share/i18n/locale.alias", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/share/locale/de/LC_MESSAGES", O_RDONLY) = 4
+fstat(4, {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+close(4)                                = 0
+open("/usr/share/locale/de/LC_MESSAGES/SYS_LC_MESSAGES", O_RDONLY) = 4
+fstat(4, {st_mode=S_IFREG|0644, st_size=44, ...}) = 0
+mmap(NULL, 44, PROT_READ, MAP_PRIVATE, 4, 0) = 0x40018000
+close(4)                                = 0
+open("/usr/share/locale/de/LC_MONETARY", O_RDONLY) = 4
+fstat(4, {st_mode=S_IFREG|0644, st_size=94, ...}) = 0
+mmap(NULL, 94, PROT_READ, MAP_PRIVATE, 4, 0) = 0x40019000
+close(4)                                = 0
+open("/usr/share/locale/de/LC_COLLATE", O_RDONLY) = 4
+fstat(4, {st_mode=S_IFREG|0644, st_size=29970, ...}) = 0
+mmap(NULL, 29970, PROT_READ, MAP_PRIVATE, 4, 0) = 0x40106000
+close(4)                                = 0
+open("/usr/share/locale/de/LC_TIME", O_RDONLY) = 4
+fstat(4, {st_mode=S_IFREG|0644, st_size=492, ...}) = 0
+mmap(NULL, 492, PROT_READ, MAP_PRIVATE, 4, 0) = 0x4001a000
+close(4)                                = 0
+open("/usr/share/locale/de/LC_NUMERIC", O_RDONLY) = 4
+fstat(4, {st_mode=S_IFREG|0644, st_size=27, ...}) = 0
+mmap(NULL, 27, PROT_READ, MAP_PRIVATE, 4, 0) = 0x4001b000
+close(4)                                = 0
+open("/usr/share/locale/de/LC_CTYPE", O_RDONLY) = 4
+fstat(4, {st_mode=S_IFREG|0644, st_size=10428, ...}) = 0
+mmap(NULL, 10428, PROT_READ, MAP_PRIVATE, 4, 0) = 0x4001c000
+close(4)                                = 0
+fstat(1, {st_mode=S_IFCHR|0620, st_rdev=makedev(136, 2), ...}) = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x4001f000
+ioctl(1, TCGETS, {B38400 opost isig icanon echo ...}) = 0
+write(1, "package=psxtools localedir=/tmp/"..., 50) = 50
+write(1, "psx-reset - reset the PSX\nCopyri"..., 124) = 124
+write(1, "Usage: psx-reset [options] <file"..., 38) = 38
+write(1, "--quiet,-q \tbe quiet\n", 21) = 21
+write(1, "--help,-h \tprint this text\n", 27) = 27
+write(1, "--verbose,-v \tbe verbose\n", 25) = 25
+write(1, "--version,-V \tprint binary versi"..., 35) = 35
+write(1, "--device=x,-d\tuse this device (d"..., 51) = 51
+munmap(0x4001f000, 4096)                = 0
+_exit(0)                                = ?

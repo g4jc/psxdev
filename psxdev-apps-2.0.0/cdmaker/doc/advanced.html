@@ -1,0 +1,62 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.61 [en] (X11; I; Linux 2.2.13 i586) [Netscape]">
+   <title>Advanced</title>
+</head>
+<body text="#330000" bgcolor="#FFFFFF" link="#0000EF" vlink="#51188E" alink="#FF0000">
+
+<h1>
+Advanced</h1>
+
+<h2>
+Getting More Informations</h2>
+This is only a quick and incomplete documentation, you definitly should
+read and study the following manual resources:
+<ul>
+<li>
+<a href="man:cdrdao">CDRDAO</a>&nbsp;man page</li>
+
+<li>
+<a href="man:mkisofs">MKISOFS</a>&nbsp;man page</li>
+
+<li>
+<a href="man:cdrecord">CDRECORD</a>&nbsp;man page</li>
+</ul>
+
+<h2>
+File placement</h2>
+All files are written alphabetically sorted to the master image, so a file
+named <b>ZZZZZZZZ.ZZZ;1</b> would be the last file written to the image.
+If file placement matters, you can control it with the filenames.
+<h2>
+Creating a bootable disc</h2>
+This is a problematic section. An original PlayStation rejects to boot
+unlicensed, non-black CD-ROM medias, so you need a developer PlayStation
+like the black NetYaroze station. I can't help you here if you are using
+a gray or white end user PlayStation, sorry.
+<h2>
+Avoiding laser seek problems</h2>
+To avoid laser seek problems, you should always include a dummy file at
+the end of your data track, which is at least three minutes long. Many
+games have a <b>DUMMY.DAT;1</b> which is located at the end of the data
+track, and I encountered seek problems when mastering too small data tracks.
+To be sure, create a three minute long (~64MB) dummy file at the end of
+the data track (just name it ZZZZZZZZ.ZZZ;1).
+<h2>
+Temporary files</h2>
+The master process writes an image named <b>image.iso</b> (the name can
+be changed <a href="tab:7">here</a>) into the <a href="tab:1">output path</a>
+directory, and the write process creates a TOC&nbsp;description file named
+<b>image.toc</b> (can also be changed <a href="tab:7">here</a>)&nbsp;in
+the same location. These files are not deleted, you have to delete them
+manually!
+<h2>
+Saving the settings</h2>
+Settings are always written to the current directory (the directory where
+the application was started from) into a file named .<b>psxcdmakerrc</b>.
+This is a textfile with human readable options, but it is not recommended
+to edit this file.
+</body>
+</html>

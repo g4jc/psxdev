@@ -1,0 +1,173 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2001-05-18 00:08+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+
+#: src/adpcmtopcm.c:57 src/pcmtoadpcm.c:57 src/play.c:68 src/query.c:56
+#: src/record.c:74
+msgid "be quiet"
+msgstr ""
+
+#: src/adpcmtopcm.c:58 src/pcmtoadpcm.c:58 src/play.c:69 src/query.c:57
+#: src/record.c:75
+msgid "print this text"
+msgstr ""
+
+#: src/adpcmtopcm.c:59 src/pcmtoadpcm.c:59 src/play.c:70 src/query.c:58
+#: src/record.c:76
+msgid "be verbose"
+msgstr ""
+
+#: src/adpcmtopcm.c:60 src/pcmtoadpcm.c:60 src/play.c:71 src/query.c:59
+#: src/record.c:77
+msgid "print binary version"
+msgstr ""
+
+#: src/adpcmtopcm.c:61 src/pcmtoadpcm.c:61
+msgid "set output file"
+msgstr ""
+
+#: src/adpcmtopcm.c:69
+#, c-format
+msgid ""
+"%s - ADPCM to PCM packer\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"based on VAG-Depacker, hacked by bITmASTER@bigfoot.com\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+
+#: src/adpcmtopcm.c:131 src/pcmtoadpcm.c:222 src/play.c:178 src/query.c:140
+#: src/record.c:209
+#, c-format
+msgid "Usage: %s [options] <filename>\n"
+msgstr ""
+
+#: src/pcmtoadpcm.c:69
+#, c-format
+msgid ""
+"%s - PCM to ADPCM packer\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"based on VAG-Packer, hacked by bITmASTER@bigfoot.com\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+
+#: src/play.c:72 src/query.c:60 src/record.c:78
+msgid "which audio device (default: /dev/dsp)"
+msgstr ""
+
+#: src/play.c:73 src/record.c:79
+msgid "enable stereo"
+msgstr ""
+
+#: src/play.c:74 src/record.c:80
+msgid "enable mono"
+msgstr ""
+
+#: src/play.c:75 src/record.c:81
+msgid "set speed (default: 44100)"
+msgstr ""
+
+#: src/play.c:76 src/record.c:82
+msgid "set audio format (default: system default)"
+msgstr ""
+
+#: src/play.c:77 src/record.c:85
+msgid "buffer size (default: 4096 bytes)"
+msgstr ""
+
+#: src/play.c:78 src/record.c:86
+msgid "set number of channels (default: 1)"
+msgstr ""
+
+#: src/play.c:105
+#, c-format
+msgid ""
+"%s - play digital audio with OSS\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+
+#: src/play.c:236 src/record.c:271
+#, c-format
+msgid "unsupported format \"%s\""
+msgstr ""
+
+#: src/query.c:87
+#, c-format
+msgid ""
+"%s - query capabilities of OSS compatible audio device\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+
+#: src/query.c:187
+#, c-format
+msgid "%s has the following capabilities:\n"
+msgstr ""
+
+#: src/query.c:188
+msgid "- Full duplex record/playback\n"
+msgstr ""
+
+#: src/query.c:189
+msgid "- Real time capability\n"
+msgstr ""
+
+#: src/query.c:190
+msgid ""
+"- Device has some kind of internal buffers which may cause some delays and "
+"decrease precision of timing\n"
+msgstr ""
+
+#: src/query.c:191
+msgid "- Has a coprocessor (Sometimes it's a DSP but usually not)\n"
+msgstr ""
+
+#: src/query.c:192
+msgid "- Supports SETTRIGGER\n"
+msgstr ""
+
+#: src/query.c:193
+msgid "- Supports mmap()\n"
+msgstr ""
+
+#: src/query.c:199
+#, c-format
+msgid "%s supports 0x%08lx: "
+msgstr ""
+
+#: src/record.c:83
+msgid "set length (default: 0 bytes)"
+msgstr ""
+
+#: src/record.c:84
+msgid "set time (default: 1 second)"
+msgstr ""
+
+#: src/record.c:87
+msgid "use RIFF-WAVE file format (default: raw pcm)"
+msgstr ""
+
+#: src/record.c:130
+#, c-format
+msgid ""
+"%s - record digital audio with OSS\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""

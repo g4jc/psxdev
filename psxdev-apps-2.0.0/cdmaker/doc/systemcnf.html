@@ -1,0 +1,46 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.61 [en] (X11; I; Linux 2.2.13 i586) [Netscape]">
+   <title>Generating the SYSTEM.CNF</title>
+</head>
+<body text="#330000" bgcolor="#FFFFFF" link="#0000EF" vlink="#51188E" alink="#FF0000">
+
+<h1>
+Generating the SYSTEM.CNF;1 file</h1>
+Normally you won't need this feature and want to provide your own and self
+edited <b>SYSTEM.CNF</b> file. However, this is an important file and if
+it's missing or corrupt your master would be unusable. So you better let
+<b>psxcdmaker</b>
+create a correct one!
+<p><b><font color="#33CC00"><a href="control:use_systemcnf=1">Click here</a></font></b>
+to turn on this feature!
+<h2>
+TCB</h2>
+The number of task control blocks initially allocated. [<a href="entry:tcb=0x4">set
+default</a>]
+<h2>
+EVENT</h2>
+The maximum number of system events which can be used. [<a href="entry:event=0x10">set
+default</a>]
+<h2>
+STACK</h2>
+The initial stack pointer value. [<a href="entry:stack=0x801ffff0">set
+default</a>]
+<h2>
+BOOT</h2>
+This file will be booted. The path must be of the following format or the
+load will be rejected:
+<h2>
+LICENSE</h2>
+The content of this file will be written to the system area of the disc.
+<h2>
+EXCLUSION&nbsp;LIST</h2>
+This is a list of shell patterns. All files which will match against one
+of these patterns are excluded from the CD-ROM! This is very useful if
+your master directory does contain temporary files like backups, secret
+documentation and so on.
+<br>&nbsp;
+</body>
+</html>

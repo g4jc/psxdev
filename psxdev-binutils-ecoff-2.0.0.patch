@@ -1,0 +1,599 @@
+diff -crN psxdev-binutils.orig/bfd/config.bfd psxdev-binutils/bfd/config.bfd
+*** psxdev-binutils.orig/bfd/config.bfd	Thu Jan 13 20:43:43 2000
+--- psxdev-binutils/bfd/config.bfd	Sun Feb 27 22:24:10 2000
+***************
+*** 504,509 ****
+--- 504,513 ----
+      targ_defvec=ecoff_big_vec
+      targ_selvecs=ecoff_little_vec
+      ;;
++   mips*-sony-psx)
++ 	targ_defvec=ecoff_biglittle_vec
++ 	targ_selvecs="ecoff_little_vec ecoff_big_vec"
++ 	;;
+    mips*-*-irix6*)
+      targ_defvec=bfd_elf32_bigmips_vec
+      targ_selvecs="bfd_elf32_littlemips_vec bfd_elf64_bigmips_vec bfd_elf64_littlemips_vec"
+diff -crN psxdev-binutils.orig/config.sub psxdev-binutils/config.sub
+*** psxdev-binutils.orig/config.sub	Mon Sep  6 19:57:21 1999
+--- psxdev-binutils/config.sub	Sun Feb 27 22:25:48 2000
+***************
+*** 640,645 ****
+--- 640,649 ----
+  	ps2)
+  		basic_machine=i386-ibm
+  		;;
++ 	psx)
++ 		basic_machine=mips-sony
++ 		os=-psx
++ 		;;
+  	rom68k)
+  		basic_machine=m68k-rom68k
+  		os=-coff
+***************
+*** 887,892 ****
+--- 891,900 ----
+  		;;
+  	-unixware*)
+  		os=-sysv4.2uw
++ 		;;
++ 	-psx*)
++ 		basic_machine=mips-sony
++ 		os=-psx
+  		;;
+  	-gnu/linux*)
+  		os=`echo $os | sed -e 's|gnu/linux|linux-gnu|'`
+diff -crN psxdev-binutils.orig/gas/config/tc-mips.c psxdev-binutils/gas/config/tc-mips.c
+*** psxdev-binutils.orig/gas/config/tc-mips.c	Fri Jan 21 22:08:26 2000
+--- psxdev-binutils/gas/config/tc-mips.c	Sun Feb 27 23:02:19 2000
+***************
+*** 9961,9967 ****
+       int ignore;
+  {
+    mips_emit_delays (true);
+!   obj_elf_ident(0);
+  }
+  
+  static void
+--- 9961,9967 ----
+       int ignore;
+  {
+    mips_emit_delays (true);
+! //  obj_elf_ident(0);
+  }
+  
+  static void
+diff -crN psxdev-binutils.orig/gas/configure.in psxdev-binutils/gas/configure.in
+*** psxdev-binutils.orig/gas/configure.in	Wed Feb  2 19:53:39 2000
+--- psxdev-binutils/gas/configure.in	Sun Feb 27 22:26:14 2000
+***************
+*** 270,275 ****
+--- 270,276 ----
+        mips-*-osf*)          fmt=ecoff endian=little ;;
+        mips-*-ecoff*)        fmt=ecoff ;;
+        mips-*-ecoff*)        fmt=ecoff ;;
++ 	  mips-sony-psx)        fmt=ecoff targ=mips-lit endian=little ;;
+        mips-*-irix6*)	    fmt=elf ;;
+        mips-*-irix5*)        fmt=elf ;;
+        mips-*-irix*)         fmt=ecoff ;;
+diff -crN psxdev-binutils.orig/ld/Makefile.in psxdev-binutils/ld/Makefile.in
+*** psxdev-binutils.orig/ld/Makefile.in	Thu Dec  2 18:15:27 1999
+--- psxdev-binutils/ld/Makefile.in	Sun Feb 27 22:27:36 2000
+***************
+*** 313,319 ****
+  	evsta.o \
+  	ew65.o \
+  	ez8001.o \
+! 	ez8002.o
+  
+  
+  ALL_64_EMULATIONS = \
+--- 313,320 ----
+  	evsta.o \
+  	ew65.o \
+  	ez8001.o \
+! 	ez8002.o \
+! 	emipspsx.o
+  
+  
+  ALL_64_EMULATIONS = \
+***************
+*** 1245,1250 ****
+--- 1246,1254 ----
+  emipslit.c:  $(srcdir)/emulparams/mipslit.sh \
+    $(srcdir)/emultempl/generic.em $(srcdir)/scripttempl/mips.sc ${GEN_DEPENDS}
+  	${GENSCRIPTS} mipslit "$(tdir_mipslit)"
++ emipspsx.c:  $(srcdir)/emulparams/mipspsx.sh \
++   $(srcdir)/emultempl/generic.em $(srcdir)/scripttempl/mips.sc ${GEN_DEPENDS}
++ 	${GENSCRIPTS} mipspsx "$(tdir_mipspsx)"
+  emipslnews.c:  $(srcdir)/emulparams/mipslnews.sh \
+    $(srcdir)/emultempl/generic.em $(srcdir)/scripttempl/mips.sc ${GEN_DEPENDS}
+  	${GENSCRIPTS} mipslnews
+diff -crN psxdev-binutils.orig/ld/configure.tgt psxdev-binutils/ld/configure.tgt
+*** psxdev-binutils.orig/ld/configure.tgt	Thu Jan 13 20:43:43 2000
+--- psxdev-binutils/ld/configure.tgt	Sun Feb 27 22:28:00 2000
+***************
+*** 216,221 ****
+--- 216,222 ----
+  			targ_extra_emuls="elf32lsmip mipsbig mipslit"
+  			;;
+  mips*-*-lnews*)		targ_emul=mipslnews ;;
++ mips*-sony-psx)     targ_emul=mipspsx ;;
+  mn10200-*-*)		targ_emul=mn10200 ;;
+  mn10300-*-*)		targ_emul=mn10300 ;;
+  alpha*-*-linuxecoff*)	targ_emul=alpha targ_extra_emuls=elf64alpha
+diff -crN psxdev-binutils.orig/ld/emulparams/mipspsx.sh psxdev-binutils/ld/emulparams/mipspsx.sh
+*** psxdev-binutils.orig/ld/emulparams/mipspsx.sh	Thu Jan  1 01:00:00 1970
+--- psxdev-binutils/ld/emulparams/mipspsx.sh	Sun Feb 27 22:23:00 2000
+***************
+*** 0 ****
+--- 1,11 ----
++ SCRIPT_NAME=mips
++ OUTPUT_FORMAT="ecoff-biglittlemips"
++ BIG_OUTPUT_FORMAT="ecoff-bigmips"
++ LITTLE_OUTPUT_FORMAT="ecoff-littlemips"
++ TARGET_PAGE_SIZE=0x1000000
++ ARCH=mips
++ ENTRY=start
++ TEXT_START_ADDR=0x80010000
++ DATA_ADDR=.
++ TEMPLATE_NAME=mipsecoff
++ EMBEDDED=yes
+diff -crN psxdev-binutils.orig/gas/config/tc-mips.c psxdev-binutils/gas/config/tc-mips.c
+*** psxdev-binutils.orig/gas/config/tc-mips.c	Fri Jan 21 22:08:26 2000
+--- psxdev-binutils/gas/config/tc-mips.c	Thu Mar 23 03:33:51 2000
+***************
+*** 82,87 ****
+--- 82,106 ----
+  static char *mips_regmask_frag;
+  #endif
+  
++ /* begin of PSX/GTE register names */
++ /* donated from dbalster@psxdev.de */
++ 
++ static CONST char * CONST gte_general[] = {
++ 	"VXY0","VZ0" ,"VXY1","VZ1" ,"VXY2","VZ2" ,"RGB" ,"OTZ",
++ 	"IR0" ,"IR1" ,"IR2" ,"IR3" ,"SXY0","SXY1","SXY2","SXYP",
++ 	"SZ0" ,"SZ1" ,"SZ2" ,"SZ3" ,"RGB0","RGB1","RGB2","????",
++ 	"MAC0","MAC1","MAC2","MAC3","IRGB","ORGB","LZCS","LZCR"
++ };
++ 
++ static CONST char * CONST gte_control[] = {
++ 	"R11R12","R13R21","R22R23","R31R32","R33","TRX" ,"TRY" ,"TRZ",
++ 	"L11L12","L13L21","L22L23","L31L32","L33","RBK" ,"GBK" ,"BBK",
++ 	"LR1LR2","LR3LG1","LG2LG3","LB1LB2","LB3","RFC" ,"GFC" ,"BFC",
++ 	"OFX"   ,"OFY"   ,"H"     ,"DQA"   ,"DQB","ZSF3","ZSF4","FLAG"
++ };
++ 
++ /* end of PSX/GTE register names */
++ 
+  #define AT  1
+  #define TREG 24
+  #define PIC_CALL_REG 25
+***************
+*** 2486,2491 ****
+--- 2505,2511 ----
+  	case 't':
+  	case 'w':
+  	case 'E':
++ 	case 'Q':
+  	  insn.insn_opcode |= va_arg (args, int) << 16;
+  	  continue;
+  
+***************
+*** 2497,2502 ****
+--- 2517,2524 ----
+  
+  	case 'd':
+  	case 'G':
++ 	case 'X':
++ 	case 'Y':
+  	  insn.insn_opcode |= va_arg (args, int) << 11;
+  	  continue;
+  
+***************
+*** 6885,6892 ****
+--- 6907,6917 ----
+        case 'C':	USE_BITS (OP_MASK_COPZ,		OP_SH_COPZ);	break;
+        case 'D':	USE_BITS (OP_MASK_FD,		OP_SH_FD);	break;
+        case 'E':	USE_BITS (OP_MASK_RT,		OP_SH_RT);	break;
++       case 'Q':	USE_BITS (OP_MASK_RT,		OP_SH_RT);	break;
+        case 'F': break;
+        case 'G':	USE_BITS (OP_MASK_RD,		OP_SH_RD);	break;
++       case 'X':	USE_BITS (OP_MASK_RD,		OP_SH_RD);	break;
++       case 'Y':	USE_BITS (OP_MASK_RD,		OP_SH_RD);	break;
+        case 'I': break;
+        case 'L': break;
+        case 'M':	USE_BITS (OP_MASK_CCC,		OP_SH_CCC);	break;
+***************
+*** 7219,7225 ****
+--- 7244,7253 ----
+  	    case 'v':		/* both dest and source */
+  	    case 'w':		/* both dest and target */
+  	    case 'E':		/* coprocessor target register */
++ 	    case 'Q':		/* coprocessor target register (GTE) */
+  	    case 'G':		/* coprocessor destination register */
++ 	    case 'X':		/* coprocessor destination register (GTE) */
++ 	    case 'Y':		/* coprocessor destination register (GTE) */
+  	    case 'x':		/* ignore register name */
+  	    case 'z':		/* must be zero register */
+  	      s_reset = s;
+***************
+*** 7240,7246 ****
+  		      if (regno > 31)
+  			as_bad (_("Invalid register number (%d)"), regno);
+  		    }
+! 		  else if (*args == 'E' || *args == 'G')
+  		    goto notreg;
+  		  else
+  		    {
+--- 7268,7274 ----
+  		      if (regno > 31)
+  			as_bad (_("Invalid register number (%d)"), regno);
+  		    }
+! 		  else if (*args == 'E' || *args == 'G' || *args == 'X' || *args == 'Q' || *args == 'Y')
+  		    goto notreg;
+  		  else
+  		    {
+***************
+*** 7304,7309 ****
+--- 7332,7340 ----
+  		  if (regno == AT
+  		      && ! mips_opts.noat
+  		      && *args != 'E'
++ 		      && *args != 'X'
++ 		      && *args != 'Y'
++ 		      && *args != 'Q'
+  		      && *args != 'G')
+  		    as_warn (_("Used $at without \".set noat\""));
+  		  c = *args;
+***************
+*** 7334,7344 ****
+--- 7365,7378 ----
+  		      break;
+  		    case 'd':
+  		    case 'G':
++ 		    case 'X':
++ 		    case 'Y':
+  		      ip->insn_opcode |= regno << 11;
+  		      break;
+  		    case 'w':
+  		    case 't':
+  		    case 'E':
++ 		    case 'Q':
+  		      ip->insn_opcode |= regno << 16;
+  		      break;
+  		    case 'x':
+***************
+*** 8230,8235 ****
+--- 8264,8270 ----
+  	    case 'A':
+  	    case 'B':
+  	    case 'E':
++ 	    case 'Q':
+  	      /* We use offset_reloc rather than imm_reloc for the PC
+                   relative operands.  This lets macros with both
+                   immediate and address operands work correctly.  */
+***************
+*** 8443,8449 ****
+    { 'q', 11, 16, 0, MIPS16OP_SH_IMM8, 0, 0, 1 },
+    { 'A',  8, 16, 2, MIPS16OP_SH_IMM8, 1, 0, 1 },
+    { 'B',  5, 16, 3, MIPS16OP_SH_IMM5, 1, 0, 1 },
+!   { 'E',  5, 16, 2, MIPS16OP_SH_IMM5, 1, 0, 1 }
+  };
+  
+  #define MIPS16_NUM_IMMED \
+--- 8478,8485 ----
+    { 'q', 11, 16, 0, MIPS16OP_SH_IMM8, 0, 0, 1 },
+    { 'A',  8, 16, 2, MIPS16OP_SH_IMM8, 1, 0, 1 },
+    { 'B',  5, 16, 3, MIPS16OP_SH_IMM5, 1, 0, 1 },
+!   { 'E',  5, 16, 2, MIPS16OP_SH_IMM5, 1, 0, 1 },
+!   { 'Q',  5, 16, 2, MIPS16OP_SH_IMM5, 1, 0, 1 }
+  };
+  
+  #define MIPS16_NUM_IMMED \
+***************
+*** 9080,9085 ****
+--- 9116,9123 ----
+        mips_big_got = 1;
+        break;
+  
++     case 'X':
++     case 'Y':
+      case 'G':
+        if (! USE_GLOBAL_POINTER_OPT)
+  	{
+***************
+*** 9726,9731 ****
+--- 9764,9785 ----
+  		  printf ("$%d", dreg);
+  		  continue;
+  
++ 	/* BEGIN PSX GTE */
++ 
++ 		case 'Y':
++ 		  printf ("$%s", gte_general[dreg]);
++ 		  continue;
++ 
++ 		case 'Q':
++ 		  printf ("$%s", gte_general[treg]);
++ 		  continue;
++ 
++ 		case 'X':
++ 		  printf ("$%s", gte_control[dreg]);
++ 		  continue;
++ 
++ 	/* END PSX GTE */
++ 
+  		case 't':
+  		case 'E':
+  		  printf ("$%d", treg);
+diff -crN psxdev-binutils.orig/opcodes/mips-opc.c psxdev-binutils/opcodes/mips-opc.c
+*** psxdev-binutils.orig/opcodes/mips-opc.c	Fri Nov 19 18:44:15 1999
+--- psxdev-binutils/opcodes/mips-opc.c	Thu Mar 23 03:38:52 2000
+***************
+*** 322,333 ****
+  {"cfc0",    "t,G",	0x40400000, 0xffe007ff,	LCD|WR_t|RD_C0,	I1	},
+  {"cfc1",    "t,G",	0x44400000, 0xffe007ff,	LCD|WR_t|RD_C1|FP_S,	I1	},
+  {"cfc1",    "t,S",	0x44400000, 0xffe007ff,	LCD|WR_t|RD_C1|FP_S,	I1	},
+! {"cfc2",    "t,G",	0x48400000, 0xffe007ff,	LCD|WR_t|RD_C2,	I1	},
+  {"cfc3",    "t,G",	0x4c400000, 0xffe007ff,	LCD|WR_t|RD_C3,	I1	},
+  {"ctc0",    "t,G",	0x40c00000, 0xffe007ff,	COD|RD_t|WR_CC,	I1	},
+  {"ctc1",    "t,G",	0x44c00000, 0xffe007ff,	COD|RD_t|WR_CC|FP_S,	I1	},
+  {"ctc1",    "t,S",	0x44c00000, 0xffe007ff,	COD|RD_t|WR_CC|FP_S,	I1	},
+! {"ctc2",    "t,G",	0x48c00000, 0xffe007ff,	COD|RD_t|WR_CC,	I1	},
+  {"ctc3",    "t,G",	0x4cc00000, 0xffe007ff,	COD|RD_t|WR_CC,	I1	},
+  {"cvt.d.l", "D,S",	0x46a00021, 0xffff003f,	WR_D|RD_S|FP_D,	I3	},
+  {"cvt.d.s", "D,S",	0x46000021, 0xffff003f,	WR_D|RD_S|FP_D|FP_S,	I1	},
+--- 322,333 ----
+  {"cfc0",    "t,G",	0x40400000, 0xffe007ff,	LCD|WR_t|RD_C0,	I1	},
+  {"cfc1",    "t,G",	0x44400000, 0xffe007ff,	LCD|WR_t|RD_C1|FP_S,	I1	},
+  {"cfc1",    "t,S",	0x44400000, 0xffe007ff,	LCD|WR_t|RD_C1|FP_S,	I1	},
+! {"cfc2",    "t,X",	0x48400000, 0xffe007ff,	LCD|WR_t|RD_C2,	I1	},
+  {"cfc3",    "t,G",	0x4c400000, 0xffe007ff,	LCD|WR_t|RD_C3,	I1	},
+  {"ctc0",    "t,G",	0x40c00000, 0xffe007ff,	COD|RD_t|WR_CC,	I1	},
+  {"ctc1",    "t,G",	0x44c00000, 0xffe007ff,	COD|RD_t|WR_CC|FP_S,	I1	},
+  {"ctc1",    "t,S",	0x44c00000, 0xffe007ff,	COD|RD_t|WR_CC|FP_S,	I1	},
+! {"ctc2",    "t,X",	0x48c00000, 0xffe007ff,	COD|RD_t|WR_CC,	I1	},
+  {"ctc3",    "t,G",	0x4cc00000, 0xffe007ff,	COD|RD_t|WR_CC,	I1	},
+  {"cvt.d.l", "D,S",	0x46a00021, 0xffff003f,	WR_D|RD_S|FP_D,	I3	},
+  {"cvt.d.s", "D,S",	0x46000021, 0xffff003f,	WR_D|RD_S|FP_D|FP_S,	I1	},
+***************
+*** 506,513 ****
+  {"lwc1",    "E,A(b)",	0,    (int) M_LWC1_AB,	INSN_MACRO,	I1	},
+  {"l.s",     "T,o(b)",	0xc4000000, 0xfc000000,	CLD|RD_b|WR_T|FP_S,	I1	}, /* lwc1 */
+  {"l.s",     "T,A(b)",	0,    (int) M_LWC1_AB,	INSN_MACRO,	I1	},
+! {"lwc2",    "E,o(b)",	0xc8000000, 0xfc000000,	CLD|RD_b|WR_CC,	I1	},
+! {"lwc2",    "E,A(b)",	0,    (int) M_LWC2_AB,	INSN_MACRO,	I1	},
+  {"lwc3",    "E,o(b)",	0xcc000000, 0xfc000000,	CLD|RD_b|WR_CC,	I1	},
+  {"lwc3",    "E,A(b)",	0,    (int) M_LWC3_AB,	INSN_MACRO,	I1	},
+  {"lwl",     "t,o(b)",	0x88000000, 0xfc000000,	LDD|RD_b|WR_t,	I1	},
+--- 506,513 ----
+  {"lwc1",    "E,A(b)",	0,    (int) M_LWC1_AB,	INSN_MACRO,	I1	},
+  {"l.s",     "T,o(b)",	0xc4000000, 0xfc000000,	CLD|RD_b|WR_T|FP_S,	I1	}, /* lwc1 */
+  {"l.s",     "T,A(b)",	0,    (int) M_LWC1_AB,	INSN_MACRO,	I1	},
+! {"lwc2",    "Q,o(b)",	0xc8000000, 0xfc000000,	CLD|RD_b|WR_CC,	I1	},
+! {"lwc2",    "Q,A(b)",	0,    (int) M_LWC2_AB,	INSN_MACRO,	I1	},
+  {"lwc3",    "E,o(b)",	0xcc000000, 0xfc000000,	CLD|RD_b|WR_CC,	I1	},
+  {"lwc3",    "E,A(b)",	0,    (int) M_LWC3_AB,	INSN_MACRO,	I1	},
+  {"lwl",     "t,o(b)",	0x88000000, 0xfc000000,	LDD|RD_b|WR_t,	I1	},
+***************
+*** 538,544 ****
+  {"mfc0",    "t,G",	0x40000000, 0xffe007ff,	LCD|WR_t|RD_C0,	I1	},
+  {"mfc1",    "t,S",	0x44000000, 0xffe007ff,	LCD|WR_t|RD_S|FP_S,	I1	},
+  {"mfc1",    "t,G",	0x44000000, 0xffe007ff,	LCD|WR_t|RD_S|FP_S,	I1	},
+! {"mfc2",    "t,G",	0x48000000, 0xffe007ff,	LCD|WR_t|RD_C2,	I1	},
+  {"mfc3",    "t,G",	0x4c000000, 0xffe007ff,	LCD|WR_t|RD_C3,	I1	},
+  {"mfhi",    "d",	0x00000010, 0xffff07ff,	WR_d|RD_HI,	I1	},
+  {"mflo",    "d",	0x00000012, 0xffff07ff,	WR_d|RD_LO,	I1	},
+--- 538,544 ----
+  {"mfc0",    "t,G",	0x40000000, 0xffe007ff,	LCD|WR_t|RD_C0,	I1	},
+  {"mfc1",    "t,S",	0x44000000, 0xffe007ff,	LCD|WR_t|RD_S|FP_S,	I1	},
+  {"mfc1",    "t,G",	0x44000000, 0xffe007ff,	LCD|WR_t|RD_S|FP_S,	I1	},
+! {"mfc2",    "t,Y",	0x48000000, 0xffe007ff,	LCD|WR_t|RD_C2,	I1	},
+  {"mfc3",    "t,G",	0x4c000000, 0xffe007ff,	LCD|WR_t|RD_C3,	I1	},
+  {"mfhi",    "d",	0x00000010, 0xffff07ff,	WR_d|RD_HI,	I1	},
+  {"mflo",    "d",	0x00000012, 0xffff07ff,	WR_d|RD_LO,	I1	},
+***************
+*** 570,576 ****
+  {"mtc0",    "t,G",	0x40800000, 0xffe007ff,	COD|RD_t|WR_C0|WR_CC,	I1	},
+  {"mtc1",    "t,S",	0x44800000, 0xffe007ff,	COD|RD_t|WR_S|FP_S,	I1	},
+  {"mtc1",    "t,G",	0x44800000, 0xffe007ff,	COD|RD_t|WR_S|FP_S,	I1	},
+! {"mtc2",    "t,G",	0x48800000, 0xffe007ff,	COD|RD_t|WR_C2|WR_CC,	I1	},
+  {"mtc3",    "t,G",	0x4c800000, 0xffe007ff,	COD|RD_t|WR_C3|WR_CC,	I1	},
+  {"mthi",    "s",	0x00000011, 0xfc1fffff,	RD_s|WR_HI,	I1	},
+  {"mtlo",    "s",	0x00000013, 0xfc1fffff,	RD_s|WR_LO,	I1	},
+--- 570,576 ----
+  {"mtc0",    "t,G",	0x40800000, 0xffe007ff,	COD|RD_t|WR_C0|WR_CC,	I1	},
+  {"mtc1",    "t,S",	0x44800000, 0xffe007ff,	COD|RD_t|WR_S|FP_S,	I1	},
+  {"mtc1",    "t,G",	0x44800000, 0xffe007ff,	COD|RD_t|WR_S|FP_S,	I1	},
+! {"mtc2",    "t,Y",	0x48800000, 0xffe007ff,	COD|RD_t|WR_C2|WR_CC,	I1	},
+  {"mtc3",    "t,G",	0x4c800000, 0xffe007ff,	COD|RD_t|WR_C3|WR_CC,	I1	},
+  {"mthi",    "s",	0x00000011, 0xfc1fffff,	RD_s|WR_HI,	I1	},
+  {"mtlo",    "s",	0x00000013, 0xfc1fffff,	RD_s|WR_LO,	I1	},
+***************
+*** 721,728 ****
+  {"swc1",    "E,A(b)",	0,    (int) M_SWC1_AB,	INSN_MACRO,	I1	},
+  {"s.s",     "T,o(b)",	0xe4000000, 0xfc000000,	SM|RD_T|RD_b|FP_S,	I1	}, /* swc1 */
+  {"s.s",     "T,A(b)",	0,    (int) M_SWC1_AB,	INSN_MACRO,	I1	},
+! {"swc2",    "E,o(b)",	0xe8000000, 0xfc000000,	SM|RD_C2|RD_b,	I1	},
+! {"swc2",    "E,A(b)",	0,    (int) M_SWC2_AB,	INSN_MACRO,	I1	},
+  {"swc3",    "E,o(b)",	0xec000000, 0xfc000000,	SM|RD_C3|RD_b,	I1	},
+  {"swc3",    "E,A(b)",	0,    (int) M_SWC3_AB,	INSN_MACRO,	I1	},
+  {"swl",     "t,o(b)",	0xa8000000, 0xfc000000,	SM|RD_t|RD_b,	I1	},
+--- 721,728 ----
+  {"swc1",    "E,A(b)",	0,    (int) M_SWC1_AB,	INSN_MACRO,	I1	},
+  {"s.s",     "T,o(b)",	0xe4000000, 0xfc000000,	SM|RD_T|RD_b|FP_S,	I1	}, /* swc1 */
+  {"s.s",     "T,A(b)",	0,    (int) M_SWC1_AB,	INSN_MACRO,	I1	},
+! {"swc2",    "Q,o(b)",	0xe8000000, 0xfc000000,	SM|RD_C2|RD_b,	I1	},
+! {"swc2",    "Q,A(b)",	0,    (int) M_SWC2_AB,	INSN_MACRO,	I1	},
+  {"swc3",    "E,o(b)",	0xec000000, 0xfc000000,	SM|RD_C3|RD_b,	I1	},
+  {"swc3",    "E,A(b)",	0,    (int) M_SWC3_AB,	INSN_MACRO,	I1	},
+  {"swl",     "t,o(b)",	0xa8000000, 0xfc000000,	SM|RD_t|RD_b,	I1	},
+***************
+*** 801,806 ****
+--- 801,897 ----
+  {"wait",    "",		0x42000020, 0xffffffff,	TRAP,	I3|M1	},
+  {"waiti",   "",		0x42000020, 0xffffffff,	TRAP,	L1	},
+  {"wb", 	    "o(b)",	0xbc040000, 0xfc1f0000, SM|RD_b,	L1	},
++ 
++ /*
++ 	here are the PlayStation COP2 GTE instructions.
++ 	The GTE is a _cool_ vector math coprocessor.
++ 	
++ 	you can now use these instructions with your GNU assembler :-))
++ 	and even better: disassembly is included, too.
++ 
++ 	I have changed the default addressing modes for COP2;
++ 	this was necessary to support the GTE register names.
++ 	
++ 	new letter names:
++ 
++ 	Q,Y = gte data
++ 	X = gte control
++ 
++ 	mfc2	t,Y					t,G
++ 	mtc2	t,Y					t,G
++ 	swc2	Q,o(b) and Q,A(b)	E,..
++ 	lwc2	Q,o(b) and Q,A(b)	E,..
++ 	ctc2	t,X					t,G
++ 	cfc2	t,X					t,G
++ 
++ 	the flags have to be re-edited, they're just a fillup!
++ */
++ { "rtps",	"",0x4a180001, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "rtpt",	"",0x4a280030, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "rt",		"",0x4a480012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "rtv0",	"",0x4a486012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "rtv1",	"",0x4a48e012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "rtv2",	"",0x4a496012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "rtir",	"",0x4a49e012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "rtirsf0","",0x4a41e012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "rtv0tr",	"",0x4a480012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "rtv1tr",	"",0x4a488012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "rtv2tr",	"",0x4a490012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "rtirtr",	"",0x4a498012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "rtv0bk",	"",0x4a482012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "rtv1bk",	"",0x4a48a012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "rtv2bk",	"",0x4a492012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "rtirbk",	"",0x4a49a012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "lli",	"",0x4a4a6412, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 }, // ll conflicts with an already used insn name!
++ { "llv0",	"",0x4a4a6012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "llv1",	"",0x4a4ae012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "llv2",	"",0x4a4b6012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "llir",	"",0x4a4be012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "llv0tr",	"",0x4a4a0012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "llv1tr",	"",0x4a4a8012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "llv2tr",	"",0x4a4b0012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "llirtr",	"",0x4a4b8012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "llv0bk",	"",0x4a4a2012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "llv1bk",	"",0x4a4aa012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "llv2bk",	"",0x4a4b2012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "llirbk",	"",0x4a4ba012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "lc",		"",0x4a4da412, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "lcv0",	"",0x4a4c6012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "lcv1",	"",0x4a4ce012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "lcv2",	"",0x4a4d6012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "lcir",	"",0x4a4de012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "lcv0tr",	"",0x4a4c0012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "lcv1tr",	"",0x4a4c8012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "lcv2tr",	"",0x4a4d0012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "lcirtr",	"",0x4a4d8012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "lcv0bk",	"",0x4a4c2012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "lcv1bk",	"",0x4a4ca012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "lcv2bk",	"",0x4a4d2012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "lcirbk",	"",0x4a4da012, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "dpcl",	"",0x4a680029, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "dpcs",	"",0x4a780010, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "dpct",	"",0x4af8002a, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "intpl",	"",0x4a980011, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "sqr12",	"",0x4aa80428, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "sqr0",	"",0x4aa00428, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "ncs",	"",0x4ac8041e, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "nct",	"",0x4ad80420, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "ncds",	"",0x4ae80413, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "ncdt",	"",0x4af80416, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "nccs",	"",0x4b08041b, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "ncct",	"",0x4b18043f, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "cdp",	"",0x4b280414, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "cc",		"",0x4b38041c, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "nclip",	"",0x4b400006, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "avsz3",	"",0x4b58002d, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "avsz4",	"",0x4b68002e, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "op12",	"",0x4b78000c, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "op0",	"",0x4b70000c, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "gpf12",	"",0x4b98003d, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "gpf0",	"",0x4b90003d, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "gpl12",	"",0x4ba8003e, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ { "gpl0",	"",0x4ba0003e, 0xffffffff,LDD|LCD|WR_d|RD_C2|WR_C2,I1 },
++ 
+  /* No hazard protection on coprocessor instructions--they shouldn't
+     change the state of the processor and if they do it's up to the
+     user to put in nops as necessary.  These are at the end so that the
+diff -crN psxdev-binutils.orig/opcodes/mips-dis.c psxdev-binutils/opcodes/mips-dis.c
+*** psxdev-binutils.orig/opcodes/mips-dis.c	Mon Nov  1 23:32:09 1999
+--- psxdev-binutils/opcodes/mips-dis.c	Thu Mar 23 03:37:55 2000
+***************
+*** 66,71 ****
+--- 66,85 ----
+  
+  static CONST char * CONST reg_names[] = REGISTER_NAMES;
+  
++ static CONST char * CONST gte_general[] = {
++ 	"VXY0","VZ0" ,"VXY1","VZ1" ,"VXY2","VZ2" ,"RGB" ,"OTZ",
++ 	"IR0" ,"IR1" ,"IR2" ,"IR3" ,"SXY0","SXY1","SXY2","SXYP",
++ 	"SZ0" ,"SZ1" ,"SZ2" ,"SZ3" ,"RGB0","RGB1","RGB2","????",
++ 	"MAC0","MAC1","MAC2","MAC3","IRGB","ORGB","LZCS","LZCR"
++ };
++ 
++ static CONST char * CONST gte_control[] = {
++ 	"R11R12","R13R21","R22R23","R31R32","R33","TRX" ,"TRY" ,"TRZ",
++ 	"L11L12","L13L21","L22L23","L31L32","L33","RBK" ,"GBK" ,"BBK",
++ 	"LR1LR2","LR3LG1","LG2LG3","LB1LB2","LB3","RFC" ,"GFC" ,"BFC",
++ 	"OFX"   ,"OFY"   ,"H"     ,"DQA"   ,"DQB","ZSF3","ZSF4","FLAG"
++ };
++ 
+  /* The mips16 register names.  */
+  static const char * const mips16_reg_names[] =
+  {
+***************
+*** 156,161 ****
+--- 170,187 ----
+        (*info->fprintf_func) (info->stream, "$%s", reg_names[0]);
+        break;
+  
++     case 'Q':
++       (*info->fprintf_func) (info->stream, "$%s", gte_general[(l >> OP_SH_RT) & OP_MASK_RT]);
++       break;
++ 
++     case 'X':
++       (*info->fprintf_func) (info->stream, "$%s", gte_control[(l >> OP_SH_RD) & OP_MASK_RD]);
++       break;
++ 
++     case 'Y':
++       (*info->fprintf_func) (info->stream, "$%s", gte_general[(l >> OP_SH_RD) & OP_MASK_RD]);
++       break;
++ 
+      case '<':
+        (*info->fprintf_func) (info->stream, "0x%x",
+  			     (l >> OP_SH_SHAMT) & OP_MASK_SHAMT);
+***************
+*** 739,744 ****
+--- 765,771 ----
+      case 'A':
+      case 'B':
+      case 'E':
++     case 'Q':
+        {
+  	int immed, nbits, shift, signedp, extbits, pcrel, extu, branch;
+  
+***************
+*** 890,895 ****
+--- 917,923 ----
+  	    info->data_size = 8;
+  	    break;
+  	  case 'E':
++ 	  case 'Q':
+  	    nbits = 5;
+  	    shift = 2;
+  	    immed = (l >> MIPS16OP_SH_IMM5) & MIPS16OP_MASK_IMM5;

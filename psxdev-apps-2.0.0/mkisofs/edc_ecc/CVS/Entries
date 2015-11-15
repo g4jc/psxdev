@@ -1,0 +1,20 @@
+/10149.audiosector.ecc/1.1.1.1/Thu May 17 11:50:28 2001//
+/10149.datasector.ecc/1.1.1.1/Thu May 17 11:50:28 2001//
+/Makefile.in/1.1.1.1/Thu May 17 11:50:28 2001//
+/README/1.1.1.1/Thu May 17 11:50:28 2001//
+/config.h/1.1.1.1/Thu May 17 11:50:28 2001//
+/crc.h/1.1.1.1/Thu May 17 11:50:28 2001//
+/crc.txt/1.1.1.1/Thu May 17 11:50:28 2001//
+/crcmodel.c/1.1.1.1/Thu May 17 11:50:28 2001//
+/crcmodel.h/1.1.1.1/Thu May 17 11:50:28 2001//
+/crctable.c/1.1.1.1/Thu May 17 11:50:28 2001//
+/ecc.h/1.1.1.1/Thu May 17 11:50:28 2001//
+/edc_ecc.c/1.1.1.1/Thu May 17 11:50:28 2001//
+/gen_encodes.c/1.1.1.1/Thu May 17 11:50:28 2001//
+/sniptype.h/1.1.1.1/Thu May 17 11:50:28 2001//
+/verify_mode_1_encoder.c/1.1.1.1/Thu May 17 11:50:28 2001//
+/verify_mode_2_encoder.c/1.1.1.1/Thu May 17 11:50:28 2001//
+/verify_mode_2_form_1_encoder.c/1.1.1.1/Thu May 17 11:50:28 2001//
+/verify_mode_2_form_2_encoder.c/1.1.1.1/Thu May 17 11:50:28 2001//
+/verify_subchannel_encoder.c/1.1.1.1/Thu May 17 11:50:28 2001//
+D

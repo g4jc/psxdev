@@ -1,0 +1,177 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 1999-12-29 14:32+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+
+#: src/interface.c:98
+msgid "PSXDEV Curve Generator"
+msgstr ""
+
+#: src/interface.c:146
+msgid "New"
+msgstr ""
+
+#: src/interface.c:147
+msgid "New File"
+msgstr ""
+
+#: src/interface.c:158 src/interface.c:531
+msgid "Open"
+msgstr ""
+
+#: src/interface.c:159
+msgid "Open File"
+msgstr ""
+
+#: src/interface.c:171 src/interface.c:543
+msgid "Save"
+msgstr ""
+
+#: src/interface.c:172
+msgid "Save File"
+msgstr ""
+
+#: src/interface.c:183
+msgid "Save As"
+msgstr ""
+
+#: src/interface.c:196
+msgid "Address of curve in PlayStation memory..."
+msgstr ""
+
+#: src/interface.c:202
+msgid "Upload"
+msgstr ""
+
+#: src/interface.c:216
+msgid "SPLINE"
+msgstr ""
+
+#: src/interface.c:229
+msgid "LINEAR"
+msgstr ""
+
+#: src/interface.c:242
+msgid "FREE"
+msgstr ""
+
+#: src/interface.c:282
+msgid "Min X"
+msgstr ""
+
+#: src/interface.c:292
+msgid "Max X"
+msgstr ""
+
+#: src/interface.c:302
+msgid "Min Y"
+msgstr ""
+
+#: src/interface.c:312
+msgid "Max Y"
+msgstr ""
+
+#: src/interface.c:322
+msgid "Count"
+msgstr ""
+
+#: src/interface.c:332 src/interface.c:505
+msgid "Type"
+msgstr ""
+
+#: src/interface.c:363 src/interface.c:381
+msgid "u_char"
+msgstr ""
+
+#: src/interface.c:364
+msgid "char"
+msgstr ""
+
+#: src/interface.c:365
+msgid "u_short"
+msgstr ""
+
+#: src/interface.c:366
+msgid "short"
+msgstr ""
+
+#: src/interface.c:367
+msgid "u_long"
+msgstr ""
+
+#: src/interface.c:368
+msgid "long"
+msgstr ""
+
+#: src/interface.c:369
+msgid "float"
+msgstr ""
+
+#: src/interface.c:370
+msgid "double"
+msgstr ""
+
+#: src/interface.c:371
+msgid "fixed (4+12)"
+msgstr ""
+
+#: src/interface.c:426
+msgid "Curve Interval:"
+msgstr ""
+
+#: src/interface.c:436
+msgid "Datatype:"
+msgstr ""
+
+#: src/interface.c:446
+msgid "Scale"
+msgstr ""
+
+#: src/interface.c:476
+msgid "Base"
+msgstr ""
+
+#: src/interface.c:512
+msgid "Name"
+msgstr ""
+
+#: src/interface.c:555
+msgid "Add"
+msgstr ""
+
+#: src/interface.c:567
+msgid "Remove"
+msgstr ""
+
+#: src/interface.c:579
+msgid "Use"
+msgstr ""
+
+#: src/interface.c:671
+msgid "Copyright (C) 1999, 2000 by Daniel Balster"
+msgstr ""
+
+#: src/interface.c:673
+msgid "A very simple curve generator"
+msgstr ""
+
+#: src/support.c:96 src/support.c:134
+#, c-format
+msgid "Couldn't find pixmap file: %s"
+msgstr ""
+
+#: src/support.c:112
+#, c-format
+msgid "Couldn't create pixmap from file: %s"
+msgstr ""

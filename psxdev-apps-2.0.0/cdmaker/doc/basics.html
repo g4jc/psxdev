@@ -1,0 +1,95 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.61 [en] (X11; I; Linux 2.2.13 i586) [Netscape]">
+   <title>Basics of a PSX CD-ROM</title>
+</head>
+<body text="#330000" bgcolor="#FFFFFF" link="#0000EF" vlink="#51188E" alink="#FF0000">
+
+<h1>
+Basics of a PSX CD-ROM</h1>
+
+<h2>
+General</h2>
+All informations provided here are guessed and not offical, so keep this
+in mind. I made some test series to find it out (try and error...)
+<h2>
+Filesystem</h2>
+The PSX&nbsp;seems to use a standard ISO&nbsp;9660 level 1 filesystem (8+3
+names plus version suffix <b>;1</b>). The ISO&nbsp;filesystem implies a
+maximum directory depth of 8 levels, and it seems that the total number
+of directories and files on one disc is limited too (it uses only one sector
+to store this information).
+<ul>
+<li>
+up to 45 directories</li>
+
+<li>
+up to 30 files per directory</li>
+
+<li>
+maximum directory depth is 8 levels</li>
+
+<li>
+filenames must conform 8+3 notation plus version suffix</li>
+</ul>
+
+<h2>
+CD-ROM&nbsp;Track types</h2>
+The first track must always be a data track. Since you may want to embed
+XA&nbsp;files (which take <b>2336 bytes/sector</b>) the data track should
+be of type <b>CD_ROM_XA</b>. See below for more informations on XA&nbsp;files.
+All following tracks can only be audio tracks, and a typical maximum of
+99 tracks in total is supported.
+<h2>
+Embedding a product license</h2>
+The system area of a PSX&nbsp;CD-ROM (the first 16 sectors) contains kind
+of a product license. I&nbsp;you have such a license file, you can embed
+it these sectors.
+<h2>
+Embedding XA&nbsp;streams</h2>
+Two file types are supported by <i>PSXDEV&nbsp;CD Maker</i>:
+<ul>
+<li>
+Mode 2 Form 1 (Used for all normal files)</li>
+
+<ul>
+<li>
+8 Bytes Subheader</li>
+
+<li>
+2048 Bytes Data</li>
+
+<li>
+4 Bytes EDC</li>
+
+<li>
+276 Bytes ECC</li>
+</ul>
+
+<li>
+Mode 2 Form 2 (Used for all XA&nbsp;files)</li>
+
+<ul>
+<li>
+8 Bytes Subheader</li>
+
+<li>
+2324 Bytes Data</li>
+
+<li>
+4 Bytes Reserved</li>
+</ul>
+</ul>
+You can specify filename filters to select the files to be embedded in
+XA&nbsp;mode, like <b>*.xa</b>. It is up to you how you create the XA&nbsp;files;&nbsp;I've
+tested this feature by using some existing XA&nbsp;files (audio files and
+movies), creating a CD-ROM and replaying them with the help of the CAETLA&nbsp;movie
+player. There are many details missing yet (like indexing, owner groups
+and some sync informations) and since I do not have enough informations
+about this they won't be implemented in the near future.
+<br>&nbsp;
+<br>&nbsp;
+</body>
+</html>

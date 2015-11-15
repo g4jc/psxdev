@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html lang=en><head>
+<title>psxdev.de: Using the file server from the PSX</title>
+<meta http-equiv="content-type" content="text/html;">
+<link rel=stylesheet type="text/css" href="psxdev.css">
+</head><body background="images/bg.png" color=#000000 bgcolor=#999999>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>Using the file server from the PSX</TD><TD ALIGN=RIGHT>[<A HREF=index.html>top</A>|<A HREF=overview.html>sitemap</A>|<A HREF=download.html>download</A>|<A HREF=documentation.html>docs</A>]</TD></TR></TABLE>
+<hr size=2 noshade>
+<center><img src=images/psxtux2.png border=0 width=78 height=90><img src=images/logo.png width=496 height=90></center>
+<h1>Using the file server from the PSX</h1>
+
+<table  width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center><table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#FFFFFF><td width=100% valign=top>
+<p>
+CAETLA installs a new device into the PSX OS which is named <b><code>"pcdrv:"</code></b>.
+It can be accessed like <b><code>"cdrom:"</code></b> using the normal POSIX
+system calls like open(), close(), etc.
+</p>
+<p>
+PSXDEV does a full implementation of this CAETLA unique feature. Although
+it was originally designed for MSDOS there is no feature missing except the
+drive letter support (chdrv), which is crap and not needed under linux.
+</p>
+<p>
+Since the very important system call <b>stat()</b> is missing, there was no
+possibility of determining the size of a remote file. Due to bugs in PSX OS or
+CAETLA it is not even possible to use the seek() system call to find this out.
+So I have added a non standard, non portable feature: if you read() into a
+buffer with a specified size of -1 (which is normally not defined or an illegal
+value!) the first four bytes of the buffer will be filled with the 32-bit
+long file size value. Because the read() call will shift an internal offset
+pointer in the PSX OS, you have to call lseek(fd,0,0) after that.
+Too complicated? Look at this example:
+<ul><code><pre>
+<span class=y2>/* <b>this</b> code works only on a <span class=y3>PSX</span> with <span class=y3>PSXDEV</span> */</span>
+
+main<b>(</b><b>)</b>
+<b>{</b>
+	<span class=y1>int</span> size;
+	<span class=y1>int</span> fd;
+	
+	fd = open <b>(</b><span class=x1>"pcdrv:/etc/passwd"</span>,<span class=y3>O_RDONLY</span><b>)</b>;
+	<b>if</b> <b>(</b>fd != -1<b>)</b>
+	<b>{</b>
+		<span class=y2>// determine file size !</span>
+		read <b>(</b>fd, &size, -1<b>)</b>;
+
+		<span class=y2>// reset internal offset</span>
+		lseek <b>(</b>fd,0,0<b>)</b>;
+	
+		<span class=y2>// read /etc/passwd from linux !</span>
+		read <b>(</b>fd, 0x800100000, size<b>)</b>;
+	
+		close <b>(</b>fd<b>)</b>;
+	<b>}</b>
+<b>}</b>
+</pre></code></ul>This is surely a very bad hack, but even better than nothing! Equipped with
+this feature, you applications can load data files and know about their size.
+</p>
+</table></td></tr></table><hr width=0 size=0>
+<table width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center>
+<table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#000000><td width=100%>
+<p class=title><img src=images/star.png>"pcdrv:" supported system calls
+</p></td></tr><tr><td bgcolor=#FFFFFF>
+<ul>
+<li><b>void putchar (char ch);</b><br>
+Print one character to STDOUT. Your current linux terminal will be used
+as STDOUT, since the PSX normally hasn't one :-)
+<li><b>char getchar (void);</b><br>
+Get one character from STDIN, which will also be your current linux terminal.
+<li><b>int open (char *filename, int mode);</b><br>
+If the filename begins with "pcdrv:", the remaining part of the filename will
+be sended to the file server (i.e. pcdrv:/dev/sda or pcdrv:/home/user/psx).
+This call will waste two file descriptors, one at the PSX and the other one
+at the file server.
+The mode is currently ignored.
+<li><b>int read (int fd, void *buffer, int length);</b><br>
+Read length bytes into buffer
+<li><b>int write (int fd, void *buffer, int length);</b><br>
+Write length bytes from buffer
+<li><b>int lseek (int fd, int offset, int whence);</b><br>
+Seek to a specific offset; whence is currently not working.
+<li><b>int close (int fd);</b><br>
+Close a file descriptor.
+<li><b>int delete (char *name);</b><br>
+Delete a file. If the filename starts with "pcdrv:" you will delete
+a remote file (i.e. pcdrv:/etc/passwd)
+<li><b>int rename (char *oldname, char *newname);</b><br>
+Try to rename a file
+<li><b>dir_entry_t* firstfile (char *name, dir_entry_t *dir);</b><br>
+Initiate a directory scan
+<li><b>dir_entry_t* nextfile (dir_entry_t *dir);</b><br>
+Get the next file of the opened directory
+<li><b>int cd (char *path);</b><br>
+Change the current dir. This will change the current directory on
+the server side, if pcdrv: is at the beginning of the filename.
+</ul>
+</td></tr></table></td></tr></table><br><table  width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center><table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#FFFFFF><td width=100% valign=top>
+The file server is a linux application, so you need the correct permissions
+and ownership of all accessed files and directories. This is main reason why
+the file server is not integrated into the linux kernel.
+</table></td></tr></table><hr width=0 size=0>
+
+<hr size=2 noshade>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>
+<address>Created with <a href=psxdev.pl>psxdev.pl</a></address>
+</td><td align=right>
+<address>Copyright &copy;2000
+ by <a href="mailto:dbalster@psxdev.de">Daniel Balster</a></address>
+</td></tr></table>
+</body></html>

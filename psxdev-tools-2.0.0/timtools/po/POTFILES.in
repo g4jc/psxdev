@@ -1,0 +1,5 @@
+src/anytotim.c
+src/error.c
+src/timmontage.c
+src/timsetpos.c
+src/timtoppm.c

@@ -1,0 +1,6 @@
+#	$Id: TODO,v 1.1.1.1 2001/05/17 11:50:28 dbalster Exp $	
+	1) Finish multiple paths.  Update nlink count on directories if it is
+	different than what stat returned.  Save the nlink count that we store in
+	the rock ridge attributes so know when we don't have to adjust it.
+
+

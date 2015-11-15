@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html lang=en><head>
+<title>psxdev.de: A simple hello world program</title>
+<meta http-equiv="content-type" content="text/html;">
+<link rel=stylesheet type="text/css" href="psxdev.css">
+</head><body background="images/bg.png" color=#000000 bgcolor=#999999>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>A simple hello world program</TD><TD ALIGN=RIGHT>[<A HREF=index.html>top</A>|<A HREF=overview.html>sitemap</A>|<A HREF=download.html>download</A>|<A HREF=documentation.html>docs</A>]</TD></TR></TABLE>
+<hr size=2 noshade>
+<center><img src=images/psxtux2.png border=0 width=78 height=90><img src=images/logo.png width=496 height=90></center>
+<h1>A simple hello world program</h1>
+
+<table  width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center><table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#FFFFFF><td width=100% valign=top>
+This is a complete tutorial which shows you the basic tasks of
+<ul>
+<li>Using a Makefile
+<li>Using the assembler
+<li>Using the C compiler
+<li>Using a system call
+<li>Converting the binary
+<li>Uploading and starting the application
+</ul>
+This tutorial does not use any includes or libraries, so you can test
+it even if you don't have any of those. Let's create some files, read
+the following boxes carefully and create those files with the same
+names!
+</table></td></tr></table><hr width=0 size=0>
+<table width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center>
+<table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#000000><td width=100%>
+<p class=title><img src=images/star.png>main.c
+</p></td></tr><tr><td bgcolor=#FFFFFF>
+<ul><code><pre>
+<span class=y2>/*
+**	a hello world program
+*/</span>
+
+<span class=y2>// prototype <b>for</b> the printf<b>(</b><b>)</b> function</span>
+<span class=y1>extern</span> <span class=y1>void</span> printf <b>(</b><span class=y1>const</span> <span class=y1>char</span> *fmt, ...<b>)</b>;
+
+<span class=y1>int</span> main <b>(</b><span class=y1>int</span> argc, <span class=y1>char</span> **argv<b>)</b>
+<b>{</b>
+	printf <b>(</b><span class=x1>"Hello World!\n"</span><b>)</b>;
+	
+	<b>return</b> 0;
+<b>}</b>
+</pre></code></ul></td></tr></table></td></tr></table><br><table width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center>
+<table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#000000><td width=100%>
+<p class=title><img src=images/star.png>startup.c
+</p></td></tr><tr><td bgcolor=#FFFFFF>
+<ul><code><pre>
+<span class=y2>/*
+**	minimal startup code
+*/</span>
+
+<span class=y1>extern</span> <span class=y1>unsigned</span> <span class=y1>long</span> _fbss<b>[</b><b>]</b>;
+<span class=y1>extern</span> <span class=y1>unsigned</span> <span class=y1>long</span> _end<b>[</b><b>]</b>;
+<span class=y1>extern</span> <span class=y1>unsigned</span> <span class=y1>long</span> _gp<b>[</b><b>]</b>;
+<span class=y1>register</span> <span class=y1>unsigned</span> <span class=y1>long</span> *gp asm <b>(</b><span class=x1>"gp"</span><b>)</b>;
+
+<span class=y2>// prototype <b>for</b> the main<b>(</b><b>)</b> function</span>
+<span class=y1>extern</span> <span class=y1>int</span> main <b>(</b><span class=y1>int</span> argc, <span class=y1>char</span> **argv<b>)</b>;
+
+<span class=y2>// an empty function <b>(</b>pre-main<b>)</b></span>
+<span class=y1>void</span> __main <b>(</b><span class=y1>void</span><b>)</b> <b>{</b><b>}</b>
+
+<span class=y2>// <b>this</b> function is called before any other</span>
+<span class=y1>int</span> start <b>(</b><span class=y1>int</span> argc, <span class=y1>char</span> **argv<b>)</b>
+<b>{</b>
+	<span class=y1>unsigned</span> <span class=y1>long</span> *addr;
+	<span class=y1>unsigned</span> <span class=y1>long</span> size;
+	
+	<span class=y2>// clear the .bss segment</span>
+	size = 0x1FFFFF - <b>(</b><b>(</b><b>(</b><span class=y1>unsigned</span> <span class=y1>long</span><b>)</b>_end<b>)</b> & 0xFFFFFF<b>)</b>;
+	<b>for</b> <b>(</b>addr = _fbss; addr &lt; _end; *addr++ = 0<b>)</b>;
+
+	<span class=y2>// set the global pointer</span>
+	gp = _gp;
+	
+	<b>return</b> main<b>(</b>argc, argv<b>)</b>;
+<b>}</b>
+</pre></code></ul></td></tr></table></td></tr></table><br><table width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center>
+<table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#000000><td width=100%>
+<p class=title><img src=images/star.png>Makefile
+</p></td></tr><tr><td bgcolor=#FFFFFF>
+<ul><code><pre>
+<span class=x4>#</span>
+<span class=x4>#	Makefile <b>for</b> hello world program</span>
+<span class=x4>#</span>
+
+<span class=y3>SOURCES</span> = main.c startup.c printf.s
+<span class=y3>BASE</span>    = 0x80010000
+
+<span class=y3>CC</span>      = psx-gcc
+<span class=y3>LD</span>      = psx-ld
+<span class=y3>AS</span>      = psx-as
+<span class=y3>STRIP</span>   = psx-strip
+
+<span class=y3>CFLAGS</span>  = -<span class=y3>EL</span> -<span class=y3>G0</span> -pipe -fno-builtin -mcpu=r3000 -msoft-<span class=y1>float</span>
+<span class=y3>LDFLAGS</span> += -<span class=y3>EL</span> -<span class=y3>G0</span> -Ttext $<b>(</b><span class=y3>BASE</span><b>)</b>
+
+all: file.psx
+	psx-run --reset --server file.psx
+
+file.psx: file.bfd
+	$<b>(</b><span class=y3>STRIP</span><b>)</b> file.bfd
+	psx-bfd2x --use-gp --verbose --output=file.psx file.bfd
+
+file.bfd: Makefile main.o startup.o printf.o
+	$<b>(</b><span class=y3>LD</span><b>)</b> $<b>(</b><span class=y3>LDFLAGS</span><b>)</b> -o file.bfd main.o startup.o printf.o
+
+%.o: %.c
+	$<b>(</b><span class=y3>CC</span><b>)</b> -c $<b>(</b><span class=y3>CFLAGS</span><b>)</b> $&lt; -o $@
+
+%.o: %.s
+	$<b>(</b><span class=y3>CC</span><b>)</b> -c $<b>(</b><span class=y3>CFLAGS</span><b>)</b> $&lt; -o $@
+</pre></code></ul></td></tr></table></td></tr></table><br><table width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center>
+<table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#000000><td width=100%>
+<p class=title><img src=images/star.png>printf.s
+</p></td></tr><tr><td bgcolor=#FFFFFF>
+<ul><code><pre>
+<span class=x5>	.text</span>
+<span class=x5>	.align</span>	2
+<span class=x5>	.globl</span>	printf
+<span class=x5>	.text</span>
+<span class=x5>	.ent</span>	printf
+<<span class=y1>sp</span>an class=y4>printf:</<span class=y1>sp</span>an>
+<b>	li</b>	$8,0x<span class=y1>a0</span>
+<span class=x5>	.set</span>	noreorder
+<b>	jr</b>	$8
+<b>	li</b>	$9,0x3f
+<span class=x5>	.set</span>	reorder
+<span class=x5>	.end</span>	printf
+</pre></code></ul></td></tr></table></td></tr></table><br><table  width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center><table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#FFFFFF><td width=100% valign=top>
+If you now type <b>make</b> you should get the following output:
+<ul><pre><code>
+<b>psx-gcc -c -EL -G0 -pipe -fno-builtin -mcpu=r3000 \
+	-msoft-float main.c -o main.o</b>
+<b>psx-gcc -c -EL -G0 -pipe -fno-builtin -mcpu=r3000 \
+	-msoft-float startup.c -o startup.o</b>
+<b>psx-gcc -c -EL -G0 -pipe -fno-builtin -mcpu=r3000 \
+	-msoft-float printf.s -o printf.o</b>
+<b>psx-ld -EL -G0 -Ttext 0x80010000 -o file.bfd \
+	main.o startup.o printf.o</b>
+<b>psx-strip file.bfd</b>
+<b>psx-bfd2x --use-gp --verbose --output=file.psx file.bfd</b>
+Reading from "file.bfd"
+Writing to "file.psx"
+Object file format is "ecoff-littlemips"
+psx-bfd2x: GP optimized size is 8
+
+Section "   .text" will be exported
+Section "  .rdata" will be exported
+Section "   .data" will be exported
+Aligning: 336 -> 2048
+PC=0x8001006c GP=0x80018150 Base=80010000 Size=0x00000150
+Section [   .text] Address [80010000] Length [000140] * 
+Section [  .rdata] Address [80010140] Length [000010] * 
+Section [   .data] Address [80010150] Length [000000] * 
+Section [    .bss] Address [80010150] Length [000000]
+<b>psx-run --reset --server file.psx</b>
+KERNEL SETUP!
+
+Configuration : EvCB    0x10            TCB     0x04
+<font size=+2>Hello World!</font>
+PC is in control!
+</code></pre></ul>
+If not, something went wrong. Most likely you haven't yet PSXDEV installed
+or the driver is not working or the PlayStation is not online (it must be
+powered on and connected since we're uploading the binary directly after
+it is created).
+</table></td></tr></table><hr width=0 size=0>
+
+<hr size=2 noshade>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>
+<address>Created with <a href=psxdev.pl>psxdev.pl</a></address>
+</td><td align=right>
+<address>Copyright &copy;2000
+ by <a href="mailto:dbalster@psxdev.de">Daniel Balster</a></address>
+</td></tr></table>
+</body></html>

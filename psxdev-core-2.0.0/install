@@ -1,0 +1,21 @@
+#!/bin/sh
+
+PSXDEV=$1
+
+sh ./setup $PSXDEV
+
+install -d -m 0755 -g 0 -o 0 $PSXDEV/
+install -d -m 0755 -g 0 -o 0 $PSXDEV/share/
+install -d -m 0755 -g 0 -o 0 $PSXDEV/pccl/
+install -d -m 0755 -g 0 -o 0 $PSXDEV/bin/
+install -d -m 0755 -g 0 -o 0 $PSXDEV/include/
+install    -m 0755 -g 0 -o 0 psxdev.sh $PSXDEV/psxdev.sh
+install    -m 0755 -g 0 -o 0 psxdev.sh /etc/profile.d/psxdev.sh
+install    -m 0644 -g 0 -o 0 magic $PSXDEV/share/magic
+install    -m 0644 -g 0 -o 0 pccl/Makefile $PSXDEV/pccl/Makefile
+install    -m 0644 -g 0 -o 0 pccl/pccl.h $PSXDEV/pccl/pccl.h
+install    -m 0644 -g 0 -o 0 pccl/pccl.c $PSXDEV/pccl/pccl.c
+
+. psxdev.sh
+
+make -C $PSXDEV/pccl install

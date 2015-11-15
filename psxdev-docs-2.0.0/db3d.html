@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html lang=en><head>
+<title>psxdev.de: Unsupported:DB3D</title>
+<meta http-equiv="content-type" content="text/html;">
+<link rel=stylesheet type="text/css" href="psxdev.css">
+</head><body background="images/bg.png" color=#000000 bgcolor=#999999>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>Unsupported:DB3D</TD><TD ALIGN=RIGHT>[<A HREF=index.html>top</A>|<A HREF=overview.html>sitemap</A>|<A HREF=download.html>download</A>|<A HREF=documentation.html>docs</A>]</TD></TR></TABLE>
+<hr size=2 noshade>
+<center><img src=images/psxtux2.png border=0 width=78 height=90><img src=images/logo.png width=496 height=90></center>
+<h1>Unsupported:DB3D</h1>
+
+<table  width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center><table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#FFFFFF><td width=100% valign=top>
+This is my private and not supported <b>object detailer</b>. It is just
+a <b>file format converter</b>; it reads
+<ul>
+<li>3D studio (.3DS)
+<li>MD2 (quake 2)
+<li>OBJ (alias|wavefront, only partially)
+<li>TMD (?)
+<li>TRI (simple triangle meshes)
+<li>psx, x3d, db[0-9] (own formats)
+</ul>
+and it exports only my custom formats. This utility allowed me to test
+and train various software techniques, but unfortunately it is a totally
+messed up source code. I added all the features I needed for my tests just
+in time. Please understand that I can not answer any questions about this
+software. I am working on a completely new version with more features (like
+BSP tree creation, world editor, more animation support, ...).
+</table></td></tr></table><hr width=0 size=0>
+<TABLE  WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0 BGCOLOR="#000000"><TR><TD VALIGN=center><TABLE CELLSPACING=1 CELLPADDING=2 WIDTH=100% BORDER=0>
+<TR BGCOLOR=#000000><TD WIDTH=100% COLSPAN=2><p class=title><IMG SRC=images/star.png>Screen shot</p></TD></TR>
+<TR BGCOLOR=#EEEEEE><TD><I>image</I></TD><TD><I>description</I></TD><tr bgcolor=#FFFFFF><td><a href=images/db3d_main.jpg><img src=images/sdb3d_main.png border=0></a></td><td width=100% valign=top>This is the main window of DB3D. You will always see the current object and
+its current frame (if it is an animation). You can select sets of vertices
+or polygones and then modify their attributes like color, position, texcoords
+and so on. All that lines and numbers are control informations (like the
+shading/normal vectors). It is possible to directly exchange models with a
+running remote program (without restarting it :-) but that is only a
+nice gimmick. You can kind of bend and scale sets of vertices, which allows
+you to create simple animations by adding modified base frames. If you are
+talented you could create a Quake2 like model including its animation etc.
+just from a cube (by adding color, texture, and shape data), however this
+tool is just a <i>converter</i>. It can simulate the PSX 3D quality.
+<tr bgcolor=#FFFFFF><td><a href=images/db3d_objects.jpg><img src=images/sdb3d_objects.png border=0></a></td><td width=100% valign=top>DB3D has an object repository, but I never finished the merge/split of
+objects. This is why the use of multiple objects does not make any sense
+in this program.
+<tr bgcolor=#FFFFFF><td><a href=images/db3d_textures.jpg><img src=images/sdb3d_textures.png border=0></a></td><td width=100% valign=top>DB3D does only support one texture per object; this is a bad restriction,
+but since the input formats do so neither it does not matter...
+<tr bgcolor=#FFFFFF><td><a href=images/db3d_viewer.jpg><img src=images/sdb3d_viewer.png border=0></a></td><td width=100% valign=top>This is the u,v texture coordinates editor. You will see the currently
+selected texture and the u,v grid. You can select and drag the coordinates
+with a mouse, rotate, flip and zoom into them. Clicking on a mapper button
+will map the selected vertices from 3D to 2D (sperical, planar, cylindrical).
+It seems that I overmerged that last feature by accident (<i>..and now have
+to search for it in a CVSROOT backup :-( </i>)
+<tr bgcolor=#FFFFFF><td><a href=images/db3d_coords.jpg><img src=images/sdb3d_coords.png border=0></a></td><td width=100% valign=top>More texture functions. This is really lowlevel; but the main design work
+must be done with a real 3D application. It is just to <i>debug</i> some
+nasty errors (like a misplaced eye texture...)
+<tr bgcolor=#FFFFFF><td><a href=images/db3d_bones.jpg><img src=images/sdb3d_bones.png border=0></a></td><td width=100% valign=top>The bone animation support is also very uncompleted. The complete IK solver
+is missing; one major problem was the internal data representation of DB3D;
+my classes had some design bugs - I am working on a new library now.
+<tr bgcolor=#FFFFFF><td><a href=images/db3d_color.jpg><img src=images/sdb3d_color.png border=0></a></td><td width=100% valign=top>Nothing to say, a vertex colorizer.. 
+<tr bgcolor=#FFFFFF><td><a href=images/db3d_gimp.jpg><img src=images/sdb3d_gimp.png border=0></a></td><td width=100% valign=top>Have I mentioned that this complete application can be run as a GIMP plug-in?
+It installs itself into the GIMP and then you can <b>realtime texture paint</b>
+your objects. I stole the idea from an available plug-in, just search for
+TexturePaint in freshmeat.net...
+</table></td></tr></table><hr width=0 size=0>
+
+<hr size=2 noshade>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>
+<address>Created with <a href=psxdev.pl>psxdev.pl</a></address>
+</td><td align=right>
+<address>Copyright &copy;2000
+ by <a href="mailto:dbalster@psxdev.de">Daniel Balster</a></address>
+</td></tr></table>
+</body></html>

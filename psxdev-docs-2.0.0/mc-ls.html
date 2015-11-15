@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html lang=en><head>
+<title>psxdev.de: list the contents of a memory card</title>
+<meta http-equiv="content-type" content="text/html;">
+<link rel=stylesheet type="text/css" href="psxdev.css">
+</head><body background="images/bg.png" color=#000000 bgcolor=#999999>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>list the contents of a memory card</TD><TD ALIGN=RIGHT>[<A HREF=index.html>top</A>|<A HREF=overview.html>sitemap</A>|<A HREF=download.html>download</A>|<A HREF=documentation.html>docs</A>]</TD></TR></TABLE>
+<hr size=2 noshade>
+<center><img src=images/psxtux2.png border=0 width=78 height=90><img src=images/logo.png width=496 height=90></center>
+<h1>list the contents of a memory card</h1>
+
+<table  width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center><table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#FFFFFF><td width=100% valign=top>
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE><tr VALIGN=top><td align=left>
+<B>mc-ls</B> - list the contents of a memory card</td><td align=right>
+<FONT SIZE=-2><A HREF="mailto:dbalster@psxdev.de">Daniel Balster</A>/psxdev-tools
+</FONT></td></tr></table>
+<ul><li><b>SYNOPSIS OF mc-ls</b><br>
+<CODE><PRE>
+</PRE></CODE></ul>
+<ul><li><b>DESCRIPTION OF mc-ls</b><br>
+<B>mc-ls</B> lists the contents of a memory card. You need a kanji capable terminal to display the memory card file comments, because they are encoded in shifto-jis. Further you can choose between a long and a short listing.
+
+
+
+</ul>
+<ul><li><b>EXAMPLES FOR mc-ls</b><br>
+<code><pre><b>mc-ls -l</b></pre></code>will give a long listing of all files of the memory card in the first slot
+<code><pre><b>mc-ls BES\*</b></pre></code> will only list files beginning with BES
+
+</ul>
+<ul><li><b>BUGS OF mc-ls</b><br>
+Slots are numbered <b>0 and 1</b> instead of <b>1 and 2</b>. This is a design bug in all memory card tools but it won't be changed anymore.<br>
+English encoded SJIS comments are not properly mapped.
+
+
+
+</ul>
+<ul><li><b>NOTES ON mc-ls</b><br>
+You need to escape the shell meta characters * and ?, because they are applied on the PSX filesystem.
+</ul>
+<ul><li><b>SEE ALSO</b><br>
+<A HREF=mc-down.html>mc-down</A>&nbsp;&nbsp;&nbsp;<A HREF=mc-up.html>mc-up</A>&nbsp;&nbsp;&nbsp;<A HREF=mc-rm.html>mc-rm</A>&nbsp;&nbsp;&nbsp;<p>&nbsp;</p></table></td></tr></table><hr width=0 size=0>
+<P ALIGN=CENTER><A HREF=psxdev-tools.html>back to index</A></P>
+<hr size=2 noshade>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>
+<address>Created with <a href=psxdev.pl>psxdev.pl</a></address>
+</td><td align=right>
+<address>Copyright &copy;2000
+ by <a href="mailto:dbalster@psxdev.de">Daniel Balster</a></address>
+</td></tr></table>
+</body></html>

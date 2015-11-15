@@ -1,0 +1,154 @@
+dnl  $Id: configure.in,v 1.1.1.1 2001/05/17 11:50:26 dbalster Exp $
+
+dnl  
+dnl  psxtools - communication and data convert tools for the unix shell
+dnl  
+dnl  Copyright (C) 1997, 1998, 1999, 2000 by these people, who contributed to this project
+dnl  
+dnl    Daniel Balster <dbalster@psxdev.de>
+dnl    Sergio Moreira <sergio@x-plorer.co.uk>
+dnl    Andrew Kieschnick <andrewk@cerc.utexas.edu>
+dnl    Kazuki Sakamoto <bsd-ps@geocities.co.jp>
+dnl  
+dnl  This program is free software; you can redistribute it and/or modify
+dnl  it under the terms of the GNU General Public License as published by
+dnl  the Free Software Foundation; either version 2 of the License, or
+dnl  (at your option) any later version.
+dnl  
+dnl  This program is distributed in the hope that it will be useful,
+dnl  but WITHOUT ANY WARRANTY; without even the implied warranty of
+dnl  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+dnl  GNU General Public License for more details.
+dnl  
+dnl  You should have received a copy of the GNU General Public License
+dnl  along with this program; if not, write to the Free Software
+dnl  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+dnl  
+
+AC_INIT(src/error.c)
+AM_INIT_AUTOMAKE(psxtools,1.0)
+AM_CONFIG_HEADER(config.h)
+
+AC_PROG_CC
+AC_PROG_CPP
+AC_ISC_POSIX
+
+dnl -----------------------------------------------------------------------
+dnl
+dnl This section checks for the "PSXDEV" environment
+dnl
+dnl -----------------------------------------------------------------------
+
+AC_ARG_WITH(psxdev,[  --with-psxdev=PREFIX    where is the PSXDEV root])
+
+AC_MSG_CHECKING([for PSXDEV root])
+if test -n "$PSXDEV" ; then
+	if test -n "$with_psxdev" ; then
+		PSXDEV="$with_psxdev"
+	fi
+else
+	PSXDEV=$prefix
+fi
+AC_MSG_RESULT([$PSXDEV])
+
+AC_SUBST(psxdev_includes)
+AC_SUBST(psxdev_libraries)
+
+psxdev_includes="-I$PSXDEV/include"
+psxdev_libraries="-L$PSXDEV/lib -Wl,--rpath -Wl,$PSXDEV/lib"
+CFLAGS="$CFLAGS $psxdev_includes"
+LDFLAGS="$LDFLAGS $psxdev_libraries"
+
+dnl -----------------------------------------------------------------------
+dnl
+dnl This section checks for the "PSXDEV" library
+dnl
+dnl -----------------------------------------------------------------------
+
+AC_MSG_CHECKING([for psxdev.h])
+AC_TRY_COMPILE([#include <psxdev.h>],,AC_MSG_RESULT([yes]),AC_MSG_ERROR("psxdev.h of libpsxdev.a is missing!"))
+
+dnl -----------------------------------------------------------------------
+dnl
+dnl This section checks for the "BFD" library
+dnl
+dnl -----------------------------------------------------------------------
+
+AC_MSG_CHECKING([for bfd.h])
+AC_TRY_COMPILE([#include <bfd.h>],,AC_MSG_RESULT([yes]),AC_MSG_ERROR("bfd.h of libbfd.a is missing!"))
+
+dnl -----------------------------------------------------------------------
+dnl
+dnl This section checks for the "TIM" library
+dnl
+dnl -----------------------------------------------------------------------
+
+AC_SUBST(tim_includes)
+AC_SUBST(tim_libraries)
+
+tim_libraries=""
+tim_includes=""
+
+AC_ARG_WITH(libtim,[  --with-libtim=PREFIX    where is the libtim root])
+
+if test -n "$with_libtim" ; then
+	tim_libraries="-L$with_libtim/lib"
+	tim_includes="-I$with_libtim/include"
+fi
+
+tim_libraries="$tim_libraries"
+
+CFLAGS="$CFLAGS $tim_includes"
+LDFLAGS="$LDFLAGS $tim_libraries"
+
+AC_MSG_CHECKING([for tim.h])
+AC_TRY_COMPILE([#include <tim.h>],,AC_MSG_RESULT([yes]),AC_MSG_ERROR("tim.h of libtim.a is missing!"))
+
+dnl -----------------------------------------------------------------------
+
+AC_SUBST(INCLUDES)
+
+AC_STDC_HEADERS
+AC_HEADER_STAT
+AC_HEADER_TIME
+
+AC_TYPE_PID_T
+AC_TYPE_OFF_T
+AC_TYPE_MODE_T
+AC_TYPE_SIZE_T
+
+AC_CHECK_HEADERS(unistd.h string.h errno.h getopt.h)
+
+AC_FUNC_ALLOCA
+AC_FUNC_MMAP
+AC_FUNC_VPRINTF
+
+AC_CHECK_FUNCS(strerror snprintf)
+
+dnl -----------------------------------------------------------------------
+
+ALL_LINGUAS="de ja fr"
+AM_GNU_GETTEXT
+
+CATALOGS=""
+for lang in $ALL_LINGUAS; do
+	CATALOGS="$CATALOGS $lang.gmo"
+done
+
+AC_HAVE_HEADERS(libintl.h locale.h)
+
+dnl -----------------------------------------------------------------------
+
+dnl Use -Wall if we have gcc.
+changequote(,)dnl
+if test "x$GCC" = "xyes"; then
+  case " $CFLAGS " in
+  *[\ \	]-Wall[\ \	]*) ;;
+  *) CFLAGS="$CFLAGS -Wall" ;;
+  esac
+fi
+changequote([,])dnl
+
+dnl -----------------------------------------------------------------------
+
+AC_OUTPUT(Makefile src/Makefile intl/Makefile po/Makefile.in)

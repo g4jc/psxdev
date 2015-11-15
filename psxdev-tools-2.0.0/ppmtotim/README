@@ -1,0 +1,13 @@
+ppmtotim - complex tim creation utility
+Copyright (C) 1997,1998,1999,2000 by Daniel Balster <dbalster@psxdev.de>
+
+PPMTOTIM converts a PPM input file to a TIM output file.
+
+- you can use an external palette
+- you can use an external STP plane bitmap
+- multipalette is possible
+
+files can be pipelined, i.e.
+
+cat input.ppm | ppmquant 16 | ppmtotim --4-bit > output.tim
+

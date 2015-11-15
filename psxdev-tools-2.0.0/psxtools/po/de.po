@@ -1,0 +1,886 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2001-05-18 00:08+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+
+#: src/bfd2x.c:64 src/bin2x.c:67 src/codedown.c:53 src/codeup.c:53
+#: src/download.c:57 src/dummy.c:53 src/exe2mexe.c:58 src/fbmode.c:64
+#: src/flash.c:56 src/geticon.c:56 src/halt.c:53 src/ls.c:59 src/mcdown.c:57
+#: src/mcup.c:57 src/mkfs.c:55 src/mode.c:53 src/reset.c:53 src/resume.c:53
+#: src/rm.c:59 src/run.c:73 src/server.c:55 src/show_registers.c:53
+#: src/timdown.c:64 src/timup.c:62 src/upload.c:55 src/xaldown.c:53
+#: src/xaldump.c:49 src/xalup.c:53
+msgid "be quiet"
+msgstr "Keine Ausgaben"
+
+#: src/bfd2x.c:65 src/bin2x.c:68 src/codedown.c:54 src/codeup.c:54
+#: src/download.c:58 src/dummy.c:54 src/exe2mexe.c:59 src/fbmode.c:65
+#: src/flash.c:57 src/geticon.c:57 src/halt.c:54 src/ls.c:60 src/mcdown.c:58
+#: src/mcup.c:58 src/mkfs.c:56 src/mode.c:54 src/reset.c:54 src/resume.c:54
+#: src/rm.c:60 src/run.c:74 src/server.c:56 src/show_registers.c:54
+#: src/timdown.c:65 src/timup.c:63 src/upload.c:56 src/xaldown.c:54
+#: src/xaldump.c:50 src/xalup.c:54
+msgid "print this text"
+msgstr "Druckt diesen Text"
+
+#: src/bfd2x.c:66 src/bin2x.c:69 src/codedown.c:55 src/codeup.c:55
+#: src/download.c:59 src/dummy.c:55 src/exe2mexe.c:60 src/fbmode.c:66
+#: src/flash.c:58 src/geticon.c:58 src/halt.c:55 src/ls.c:61 src/mcdown.c:59
+#: src/mcup.c:59 src/mkfs.c:57 src/mode.c:55 src/reset.c:55 src/resume.c:55
+#: src/rm.c:61 src/run.c:75 src/server.c:57 src/show_registers.c:55
+#: src/timdown.c:66 src/timup.c:64 src/upload.c:57 src/xaldown.c:55
+#: src/xaldump.c:51 src/xalup.c:55
+msgid "be verbose"
+msgstr "Ausführliche Ausgaben"
+
+#: src/bfd2x.c:67 src/bin2x.c:70 src/codedown.c:56 src/codeup.c:56
+#: src/download.c:60 src/dummy.c:56 src/exe2mexe.c:61 src/fbmode.c:67
+#: src/flash.c:59 src/geticon.c:59 src/halt.c:56 src/ls.c:62 src/mcdown.c:60
+#: src/mcup.c:60 src/mkfs.c:58 src/mode.c:56 src/reset.c:56 src/resume.c:56
+#: src/rm.c:62 src/run.c:76 src/server.c:58 src/show_registers.c:56
+#: src/timdown.c:67 src/timup.c:65 src/upload.c:58 src/xaldown.c:56
+#: src/xaldump.c:52 src/xalup.c:56
+msgid "print binary version"
+msgstr "Zeigt die Programmversion"
+
+#: src/bfd2x.c:68 src/bin2x.c:71 src/exe2mexe.c:64 src/geticon.c:60
+msgid "set output file"
+msgstr "Zeigt die Programmversion"
+
+#: src/bfd2x.c:69 src/bin2x.c:72
+msgid "set area code for europe"
+msgstr "Setzt den Länderkode für Europa"
+
+#: src/bfd2x.c:70 src/bin2x.c:73
+msgid "set area code for north america"
+msgstr "Setzt den Länderkode für Nordamerika"
+
+#: src/bfd2x.c:71 src/bin2x.c:74
+msgid "set area code for japan"
+msgstr "Setzt den Länderkode für Japan"
+
+#: src/bfd2x.c:72 src/bin2x.c:75
+msgid "set stack pointer (SP, default: 0x801ffff0)"
+msgstr "Setzt den Stapelzeiger (SP, Standard: 0x801ffff0)"
+
+#: src/bfd2x.c:73
+msgid "use global pointer of object file (GP, default: 0x00000000)"
+msgstr "Benutze den ""Globalen Zeiger\" der Objektdatei (GP, Standard: 0x00000000)"
+
+#: src/bfd2x.c:74 src/bin2x.c:79
+msgid "set a custom area code string"
+msgstr "Setzt einen eigenen Länderkode"
+
+#: src/bfd2x.c:82
+#, c-format
+msgid ""
+"%s - BFD to PS-X EXE converter\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+"%s - BFD nach PS-X EXE Konvertierer\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"Alle Rechte Vorbehalten.\n"
+"\n"
+
+#: src/bfd2x.c:99
+msgid "GP not supported with ELF"
+msgstr "GP wird vom ELF format nicht unterstützt"
+
+#: src/bfd2x.c:159 src/bin2x.c:147 src/codedown.c:124 src/codeup.c:125
+#: src/download.c:131 src/dummy.c:116 src/exe2mexe.c:134 src/fbmode.c:144
+#: src/flash.c:125 src/geticon.c:125 src/halt.c:115 src/ls.c:134
+#: src/mcdown.c:129 src/mcup.c:132 src/mkfs.c:126 src/mode.c:115
+#: src/reset.c:114 src/resume.c:115 src/rm.c:133 src/run.c:169
+#: src/server.c:119 src/show_registers.c:121 src/timdown.c:143 src/timup.c:141
+#: src/upload.c:128 src/xaldown.c:124 src/xaldump.c:112 src/xalup.c:125
+#, c-format
+msgid "Usage: %s [options] <filename>\n"
+msgstr "Benutzung: %s [Optionen] <Dateiname>\n"
+
+#: src/bfd2x.c:225 src/bin2x.c:221 src/codeup.c:166 src/dummy.c:158
+#: src/exe2mexe.c:185 src/flash.c:171 src/geticon.c:172 src/run.c:249
+#: src/timup.c:198 src/upload.c:173 src/xaldump.c:149 src/xalup.c:166
+msgid "input filename missing"
+msgstr "Name der Eingabedatei fehlt"
+
+#: src/bfd2x.c:226 src/bin2x.c:222
+#, c-format
+msgid "Reading from \"%s\"\n"
+msgstr "Lese von \"%s\"\n"
+
+#: src/bfd2x.c:229 src/bin2x.c:279 src/exe2mexe.c:325
+#, c-format
+msgid "Writing to \"%s\"\n"
+msgstr "Schreibe nach \"%s\"\n"
+
+#: src/bfd2x.c:244
+#, c-format
+msgid "Object file format is \"%s\"\n"
+msgstr "Format der Objektdatei ist \"%s\"\n"
+
+#: src/bfd2x.c:246
+#, c-format
+msgid "GP optimized size is %d\n"
+msgstr "Optimierte Größe des GP ist %d\n"
+
+#: src/bfd2x.c:247
+msgid "Executable not stripped!\n"
+msgstr "Das Programm enthält noch Symbole und Debuginformationen!\n"
+
+#: src/bfd2x.c:253
+#, c-format
+msgid "Section \"%8s\" is not stripped\n"
+msgstr "Sektion \"%8s\" enthält noch Symbole und Debuginformationen\n"
+
+#: src/bfd2x.c:258
+#, c-format
+msgid "Section \"%8s\" will be exported\n"
+msgstr "Sektion \"%8s\" wird exportiert\n"
+
+#: src/bfd2x.c:289
+#, c-format
+msgid "Aligning: %d -> %d\n"
+msgstr "Ausrichtung: %d -> %d\n"
+
+#: src/bfd2x.c:298 src/bin2x.c:275
+#, c-format
+msgid "PC=0x%08lx GP=0x%08lx Base=%08lx Size=0x%08lx\n"
+msgstr "PC=0x%08lx GP=0x%08lx Anfang=%08lx Größe=0x%08lx\n"
+
+#: src/bfd2x.c:307
+#, c-format
+msgid "Section [%8s] Address [%08lx] Length [%06lx]"
+msgstr "Sektion [%8s] Adresse [%08lx] Größe [%06lx]"
+
+#: src/bin2x.c:76
+msgid "set base address (default: 0x80010000)"
+msgstr "Setzt die Anfangsadresse (Standard: 0x80010000)"
+
+#: src/bin2x.c:77
+msgid "set program counter (PC, Standard: address)"
+msgstr "Setzt den Programmzähler (PC, Standard: address)"
+
+#: src/bin2x.c:78
+msgid "set global pointer (GP, default: 0)"
+msgstr "Setzt den \"Global Pointer\" (GP, Standard: 0)"
+
+#: src/bin2x.c:87
+#, c-format
+msgid ""
+"%s - RAW BINARY to PS-X EXE converter\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+"%s - RAW BINARY nach PS-X EXE Konvertierer\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"Alle Rechte Vorbehalten.\n"
+"\n"
+
+#: src/bin2x.c:224
+msgid "Object file format is \"RAW BINARY\"\n"
+msgstr "Format der Objektdatei ist \"RAW BINARY\"\n"
+
+#: src/bin2x.c:276
+#, c-format
+msgid "Section [   .text] Address [%08lx] Length [%06lx] *\n"
+msgstr "Sektion [   .text] Adresse [%08lx] Größe [%06lx] *\n"
+
+#: src/codedown.c:57 src/codeup.c:57 src/download.c:61 src/dummy.c:57
+#: src/fbmode.c:68 src/flash.c:60 src/halt.c:57 src/ls.c:63 src/mcdown.c:61
+#: src/mcup.c:61 src/mkfs.c:59 src/mode.c:57 src/reset.c:57 src/resume.c:57
+#: src/rm.c:63 src/run.c:77 src/server.c:59 src/show_registers.c:57
+#: src/timdown.c:68 src/timup.c:66 src/upload.c:59 src/xaldown.c:57
+#: src/xalup.c:57
+msgid "use this device (default: /dev/pccl)"
+msgstr "Welches Gerät benutzt werden soll (Standard: /dev/pccl)"
+
+#: src/codedown.c:65
+#, c-format
+msgid ""
+"%s - download content of code preservation area\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+"%s - Lade den Inhalt des Codebereiches\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"Alle Rechte Vorbehalten.\n"
+"\n"
+
+#: src/codedown.c:198 src/download.c:218 src/run.c:316 src/run.c:366
+#: src/run.c:408 src/run.c:427 src/upload.c:223
+#, c-format
+msgid "invalid checksum (%02x/%02x)"
+msgstr "Ungültige Prüfsumme (%02x/%02x)"
+
+#: src/codedown.c:200 src/codeup.c:224 src/xalup.c:207
+msgid "O.K.\n"
+msgstr "Alles in Ordnung!\n"
+
+#: src/codeup.c:65
+#, c-format
+msgid ""
+"%s - upload a file to the code preservation area\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+"%s - Speichere den Inhalt einer Datei in den Codebereich\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"Alle Rechte Vorbehalten.\n"
+"\n"
+
+#: src/codeup.c:183 src/exe2mexe.c:208 src/flash.c:188 src/geticon.c:189
+#: src/mcup.c:214 src/run.c:266 src/timup.c:215 src/upload.c:190
+#: src/xaldump.c:164 src/xalup.c:183
+msgid "input file has zero length"
+msgstr "Eingabedatei ist leer"
+
+#: src/codeup.c:202
+#, c-format
+msgid "size of code preservation area: %d\n"
+msgstr "Größe des Codebereiches: %d\n"
+
+#: src/codeup.c:204
+msgid "not enough memory in code preservation area for that file!"
+msgstr "Nicht genug Platz im Codebereich für diese Datei!"
+
+#: src/codeup.c:225
+msgid "didn't correspond to checksum"
+msgstr "Entspricht nicht der Prüfsumme"
+
+#: src/codeup.c:226
+msgid "didn't recognize EEPROM"
+msgstr "Konnte EEPROM nicht erkennen"
+
+#: src/codeup.c:227
+msgid "failed writing to EEPROM"
+msgstr "Fehler beim Schreiben in das EEPROM"
+
+#: src/codeup.c:228 src/xalup.c:212
+msgid "unknown error code"
+msgstr "Unbekannter Fehler (tut mir leid!)"
+
+#: src/download.c:62 src/upload.c:60
+msgid "set address (default: 0x80010000)"
+msgstr "Setzt die Adresse (Standard: 0x80010000)"
+
+#: src/download.c:63
+msgid "number of bytes to download (default: 0)"
+msgstr "Anzahl Bytes die Heruntergeladen werden sollen (Standard: 0)"
+
+#: src/download.c:71
+#, c-format
+msgid ""
+"%s - download memory from the PSX\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+"%s - Lade Speicher von der PSX herunter\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"Alle Rechte Vorbehalten.\n"
+"\n"
+
+#: src/download.c:186
+msgid "size must be greater than zero"
+msgstr "Größenangabe darf nicht Null sein"
+
+#: src/dummy.c:65
+#, c-format
+msgid ""
+"%s - dummy skeleton\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+"%s - dummy skeleton\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"Alle Rechte Vorbehalten.\n"
+"\n"
+
+#. your code here, like this:
+#: src/dummy.c:169
+msgid "a localized string...\n"
+msgstr ""
+
+#: src/exe2mexe.c:62
+msgid "specify icon file(s) (16x16 4-Bit TIM)"
+msgstr "Ikon Datei(en) (16x16 4-Bit TIM)"
+
+#: src/exe2mexe.c:63
+msgid "specify memory card title"
+msgstr "Titel der Memorycard"
+
+#: src/exe2mexe.c:72
+#, c-format
+msgid ""
+"%s - PS-X EXE to MEXE converter\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+"%s - PS-X EXE nach MEXE Konvertierer\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"Alle Rechte Vorbehalten.\n"
+"\n"
+
+#: src/exe2mexe.c:167
+msgid "a maximum of three icons is allowed"
+msgstr "maximal sind drei Ikons erlaubt"
+
+#: src/exe2mexe.c:224 src/run.c:284
+msgid "file is not a PSX executable"
+msgstr "Datei ist kein ausführbares Programm für die PSX"
+
+#: src/exe2mexe.c:251
+msgid "using builtin icon of tux the penguin\n"
+msgstr "benutze das eingebaute Ikon von Tux, dem Pinguin\n"
+
+#: src/exe2mexe.c:272
+#, c-format
+msgid "icon %s has zero length"
+msgstr "Ikon %s ist eine leere Datei"
+
+#: src/exe2mexe.c:279
+#, c-format
+msgid "using \"%s\" as icon #%d\n"
+msgstr "Benutze \"%s\" als ikon #%d\n"
+
+#: src/exe2mexe.c:282
+#, c-format
+msgid "icon %s is not a TIM image"
+msgstr "Das Ikon %s ist nicht im TIM Bildformat"
+
+#: src/exe2mexe.c:289
+#, c-format
+msgid "icon %s is not a 16x16 4-Bit TIM image"
+msgstr "Das Ikon %s ist kein 16x16 4-Bit TIM Bild"
+
+#: src/fbmode.c:69
+msgid "left edge of image area (default: 0)"
+msgstr "Linke Ecke des Bildbereiches (Standard: 0)"
+
+#: src/fbmode.c:70
+msgid "top edge of image area (default: 0)"
+msgstr "Obere Ecke des Bildbereiches (Standard: 0)"
+
+#: src/fbmode.c:71
+msgid "width of image area (default: 256)"
+msgstr "Breite des Bildbereiches (Standard: 0)"
+
+#: src/fbmode.c:72
+msgid "height of image area (default: 240)"
+msgstr "Höhe des Bildbereiches (Standard: 0)"
+
+#: src/fbmode.c:73 src/timdown.c:73
+msgid "pixel mode (0:15-bit, 1:24-bit, default:0)"
+msgstr "Darstellungsmodus (0:15-bit, 1:24-bit, Standard:0)"
+
+#: src/fbmode.c:81
+#, c-format
+msgid ""
+"%s - set PSX frame buffer mode\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+"%s - setzt den PSX Framebuffer Modus\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"Alle Rechte Vorbehalten.\n"
+"\n"
+
+#: src/flash.c:61
+msgid "emergency mode (you have to boot with a special CD-ROM)"
+msgstr "Notfallmodus (Sie benötigen dafür eine spezielle CD-ROM)"
+
+#: src/flash.c:69
+#, c-format
+msgid ""
+"%s - flash a PAR rom image\n"
+"Copyright (C) 1999 by Andrew Kieschnick <andrewk@mail.utexas.edu>\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+"%s - beschreibe das FlashROM mit einem neuen Image\n"
+"Copyright (C) 1999 by Andrew Kieschnick <andrewk@mail.utexas.edu>\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"Alle Rechte Vorbehalten.\n"
+"\n"
+
+#: src/flash.c:207
+msgid "WARNING: FLASH UPDATE - Turn PSX off and hit CTRL-C to abort!\n"
+msgstr "WARNUNG: FLASH PROGRAMM AKTUALISIERUNG - Zum Abbrechen Schalten Sie die PSX aus oder Drücken Sie jetzt CTRL-C!\n"
+
+#: src/flash.c:208
+msgid "Press RESET on PSX to continue!\n"
+msgstr "Drücken Sie den RESET Knopf an der PSX zum Weitermachen!\n"
+
+#: src/flash.c:216
+msgid "Sending update program.\n"
+msgstr "Sende das Aktualisierungsprogramm.\n"
+
+#: src/flash.c:243 src/flash.c:294
+msgid "Transfer error!\n"
+msgstr "Übertragungsfehler!\n"
+
+#: src/flash.c:262
+msgid "Sending ROM image.\n"
+msgstr "Sende das ROM Programm.\n"
+
+#: src/flash.c:313
+msgid "Update complete.\n"
+msgstr "Aktualisierung Erfolgreich abgeschlossen.\n"
+
+#: src/geticon.c:61
+msgid "icon number (1..3)"
+msgstr "Ikonnummer (1..3)"
+
+#: src/geticon.c:69
+#, c-format
+msgid ""
+"%s - get icon from memory card image\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+"%s - extrahiere Ikon aus MemoryCard Datei\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"Alle Rechte Vorbehalten.\n"
+"\n"
+
+#: src/geticon.c:161
+msgid "icon number must be between 1 and 3"
+msgstr "Die Ikonnummer muß zwischen 1 und 3 liegen"
+
+#: src/geticon.c:202
+msgid "file is not a memory card image"
+msgstr "Datei ist kein Memorycard Spielstand"
+
+#: src/geticon.c:211
+#, c-format
+msgid "%d icon(s) in %s\n"
+msgstr "%d Ikon(s) in %s\n"
+
+#: src/geticon.c:215
+#, c-format
+msgid "only %d icon(s) in %s, using first"
+msgstr "Nur %d Ikon(s) in %s, benutze das Erste"
+
+#: src/halt.c:65
+#, c-format
+msgid ""
+"%s - get control over the PSX\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+"%s - übernimmt die Kontroller über die PSX\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"Alle Rechte Vorbehalten.\n"
+"\n"
+
+#: src/ls.c:64 src/mcdown.c:62 src/mcup.c:62 src/mkfs.c:60 src/rm.c:64
+msgid "memory card slot (default: 0)"
+msgstr "Memorycard Schlitz (Standard: 0)"
+
+#: src/ls.c:65
+msgid "list in long format"
+msgstr "Auflistung im Langformat"
+
+#: src/ls.c:66
+msgid "show sjis encoded file comment"
+msgstr "Zeigt Kommentare SJIS kodiert"
+
+#: src/ls.c:74 src/mkfs.c:68
+#, c-format
+msgid ""
+"%s - list the contents of a memory card\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+"%s - listet den Inhalt einer MemoryCard\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"Alle Rechte Vorbehalten.\n"
+"\n"
+
+#: src/mcdown.c:70
+#, c-format
+msgid ""
+"%s - download file(s) from a memory card\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+"%s - Übertrage Dateien von einer MemoryCard\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"Alle Rechte Vorbehalten.\n"
+"\n"
+
+#: src/mcdown.c:204
+#, c-format
+msgid "downloading %s\n"
+msgstr "Lade %s herunter\n"
+
+#: src/mcdown.c:223
+#, c-format
+msgid "invalid checksum (%04x/%04x)"
+msgstr "ungültige Prüfsumme (%04x/%04x)"
+
+#: src/mcup.c:63 src/rm.c:65
+msgid "force operation (default: ask)"
+msgstr "Selbstständiges Arbeiten (Standard: den Benutzer Abfragen)"
+
+#: src/mcup.c:71
+#, c-format
+msgid ""
+"%s - upload file(s) to a memory card\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+"%s - Übertrage Dateien auf eine MemoryCard\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"Alle Rechte Vorbehalten.\n"
+"\n"
+
+#: src/mcup.c:199
+#, c-format
+msgid "uploading %s\n"
+msgstr "Lade %s hoch\n"
+
+#: src/mcup.c:242 src/rm.c:237
+#, c-format
+msgid "delete file \"%s\" [yes/no]? :"
+msgstr "Soll die Datei \"%s\" gelöscht werden [ja/nein]? :"
+
+#: src/mcup.c:244 src/rm.c:239
+msgid "yes"
+msgstr "ja"
+
+#: src/mcup.c:252
+#, c-format
+msgid "deleting %s\n"
+msgstr "Lösche %s\n"
+
+#: src/mkfs.c:170
+msgid "THIS APPLICATION DOES NOT YET WORK CORRECTLY - USE AT YOUR OWN RISK"
+msgstr "DIESE ANWENDUNG ARBEITET NOCH NICHT EINWANDFREI - BENUTZUNG AUF EIGENE GEFAHR"
+
+#: src/mode.c:65
+#, c-format
+msgid ""
+"%s - configure global modes of a device\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+"%s - Konfiguriere globale Modi eines Gerätes\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"Alle Rechte Vorbehalten.\n"
+"\n"
+
+#: src/reset.c:65
+#, c-format
+msgid ""
+"%s - reset the PSX\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+"%s - Zurücksetzen der PSX\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"Alle Rechte Vorbehalten.\n"
+"\n"
+
+#: src/resume.c:65
+#, c-format
+msgid ""
+"%s - give control back to the PSX\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+"%s - Rückgabe der Ausführungskontrolle an die PSX\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"Alle Rechte Vorbehalten.\n"
+"\n"
+
+#: src/rm.c:73
+#, c-format
+msgid ""
+"%s - delete a file from a memory card\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+"%s - Löscht eine Datei von einer MemoryCard\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"Alle Rechte Vorbehalten.\n"
+"\n"
+
+#: src/rm.c:247
+#, c-format
+msgid "deleting \"%s\"...\n"
+msgstr "Lösche \"%s\"...\n"
+
+#: src/run.c:78
+msgid "number of tasks allowed (default: 4)"
+msgstr "Anzahl System-Tasks (Voreingestellt: 4)"
+
+#: src/run.c:79
+msgid "number of events allowed (default: 16)"
+msgstr "Anzahl Systemereignisse (Voreingestellt: 16)"
+
+#: src/run.c:80
+msgid "initial stack address (default: 0x801ffff0)"
+msgstr "Initialer Stapelzeiger (Voreingestellt: 0x801ffff0)"
+
+#: src/run.c:81
+msgid "run with full stdio and file server"
+msgstr "Aktiviere Ausgabeumleitung und Dateiserver"
+
+#: src/run.c:82
+msgid "run without server, but with console mode activated"
+msgstr "Aktiviere Ausgabeumleitung, aber nicht den Dateiserver"
+
+#: src/run.c:83
+msgid "normal start"
+msgstr "Normaler Start"
+
+#: src/run.c:84
+msgid "reset PSX before upload"
+msgstr "Setze die PSX zurück vor einer Übertragung"
+
+#: src/run.c:85
+msgid "break execution at main() function"
+msgstr "Unterbreche die Programmausführung an der main() Funktion"
+
+#: src/run.c:86 src/server.c:60
+msgid "poll until the game stops"
+msgstr "Dauerabfragen bis das Spiel terminiert"
+
+#: src/run.c:87
+msgid "where to place argv/argc arguments in memory"
+msgstr "Wo liegen die Programmargumente (argc/argv) im Speicher"
+
+#: src/run.c:95
+#, c-format
+msgid ""
+"%s - upload and start PS-X EXE files\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+"%s - Übertrage und Starte PS-X EXE Dateien\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"Alle Rechte Vorbehalten.\n"
+"\n"
+
+#: src/server.c:68
+#, c-format
+msgid ""
+"%s - stdio and file server for the PSX\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+"%s - Ausgabeumleitung und Dateiserver für die PSX\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"Alle Rechte Vorbehalten.\n"
+"\n"
+
+#: src/show_registers.c:65
+#, c-format
+msgid ""
+"%s - show the contents of the MIPS CPU registers\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+"%s - Zeige die Register der MIPS CPU\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"Alle Rechte Vorbehalten.\n"
+"\n"
+
+#: src/show_registers.c:176
+msgid "no program is running"
+msgstr "es läuft kein Programm"
+
+#: src/timdown.c:69
+msgid "left edge of image area (default: caetla FBV)"
+msgstr "Linke Ecke des Bildbereiches (Voreingestellt: caetla FBV)"
+
+#: src/timdown.c:70
+msgid "top edge of image area (default: caetla FBV)"
+msgstr "Obere Ecke des Bildbereiches (Voreingestellt: caetla FBV)"
+
+#: src/timdown.c:71
+msgid "width of image area (default: caetla FBV)"
+msgstr "Breite des Bildbereiches (Voreingestellt: caetla FBV)"
+
+#: src/timdown.c:72
+msgid "height of image area (default: caetla FBV)"
+msgstr "Höhe des Bildbereiches (Voreingestellt: caetla FBV)"
+
+#: src/timdown.c:81
+#, c-format
+msgid ""
+"%s - download a TIM image from the framebuffer\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+"%s - Übertrage ein Bild im TIM Format aus dem Videospeicher der PSX\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"Alle Rechte Vorbehalten.\n"
+"\n"
+
+#: src/timdown.c:229
+#, c-format
+msgid "Downloading +%d+%d %dx%d (mode %d)\n"
+msgstr "Übertrage +%d+%d %dx%d (Modus %d)\n"
+
+#: src/timup.c:67
+msgid "left edge of pixel (default: TIM)"
+msgstr "Linke Ecke der Pixel (Voreingestellt: TIM)"
+
+#: src/timup.c:68
+msgid "top edge of pixel (default: TIM)"
+msgstr "Obere Ecke der Pixel (Voreingestellt: TIM)"
+
+#: src/timup.c:69
+msgid "left edge of clut (default: TIM)"
+msgstr "Linke Ecke der CLUT (Voreingestellt: TIM)"
+
+#: src/timup.c:70
+msgid "top edge of clut (default: TIM)"
+msgstr "Obere Ecke der CLUT (Voreingestellt: TIM)"
+
+#: src/timup.c:78
+#, c-format
+msgid ""
+"%s - upload a TIM image to the framebuffer\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+"%s - Übertrage ein Bild im TIM Format in den Videospeicher der PSX\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"Alle Rechte Vorbehalten.\n"
+"\n"
+
+#: src/timup.c:231
+msgid "not a TIM image!"
+msgstr "Dies ist kein Bild im TIM Format!"
+
+#: src/upload.c:68
+#, c-format
+msgid ""
+"%s - upload memory to the PSX\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+"%s - Übertrage Speicher in die PSX\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"Alle Rechte Vorbehalten.\n"
+"\n"
+
+#: src/xaldown.c:65
+#, c-format
+msgid ""
+"%s - download XA list\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+"%s - Übertrage eine XA Liste in die PSX\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"Alle Rechte Vorbehalten.\n"
+"\n"
+
+#: src/xaldump.c:60
+#, c-format
+msgid ""
+"%s - dump a XA list file\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+"%s - Zeige den Inhalt einer XA Liste\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"Alle Rechte Vorbehalten.\n"
+"\n"
+
+#.
+#. a quick and dirty parser for the XALISTs
+#.
+#: src/xaldump.c:176
+msgid "file is not a XA-LIST"
+msgstr "Datei ist keine XA Liste"
+
+#: src/xaldump.c:182
+#, c-format
+msgid "Volume: %s\n"
+msgstr "Volumen: %s\n"
+
+#: src/xaldump.c:188
+#, c-format
+msgid "Filename: %s\n"
+msgstr "Dateiname: %s\n"
+
+#: src/xaldump.c:197
+#, c-format
+msgid "Audio: %02x:%02x:%02x - %02x:%02x:%02x (Speed:%dX, Interleave:%d)\n"
+msgstr "Audio: %02x:%02x:%02x - %02x:%02x:%02x (Geschwindigkeit:%dX, Interleave:%d)\n"
+
+#: src/xaldump.c:201
+#, c-format
+msgid "Movie: %02x:%02x:%02x - %02x:%02x:%02x\n"
+msgstr ""
+
+#: src/xalup.c:65
+#, c-format
+msgid ""
+"%s - upload XA list\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"All Rights Reserved.\n"
+"\n"
+msgstr ""
+"%s - Übertrage eine XA Liste in die PSX\n"
+"Copyright (C) 1997, 1998, 1999, 2000 by Daniel Balster <dbalster@psxdev.de>\n"
+"Alle Rechte Vorbehalten.\n"
+"\n"
+
+#: src/xalup.c:208
+msgid "invalid header"
+msgstr "Ungültige Signatur im Datenkopf"
+
+#: src/xalup.c:209
+msgid "unsupported version"
+msgstr "Nicht unterstütze Version"
+
+#: src/xalup.c:210
+msgid "over size"
+msgstr "Größe überschritten"
+
+#: src/xalup.c:211
+msgid "inconsistency checksum"
+msgstr "Inkonsistente Prüfsumme"

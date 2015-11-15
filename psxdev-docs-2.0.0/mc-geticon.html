@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html lang=en><head>
+<title>psxdev.de: get icon from memory card image</title>
+<meta http-equiv="content-type" content="text/html;">
+<link rel=stylesheet type="text/css" href="psxdev.css">
+</head><body background="images/bg.png" color=#000000 bgcolor=#999999>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>get icon from memory card image</TD><TD ALIGN=RIGHT>[<A HREF=index.html>top</A>|<A HREF=overview.html>sitemap</A>|<A HREF=download.html>download</A>|<A HREF=documentation.html>docs</A>]</TD></TR></TABLE>
+<hr size=2 noshade>
+<center><img src=images/psxtux2.png border=0 width=78 height=90><img src=images/logo.png width=496 height=90></center>
+<h1>get icon from memory card image</h1>
+
+<table  width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center><table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#FFFFFF><td width=100% valign=top>
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE><tr VALIGN=top><td align=left>
+<B>mc-geticon</B> - get icon from memory card image</td><td align=right>
+<FONT SIZE=-2><A HREF="mailto:dbalster@psxdev.de">Daniel Balster</A>/psxdev-tools
+</FONT></td></tr></table>
+<ul><li><b>SYNOPSIS OF mc-geticon</b><br>
+<CODE><PRE>
+</PRE></CODE></ul>
+<ul><li><b>DESCRIPTION OF mc-geticon</b><br>
+<B>mc-geticon</B> extracts one of the 4-bit icons of a PSX memory card file (which must be downloaded before). This is very useful if you want to see the icons of game savings in you desktop environment.
+
+</ul>
+<ul><li><b>EXAMPLES FOR mc-geticon</b><br>
+This is a very simple (and bad!) script for your GNOME desktop. Just run it in you memory card saving directory root and after that explore the directories with the GNOME file manager...
+<code><pre><b>
+#!/bin/sh
+
+# find memory card savings, extract the first icon and create a .name.icon entry
+find -name 'B?S????*' -printf \
+"mc-geticon '0.000000' | timtoppm | pnmscale -xysize 32 32 | pnmsmooth | ppmquant 256 | ppmtoxpm > '.0.000000.icon'\n" \
+| sh
+
+# for all .icon entries create a mime key (which is a very bad hack :-)
+find -name 'B?S????*' -printf \
+"image/-1.995358:\n\ticon-filename=$PWD/.-1.994374.icon\n\n" \
+> $HOME/.gnome/mime-info/gnome.keys
+
+# for all .icon entries create a new mime type...
+find -name 'B?S????*' -printf \
+"image/0.000000\n\text:0.000000\n\n"
+> $HOME/.gnome/mime-info/gnome.mime
+</b></pre></code>
+</ul>
+<ul><li><b>NOTES ON mc-geticon</b><br>
+<B>mc-geticon</B> could also be used to automatically create web pages with game savings!
+</ul>
+<p>&nbsp;</p></table></td></tr></table><hr width=0 size=0>
+<P ALIGN=CENTER><A HREF=psxdev-tools.html>back to index</A></P>
+<hr size=2 noshade>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>
+<address>Created with <a href=psxdev.pl>psxdev.pl</a></address>
+</td><td align=right>
+<address>Copyright &copy;2000
+ by <a href="mailto:dbalster@psxdev.de">Daniel Balster</a></address>
+</td></tr></table>
+</body></html>

@@ -1,0 +1,6 @@
+src/adpcmtopcm.c
+src/error.c
+src/pcmtoadpcm.c
+src/play.c
+src/query.c
+src/record.c

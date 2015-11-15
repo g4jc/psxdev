@@ -1,0 +1,19 @@
+xatopcm - extract PCM data from XA sectors
+------------------------------------------
+
+- xatopcm must be run as root user (it uses a special ioctl())
+
+- usage: xatopcm <infile> <outfile> [optional: cdrom device]
+
+example:
+
+mount /mnt/cdrom            # insert PSX CD and mount it
+xatopcm /mnt/cdrom/music.xa music
+
+i.e. if music.xa is an 8-channel stream, you will get
+
+music_0c0.pcm ... music_0c7.pcm
+
+if the file contains one or more breaks, new files will be
+created.
+

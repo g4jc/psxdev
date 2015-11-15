@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html lang=en><head>
+<title>psxdev.de: convert an image (any format) into a BS image</title>
+<meta http-equiv="content-type" content="text/html;">
+<link rel=stylesheet type="text/css" href="psxdev.css">
+</head><body background="images/bg.png" color=#000000 bgcolor=#999999>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>convert an image (any format) into a BS image</TD><TD ALIGN=RIGHT>[<A HREF=index.html>top</A>|<A HREF=overview.html>sitemap</A>|<A HREF=download.html>download</A>|<A HREF=documentation.html>docs</A>]</TD></TR></TABLE>
+<hr size=2 noshade>
+<center><img src=images/psxtux2.png border=0 width=78 height=90><img src=images/logo.png width=496 height=90></center>
+<h1>convert an image (any format) into a BS image</h1>
+
+<table  width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center><table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#FFFFFF><td width=100% valign=top>
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE><tr VALIGN=top><td align=left>
+<B>anytobs</B> - convert an image (any format) into a BS image</td><td align=right>
+<FONT SIZE=-2><A HREF="mailto:dbalster@psxdev.de">Daniel Balster</A>/psxdev-tools
+</FONT></td></tr></table>
+<ul><li><b>SYNOPSIS OF anytobs</b><br>
+<CODE><PRE>
+--quiet,-q 	Keine Ausgaben
+--help,-h 	print this text
+--verbose,-v 	be verbose
+--version,-V 	print binary version
+--output=x,-o	set output file
+--qscale=x,-Q	set Q scaling factor (default: 1)
+--type=x,-t	set image type (default: 2)
+--width=x,-W	scale to new width (default: do not scale)
+--height=x,-H	scale to new height (default: do not scale)
+--limit=x,-l	limit output size to X bytes (default: do not limit)
+</PRE></CODE></ul>
+<ul><li><b>DESCRIPTION OF anytobs</b><br>
+<B>anytobs</B> converts any image format into a BS image (which can be used to encode PSX movies). It can read all formats that Imlib, ImageMagick and NetPBM can read. There is currently no utility included to decode a BS image back into another format, I'm working on that (useful to control image compression quality).
+
+</ul>
+<ul><li><b>BUGS OF anytobs</b><br>
+The quality of the compressed images could be better, even with image sources directly taken from a DVD video stream I got very poor results (in my opinion).
+</ul>
+<ul><li><b>NOTES ON anytobs</b><br>
+This utility is based on open sources from bero@geocities.co.jp, bitmaster and the Independent JPEG Group's software.
+</ul>
+<p>&nbsp;</p></table></td></tr></table><hr width=0 size=0>
+<P ALIGN=CENTER><A HREF=psxdev-tools.html>back to index</A></P>
+<hr size=2 noshade>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>
+<address>Created with <a href=psxdev.pl>psxdev.pl</a></address>
+</td><td align=right>
+<address>Copyright &copy;2000
+ by <a href="mailto:dbalster@psxdev.de">Daniel Balster</a></address>
+</td></tr></table>
+</body></html>

@@ -1,0 +1,31 @@
+#!/bin/sh
+
+prefixpath=$1
+
+#############################################################
+##
+## create /etc/profile.d script
+##
+#############################################################
+cat > psxdev.sh <<EOF
+#!/bin/sh
+
+PSXDEV=$prefixpath
+
+if [ \$PATH ] ; then
+  PATH=$prefixpath/bin:\$PATH
+else
+  PATH=$prefixpath/bin
+fi
+
+if [ \$LD_LIBRARY_PATH ] ; then
+  LD_LIBRARY_PATH=$prefixpath/lib:\$LD_LIBRARY_PATH
+else
+  LD_LIBRARY_PATH=$prefixpath/lib
+fi
+
+alias psx-file="file -m $prefixpath/share/magic"
+
+export PSXDEV PATH LD_LIBRARY_PATH
+EOF
+#############################################################

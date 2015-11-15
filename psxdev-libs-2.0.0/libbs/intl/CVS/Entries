@@ -1,0 +1,24 @@
+/ChangeLog/1.1.1.1/Thu May 17 11:50:27 2001//
+/Makefile.in/1.1.1.1/Thu May 17 11:50:27 2001//
+/VERSION/1.1.1.1/Thu May 17 11:50:27 2001//
+/bindtextdom.c/1.1.1.1/Thu May 17 11:50:27 2001//
+/cat-compat.c/1.1.1.1/Thu May 17 11:50:27 2001//
+/dcgettext.c/1.1.1.1/Thu May 17 11:50:27 2001//
+/dgettext.c/1.1.1.1/Thu May 17 11:50:27 2001//
+/explodename.c/1.1.1.1/Thu May 17 11:50:27 2001//
+/finddomain.c/1.1.1.1/Thu May 17 11:50:27 2001//
+/gettext.c/1.1.1.1/Thu May 17 11:50:27 2001//
+/gettext.h/1.1.1.1/Thu May 17 11:50:27 2001//
+/gettextP.h/1.1.1.1/Thu May 17 11:50:27 2001//
+/hash-string.h/1.1.1.1/Thu May 17 11:50:27 2001//
+/intl-compat.c/1.1.1.1/Thu May 17 11:50:27 2001//
+/l10nflist.c/1.1.1.1/Thu May 17 11:50:27 2001//
+/libgettext.h/1.1.1.1/Thu May 17 11:50:27 2001//
+/linux-msg.sed/1.1.1.1/Thu May 17 11:50:27 2001//
+/loadinfo.h/1.1.1.1/Thu May 17 11:50:27 2001//
+/loadmsgcat.c/1.1.1.1/Thu May 17 11:50:27 2001//
+/localealias.c/1.1.1.1/Thu May 17 11:50:27 2001//
+/po2tbl.sed.in/1.1.1.1/Thu May 17 11:50:27 2001//
+/textdomain.c/1.1.1.1/Thu May 17 11:50:27 2001//
+/xopen-msg.sed/1.1.1.1/Thu May 17 11:50:27 2001//
+D

@@ -1,0 +1,31 @@
+#!/bin/sh
+#
+# Load PSXDEV pccl driver
+#
+# chkconfig: 2345 75 05
+# description: load pccl driver
+
+. /etc/rc.d/init.d/functions
+
+case "$1" in
+	start)
+		action "Starting PSXDEV drivers: " \
+			/sbin/modprobe pccl
+		;;
+	stop)
+		action "Stopping PSXDEV drivers: " \
+			/sbin/rmmod pccl
+		;;
+	restart|reload)
+		$0 stop
+		$0 start
+		;;
+	status)
+		cat /proc/pccl/?/status
+		;;
+	*)
+		echo "Usage: psxdev {start|stop|restart|reload|status}"
+		exit 1
+esac
+
+exit 0

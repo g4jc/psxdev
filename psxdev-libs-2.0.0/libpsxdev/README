@@ -1,0 +1,43 @@
+ -------------------------------------------------------------------------
+
+ PSXDEV is a free, GPL'd development environment for the Sony PlayStation
+ aka PSX. It consists of a collection of utitiles, a patched GNU egcs compiler,
+ patched GNU binutils, a device driver (kernel module) and data converters.
+ It requires a PC commslink package, an ActionReplay with the CAETLA PS/PAR
+ replacement firmware and of course a PSX. It does not include the required
+ development libraries, includes and documentation - see documentation why.
+
+ It allows you to up- and download main memory, video memory and memory card
+ contents. Besides that, it's a full remote-target cross-compiling development
+ environment hosted under unix. A remote PSX application can use the unix host
+ as a file server and standard input/output can also be redirected. The kernel
+ device driver has a simple API and support libraries; this makes it very easy
+ to write special video game development applications like graphic editors,
+ which for example can directly communicate with the target system.
+
+ PlayStation(TM) is a registered trademark of Sony Computer Entertainment Inc.
+ PSXDEV is not a SCEI product and has no relations to SCEI, is not supported
+ by SCEI and was not developed by SCEI.
+
+ -------------------------------------------------------------------------
+
+ Copyright (C) 1997, 1998, 1999, 2000 by these people, who contributed to this project
+
+  Daniel Balster <dbalster@psxdev.de>
+  Sergio Moreira <sergio@x-plorer.co.uk>
+  Andrew Kieschnick <andrewk@cerc.utexas.edu>
+  Kazuki Sakamoto <bsd-ps@geocities.co.jp>
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.

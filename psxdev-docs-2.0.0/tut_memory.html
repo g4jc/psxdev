@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html lang=en><head>
+<title>psxdev.de: Accessing remote memory</title>
+<meta http-equiv="content-type" content="text/html;">
+<link rel=stylesheet type="text/css" href="psxdev.css">
+</head><body background="images/bg.png" color=#000000 bgcolor=#999999>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>Accessing remote memory</TD><TD ALIGN=RIGHT>[<A HREF=index.html>top</A>|<A HREF=overview.html>sitemap</A>|<A HREF=download.html>download</A>|<A HREF=documentation.html>docs</A>]</TD></TR></TABLE>
+<hr size=2 noshade>
+<center><img src=images/psxtux2.png border=0 width=78 height=90><img src=images/logo.png width=496 height=90></center>
+<h1>Accessing remote memory</h1>
+
+<table  width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center><table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#FFFFFF><td width=100% valign=top>
+<p>
+One of the most important aspects in remote machine development is the
+exchange of data. You have to upload your program code, graphical data and
+other object data and maybe want to download regions of the remote memory
+for further analysis (debugging).
+</p>
+<p>
+<B>PSXDEV</B> provides several ways in how to access the remote memory:
+<ul>
+<li><B>shell utilities</B> -
+<A href=psx-upload.html>psx-upload</A>,
+<A href=psx-download.html>psx-download</A>, ...
+<li><b>/dev/pccl programming interfaces</b> - using <code>ioctl()</code> calls
+<li><b>/proc/pccl programming interface</b> - using <code>/proc/pccl/?/fullmem</code>
+</ul>
+Each interface has its special features and benefits. The shell utilities will
+allow you to use them in your Makefiles and other shell scripts, but you can't
+use them while a program is running. The /dev/pccl API is very complex but also
+very powerful; you can do everything with it. But the most versatile of them
+is the /proc/pccl interface, you can use it for nearly everything, it is very
+stable and it is very easy to use.
+</table></td></tr></table><hr width=0 size=0>
+<table width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center>
+<table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#000000><td width=100%>
+<p class=title><img src=images/star.png>Using the shell utilities
+</p></td></tr><tr><td bgcolor=#FFFFFF>
+The shell commands <A href=psx-upload.html>psx-upload</A>,
+<A href=psx-download.html>psx-download</A> and so on will allow you to
+transfer remote memory to or from local files. These files are formatless,
+their raw content will be transferred. If you want to transfer formatted
+files like TIM images, cheat codes or XA lists you should use the
+appropriate utilities for that.
+</table></td></tr></table><hr width=0 size=0>
+<table width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center>
+<table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#000000><td width=100%>
+<p class=title><img src=images/star.png>Using the /dev/pccl interface
+</p></td></tr><tr><td bgcolor=#FFFFFF>
+The method /dev/pccl uses to transfer memory may looks a bit weird, but this is
+in my opinion the best solution. The problem with memory transfer is that the
+amount of data varies. If you are communicating with the linux kernel you
+can't just pass a 2MB buffer as argument to the ioctl() call and want to fill it.
+A better solution is to use the read() and write() calls. Unfortunately, caetla
+requires checksums after a transmission and you need to tell it how many bytes
+you want to read or write. This leads to the following programming style:
+<ul><code><pre>
+<span class=y2>/*
+** upload 1000 bytes to 0x80100000
+*/</span>
+
+<span class=x4>#include &lt;pccl.h&gt;</span>
+<span class=x4>#include &lt;sys/ioctl.h&gt;</span>
+
+<span class=x4>#define <span class=y3>SIZE</span>    1000</span>
+<span class=x4>#define <span class=y3>ADDRESS</span> 0x80100000</span>
+
+main<b>(</b><b>)</b>
+<b>{</b>
+	<span class=x4>caetla_memory_t</span> mem;
+	<span class=x4>caetla_device_info_t</span> info;
+	<span class=y1>u_char</span> checksum;
+	<span class=y1>u_char</span> data<b>[</b><span class=y3>SIZE</span><b>]</b>;
+
+	mem.address = <span class=y3>ADDRESS</span>;
+	mem.size    = <span class=y3>SIZE</span>;
+
+	<span class=y2>// initialize a memory write</span>
+	ioctl <b>(</b>pccl,<span class=y3>CAEIOC_WRITE_MEMORY</span>,&mem<b>)</b>;
+
+	<span class=y2>// write the actual data</span>
+	write <b>(</b>pccl,data,<span class=y3>SIZE</span><b>)</b>;
+
+	<span class=y2>// get caetla device info</span>
+	<span class=y2>// <b>(</b>which holds the last checksums<b>)</b></span>
+	ioctl <b>(</b>pccl,<span class=y3>CAEIOC_DEVICE_INFO</span>,&info<b>)</b>;
+
+	<span class=y2>// exchange the checksums</span>
+	checksum = info.checksum;
+	ioctl <b>(</b>pccl,<span class=y3>CAEIOC_SWAP_8</span>,&checksum<b>)</b>;
+
+	<span class=y2>// ..and test it</span>
+	<b>if</b> <b>(</b>checksum != info.checksum<b>)</b>
+	<b>{</b>
+		<span class=y2>// error ...</span>
+	<b>}</b>
+<b>}</b>
+</pre></code></ul>You should definitely take a look into the sources of psx-upload, psx-download,
+mc-up, mc-down and of /dev/pccl itself if you want to understand the mechanism.
+Remember: it is ok to reuse existing code!
+</table></td></tr></table><hr width=0 size=0>
+<table width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center>
+<table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#000000><td width=100%>
+<p class=title><img src=images/star.png>Using the /proc/pccl interface
+</p></td></tr><tr><td bgcolor=#FFFFFF>
+The /proc/pccl interface is as soon available as the kernel driver is loaded,
+just take a look into the <code>/proc/pccl/0/</code> directory. You will find
+two special files here:
+<ul>
+<li><b>/proc/pccl/?/mem</b> - 2MB main memory (0x80000000..0x801fffff)
+<li><b>/proc/pccl/?/fullmem</b> - the complete 32-Bit address space
+</ul>
+The special file <code>mem</code> only covers the main memory. This is very
+useful if you want to <b>hexedit</b> the main memory or copy the whole
+memory to a file (you can simply use <code>cp /proc/pccl/0/mem /tmp/mymem</code>
+for this!). If you want to access any byte of the remote memory, you should use
+the special file <code>fullmem</code> since it covers the complete 32-bit
+address space. <b>VERY IMPORTANT! <code>fullmem</code> does not know yet if
+a specific address is accessible</b>! So if you access a non-existant memory
+region the PlayStation will simply freeze and you have to hard reset the
+machine.
+<p>
+Both special files can be treated as such and so you can use them
+from any programming language to upload/download memory by simply writing or
+reading from them! They also know whether the PlayStation is running a game or
+if it is in menu mode (of caetla), so you can use one API to access it and do
+not need to worry about the current mode (as in the /dev/pccl API).
+</p>
+<p>
+Here is a silly example which shows how easy it is to use this API:
+<ul><code><pre>
+<span class=y2>/*
+** read 1234 bytes from the address 0x80123456
+*/</span>
+
+<span class=x4>#include &lt;sys/file.h&gt;</span>
+
+<span class=y1>int</span> file;       <span class=y2>// our file descriptor</span>
+<span class=y1>char</span> buf<b>[</b>1234<b>]</b>; <span class=y2>// temp. buffer</span>
+
+file = open <b>(</b><span class=x1>"/proc/pccl/0/fullmem"</span>, <span class=y3>O_RDONLY</span><b>)</b>;
+<b>if</b> <b>(</b>file != -1<b>)</b>
+<b>{</b>
+	<span class=y2>// seek to the address</span>
+	lseek <b>(</b>file, 0x80123456, 0<b>)</b>;
+	
+	<span class=y2>// transfer the memory</span>
+	read <b>(</b>file, buf, 1234<b>)</b>;
+<b>}</b>
+<b>else</b> perror <b>(</b><span class=x1>"open"</span><b>)</b>;
+</pre></code></ul></p>
+</table></td></tr></table><hr width=0 size=0>
+
+<hr size=2 noshade>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>
+<address>Created with <a href=psxdev.pl>psxdev.pl</a></address>
+</td><td align=right>
+<address>Copyright &copy;2000
+ by <a href="mailto:dbalster@psxdev.de">Daniel Balster</a></address>
+</td></tr></table>
+</body></html>

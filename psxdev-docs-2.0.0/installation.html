@@ -1,0 +1,258 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html lang=en><head>
+<title>psxdev.de: Installation guide</title>
+<meta http-equiv="content-type" content="text/html;">
+<link rel=stylesheet type="text/css" href="psxdev.css">
+</head><body background="images/bg.png" color=#000000 bgcolor=#999999>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>Installation guide</TD><TD ALIGN=RIGHT>[<A HREF=index.html>top</A>|<A HREF=overview.html>sitemap</A>|<A HREF=download.html>download</A>|<A HREF=documentation.html>docs</A>]</TD></TR></TABLE>
+<hr size=2 noshade>
+<center><img src=images/psxtux2.png border=0 width=78 height=90><img src=images/logo.png width=496 height=90></center>
+<h1>Installation guide</h1>
+
+<table  width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center><table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#FFFFFF><td width=100% valign=top>
+You need a linux distribution which uses the <B>RedHat package manager</B> (RPM)
+unless you want to compile and install PSXDEV from the source tarballs
+(which is only recommended for very experienced users).
+<p>
+A good choice for a distribution is of course RedHat linux or one of its
+distribution clones like Haloween, Mandrake, Go!Linux, etc. The very well known
+german linux distribution SuSE has IMHO a very bad RPM support and PSXDEV
+has not been tested with this distribution.
+<p>
+It is also required that the <b>linux kernel source code</b> is installed in
+<code>/usr/src/linux</code> and that your currently installed kernel was
+compiled from that sources. During the installation of PSXDEV-CORE the PSXDEV
+kernel device driver will be compiled and installed as a loadable kernel module,
+so you must have your kernel configured with support for that. To check that,
+start your kernel configuration utiltiy (i.e. make menuconfig) and check these
+settings:
+<ul>
+<li>Loadable module support<br>
+<ul>
+<li>Enable loadable module support: <b>YES</b><br>
+<li>Set version information on all symbols for modules: <b>YES</b><br>
+<li>Kernel module loader: <b>YES</b><br>
+</ul>
+</ul>
+Again, the kernel source is expected in <b><code>/usr/src/linux</code></b>,
+this is typically a symbolic link to the real location. If the kernel source
+is not present the installation will fail!
+</table></td></tr></table><hr width=0 size=0>
+<table width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center>
+<table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#000000><td width=100%>
+<p class=title><img src=images/star.png>Installing PSXDEV from binary RPMS</p></td></tr><tr><td bgcolor=#FFFFFF>
+Starting with PSXDEV 2.0.0 the installation can be much more customized.
+First you have to decide what components you need. Choose your
+packages from the following sets: 
+
+<h1>Basis</h1>
+<ul>
+<li><b>psxdev-core</b> - always needed
+<li><b>psxdev-libs</b> - shared libraries
+<li><b>psxdev-tools</b> - communication tools
+</ul>
+If you want to write own applications for PSXDEV, you'll also need
+the <b>psxdev-libs-devel</b> package. Otherwise it's not needed.
+
+<h1>Programming</h1>
+<ul>
+<li><b>psxdev-gcc</b> - C/C++/Java/Fortran/Chill compiler
+<li><b>psxdev-binutils-elf</b> - assembler, linker, etc. for ELF linker format
+<li><b>psxdev-binutils-ecoff</b> - assembler, linker, etc. for ECOFF linker format
+</ul>
+You don't want ELF unless you know what you're doing. ECOFF and ELF mutually
+exclude each other, you can't use both together! However, you can
+uninstall and reinstall them on the fly. ELF is the choice if you want
+to program for PS2. <i>Hint: you should use the official patches for PS2,
+not mine</i>
+
+<h1>Graphics</h1>
+<ul>
+<li><b>psxdev-tools-for-images</b> - shell conversion commands
+<li><b>psxdev-gimp</b> - GIMP plug-ins
+</ul>
+The GIMP plug-ins compile themself during RPM installation and
+need the <b>psxdev-libs-devel</b> package temporarily installed.
+After psxdev-gimp installation you can uninstall the <b>psxdev-libs-devel</b>
+package if you like to.
+
+<h1>Audio</h1>
+<ul>
+<li><b>psxdev-tools-for-audio</b> - shell conversion commands
+</ul>
+There's nothing special. Just record, replay and conversion.
+
+<h1>Debugging and extras</h1>
+<ul>
+<li><b>psxdev-curvegen</b> - discrete curve generator
+<li><b>psxdev-debugger</b> - visual assembler debugger
+<li><b>psxdev-interactor</b> - modify variables in realtime
+</ul>
+
+<h1>CD-ROM creation</h1>
+<ul>
+<li><b>psxdev-cdmaker</b> - CD-ROM mastering and burning frontend
+</ul>
+This package still needs CDRDAO being installed. Search the internet
+for a CDRDAO RPM package and install it or override the installation.
+
+<p>
+
+<hr size=2 noshade>
+
+<ol>
+<li>Now download all PSXDEV binary RPMS you need<br>
+<li>Open a shell and change to the download directory<br>
+<li>Install the RPMS by typing<br>
+<code><pre>
+shell> rpm -Uvh psxdev-*.rpm
+<b>
+psxdev-binutils-ecoff       ##################################################
+psxdev-core                 ##################################################
+psxdev-docs                 ##################################################
+psxdev-gcc                  ##################################################
+psxdev-libs                 ##################################################
+psxdev-tools                ##################################################
+</b></pre></code>
+</ol>
+<i>This is an example output!</i> This has been tested with a plain RedHat 6.0 installation.
+</td></tr></table></td></tr></table><br><table width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center>
+<table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#000000><td width=100%>
+<p class=title><img src=images/star.png>Installing PSXDEV from source RPMS</p></td></tr><tr><td bgcolor=#FFFFFF>
+You can install the source RPMS only in this order, because of the dependencies
+between the packages!
+<ol>
+<li>psxdev-core
+<li>psxdev-libs
+<li>psxdev-binutils (elf or ecoff)
+<li>psxdev-tools
+<li>psxdev-gcc
+<li>psxdev-apps
+<li>psxdev-sdk
+<li>psxdev-docs
+</ol>
+For all packages in that list do (<em>you must be superuser</em>)
+<ul>
+<li><b>rpm --rebuild &lt;<i>source package</i>&gt;</b><br>
+After that the newly created binary RPM can be found in
+the <code>RPMS/i386/</code> subtree of your RPM build directory,
+typically <code>/usr/src/redhat/RPMS/i386</code>.
+<li><b>rpm -Uvh &lt;<i>binary package</i>&gt;</b><br>
+This is necessary because of the package dependencies.
+</ul>
+Some source packages will spit out more than one binary RPM, like
+tools, apps and libs.
+</td></tr></table></td></tr></table><br><table width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center>
+<table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#000000><td width=100%>
+<p class=title><img src=images/star.png>Installing PSXDEV from source TARBALLS</p></td></tr><tr><td bgcolor=#FFFFFF>
+<b>CORE</b>
+<p>
+Download the psxdev-core-???.tar.gz archive. Then unpack it to a temporary
+directory and change into <b>psxdev-core-???</b>. Become root and choose
+a location for PSXDEV. The recommended location is <b>/opt/psxdev</b>, but
+you can also use <b>/usr/local</b> or anything else. The location should
+be owned by root. Run <b>./install /opt/psxdev</b> to install the core
+into /opt/psxdev. This also compiles and installs the device driver; you
+need a linux kernel source version 2.1 or higher and you kernel should
+be compiled with loadable modules support. <b>Note:</b> You need to modify
+your <B>$PATH</B> and <B>$LD_LIBRARY_PATH</B> variables to point to
+<B>$PSXDEV/bin</B> and <B>$PSXDEV/lib</B>. You should use the psxdev.sh
+script which has been generated by the ./install script. Normally you
+want to place this script with executable permission in <b>/etc/profile.d/</B>
+script directory (i.e. RedHat Linux).
+</p>
+
+<b>DOCS</b>
+<p>
+Just change to the <B>$PSXDEV</B> base directory and unpack the .tar.gz
+archive. You will find the documentation files in the doc and public_html
+subdirectores.
+</p>
+
+<b>LIBS</b>
+<p>
+Download the psxdev-libs-???.tar.gz archive. Then unpack it to a temporary
+directory and change into <b>psxdev-libs-???</b>. Check if the <B>$PSXDEV</B>
+variable points to the correct location. Become root and repeat
+the following for all sub directories:
+<ul>
+./configure --with-library-version=?.?.?--prefix=$PSXDEV --exec-prefix=$PSXDEV<br>
+make<br>
+make install<br>
+</ul>
+This will build and install all the static and shared libraries and the
+header files into the <B>$PSXDEV</B> hierarchy.
+The <i>--with-library-version=?.?.?</i> lets you choose the version
+number for the shared library. This is a maintainer option!
+If you omit it, a 1.0.0 version will be generated.
+</p>
+
+<b>BINUTILS</b>
+<p>
+Next, you need to install the GNU binutils, because the psxdev-tools depends
+on it. Download and unpack psxdev-binutils-???.tar.gz. You will find
+a new .tar.gz file and a .patch file. Perform the following steps:
+<ul>
+tar zxvf psxdev-binutils-???.tar.gz<br>
+cd psxdev-binutils-???
+patch -p1 &lt; psxdev-binutils-???.patch<br>
+mkdir psx<br>
+cd psx<br>
+../configure --prefix=$PSXDEV --exec-prefix=$PSXDEV --enable-shared --enable-commonbfdlib --with-mmap --target=psx<br>
+make<br>
+make install<br>
+</ul>
+</p>
+
+<b>TOOLS</b>
+<p>
+The same as above for psxdev-tools-???.tar.gz. Unpack and
+<ul>
+./configure --prefix=$PSXDEV --exec-prefix=$PSXDEV<br>
+make<br>
+make install<br>
+</ul>
+</p>
+
+<b>GCC</b>
+<p>
+Download and unpack psxdev-gcc-???.tar.gz. You will find
+a new .tar.gz file and a .patch file. Perform the following steps:
+<ul>
+tar zxvf psxdev-gcc-???.tar.gz<br>
+cd psxdev-gcc-???<br>
+patch -p1 &lt; psxdev-gcc-???.patch<br>
+mkdir psx<br>
+cd psx<br>
+../configure --prefix=$PSXDEV --with-gnu-as --with-gnu-ld --exec-prefix=$PSXDEV --target=psx<br>
+make install<br>
+</ul>
+</p>
+
+<b>APPS</b>
+<p>
+Download and unpack psxdev-apps-???.tar.gz. For each subdirectory repeat
+the following:
+<ul>
+./configure --prefix=$PSXDEV --exec-prefix=$PSXDEV<br>
+make<br>
+make install<br>
+</ul>
+</p>
+
+<center><b>Congratulations! Installation complete.</b></center>
+
+</td></tr></table></td></tr></table><br></td></tr></table>
+
+<hr size=2 noshade>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>
+<address>Created with <a href=psxdev.pl>psxdev.pl</a></address>
+</td><td align=right>
+<address>Copyright &copy;2000
+ by <a href="mailto:dbalster@psxdev.de">Daniel Balster</a></address>
+</td></tr></table>
+</body></html>

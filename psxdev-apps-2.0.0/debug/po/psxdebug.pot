@@ -1,0 +1,503 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 1999-12-29 14:30+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+
+#: src/interface.c:28
+msgid "_Generate Bookmarks"
+msgstr ""
+
+#: src/interface.c:254
+msgid "PSXDEV Debugger"
+msgstr ""
+
+#: src/interface.c:312
+msgid "Reset"
+msgstr ""
+
+#: src/interface.c:313
+msgid "Reset the PlayStation"
+msgstr ""
+
+#: src/interface.c:324
+msgid "Resume"
+msgstr ""
+
+#: src/interface.c:325
+msgid "Resume operation on PlayStation and give control back to it"
+msgstr ""
+
+#: src/interface.c:336
+msgid "Halt"
+msgstr ""
+
+#: src/interface.c:337
+msgid "Stop execution on PlayStation and take over control"
+msgstr ""
+
+#: src/interface.c:353
+msgid "Step"
+msgstr ""
+
+#: src/interface.c:354
+msgid "Perform a single step"
+msgstr ""
+
+#: src/interface.c:368
+msgid "Server"
+msgstr ""
+
+#: src/interface.c:382
+msgid "Exit"
+msgstr ""
+
+#: src/interface.c:383
+msgid "Quit this fine application"
+msgstr ""
+
+#: src/interface.c:405
+msgid "Cancel"
+msgstr ""
+
+#: src/interface.c:417
+msgid "CD-ROM"
+msgstr ""
+
+#: src/interface.c:429
+msgid "Protect"
+msgstr ""
+
+#: src/interface.c:441
+msgid "Convert"
+msgstr ""
+
+#: src/interface.c:453
+msgid "Print"
+msgstr ""
+
+#: src/interface.c:509
+msgid ""
+"Welcome to PSXDEBUG!\n"
+"This is a design prototype.\n"
+msgstr ""
+
+#: src/interface.c:524 src/interface.c:711
+msgid "_Clear"
+msgstr ""
+
+#: src/interface.c:533
+msgid "Clear all messages"
+msgstr ""
+
+#: src/interface.c:537
+msgid "_Status"
+msgstr ""
+
+#: src/interface.c:546
+msgid "Get status of remote target connection link"
+msgstr ""
+
+#: src/interface.c:550
+msgid "_Versions"
+msgstr ""
+
+#: src/interface.c:559
+msgid "Get versions of caetla sub systems"
+msgstr ""
+
+#: src/interface.c:561
+msgid "Messages"
+msgstr ""
+
+#: src/interface.c:593 src/interface.c:1336 src/interface.c:1389
+#: src/interface.c:1434 src/interface.c:1683 src/interface.c:1965
+msgid "Address"
+msgstr ""
+
+#: src/interface.c:601 src/interface.c:631
+msgid "Comment"
+msgstr ""
+
+#: src/interface.c:644
+msgid "You can use these comments like assembler labels for addresses"
+msgstr ""
+
+#: src/interface.c:659
+msgid "_Add"
+msgstr ""
+
+#: src/interface.c:668
+msgid "Add new entry with current display address and current comment"
+msgstr ""
+
+#: src/interface.c:672
+msgid "_Remove"
+msgstr ""
+
+#: src/interface.c:681
+msgid "Remove selected entry"
+msgstr ""
+
+#: src/interface.c:685 src/interface.c:1033
+msgid "_Save"
+msgstr ""
+
+#: src/interface.c:694
+msgid "Save to $HOME/.psxdev/debug_bookmarks"
+msgstr ""
+
+#: src/interface.c:698 src/interface.c:1045
+msgid "_Load"
+msgstr ""
+
+#: src/interface.c:707
+msgid "Load from $HOME/.psxdev/debug_bookmarks"
+msgstr ""
+
+#: src/interface.c:721
+msgid "Bookmarks"
+msgstr ""
+
+#: src/interface.c:760
+msgid "Stack"
+msgstr ""
+
+#: src/interface.c:770
+msgid "Task"
+msgstr ""
+
+#: src/interface.c:780
+msgid "Event"
+msgstr ""
+
+#: src/interface.c:790
+msgid "Executable"
+msgstr ""
+
+#: src/interface.c:865 src/interface.c:1252
+msgid "/dev/pccl"
+msgstr ""
+
+#: src/interface.c:875
+msgid "psx-run"
+msgstr ""
+
+#: src/interface.c:877 src/interface.c:1254
+msgid "Device"
+msgstr ""
+
+#: src/interface.c:887
+msgid "Command"
+msgstr ""
+
+#: src/interface.c:897
+msgid "Reset before upload ?"
+msgstr ""
+
+#: src/interface.c:907
+msgid "Directory"
+msgstr ""
+
+#: src/interface.c:933
+msgid "Break before main() ?"
+msgstr ""
+
+#: src/interface.c:942
+msgid "Use stack from executable ?"
+msgstr ""
+
+#: src/interface.c:952
+msgid "Use the directory path from the executable ?"
+msgstr ""
+
+#: src/interface.c:977
+msgid "Debug EXE"
+msgstr ""
+
+#: src/interface.c:1009
+msgid "_Run"
+msgstr ""
+
+#: src/interface.c:1021
+msgid "_Info"
+msgstr ""
+
+#: src/interface.c:1055
+msgid "Upload"
+msgstr ""
+
+#: src/interface.c:1070
+msgid "Templates"
+msgstr ""
+
+#: src/interface.c:1095
+#, c-format
+msgid "nc -read -line %d -noask %s"
+msgstr ""
+
+#: src/interface.c:1105
+#, c-format
+msgid "psx-addr2line -e %s --demangle 0x%08lx"
+msgstr ""
+
+#: src/interface.c:1115
+#, c-format
+msgid "psx-nm %s | grep \" T \" | awk '{print \"0x\" $0}'"
+msgstr ""
+
+#: src/interface.c:1117
+msgid "Open editor"
+msgstr ""
+
+#: src/interface.c:1127
+msgid "Addr to line"
+msgstr ""
+
+#: src/interface.c:1137
+msgid "Get Symbols"
+msgstr ""
+
+#: src/interface.c:1147
+msgid "PSXDEV PCCL Communication Link"
+msgstr ""
+
+#: src/interface.c:1172
+msgid "/proc/pccl/0/fullmem"
+msgstr ""
+
+#: src/interface.c:1182
+msgid "/proc/pccl/0/status"
+msgstr ""
+
+#: src/interface.c:1192
+msgid "/proc/pccl/0/version"
+msgstr ""
+
+#: src/interface.c:1202
+msgid "/proc/pccl/0/pid"
+msgstr ""
+
+#: src/interface.c:1204
+msgid "Fullmem"
+msgstr ""
+
+#: src/interface.c:1214
+msgid "Status"
+msgstr ""
+
+#: src/interface.c:1224
+msgid "Version"
+msgstr ""
+
+#: src/interface.c:1234
+msgid "PID"
+msgstr ""
+
+#: src/interface.c:1264
+msgid "Configuration"
+msgstr ""
+
+#: src/interface.c:1271
+msgid "Edit Memory"
+msgstr ""
+
+#: src/interface.c:1326 src/interface.c:1973
+msgid "Value"
+msgstr ""
+
+#: src/interface.c:1353
+msgid "Display..."
+msgstr ""
+
+#: src/interface.c:1398
+msgid "Jump to..."
+msgstr ""
+
+#: src/interface.c:1443
+msgid "Search Mnemonic Opcode"
+msgstr ""
+
+#: src/interface.c:1469
+msgid "Mnemonic substring search"
+msgstr ""
+
+#: src/interface.c:1471
+msgid "Mnemo"
+msgstr ""
+
+#: src/interface.c:1507
+msgid "..."
+msgstr ""
+
+#: src/interface.c:1523
+msgid "Load"
+msgstr ""
+
+#: src/interface.c:1531
+msgid ""
+"Transfer remote memory from selected range into a local buffer for further "
+"analysis"
+msgstr ""
+
+#: src/interface.c:1533
+msgid "Hex"
+msgstr ""
+
+#: src/interface.c:1569
+msgid "Search for 32-bit values"
+msgstr ""
+
+#: src/interface.c:1571
+msgid "Mask"
+msgstr ""
+
+#: src/interface.c:1596
+msgid "Bitmask for 32-bit search"
+msgstr ""
+
+#: src/interface.c:1598
+msgid "CPU Registers"
+msgstr ""
+
+#: src/interface.c:1622
+msgid "Disassembly"
+msgstr ""
+
+#: src/interface.c:1646
+msgid "Breakpoints"
+msgstr ""
+
+#: src/interface.c:1691
+msgid "Flags"
+msgstr ""
+
+#: src/interface.c:1699
+msgid "Saved"
+msgstr ""
+
+#: src/interface.c:1707
+msgid "PC ADDR"
+msgstr ""
+
+#: src/interface.c:1715
+msgid "PC MASK"
+msgstr ""
+
+#: src/interface.c:1723
+msgid "DATA ADDR"
+msgstr ""
+
+#: src/interface.c:1731
+msgid "DATA MASK"
+msgstr ""
+
+#: src/interface.c:1759
+msgid "Add"
+msgstr ""
+
+#: src/interface.c:1760
+msgid "Add a new breakpoint"
+msgstr ""
+
+#: src/interface.c:1771
+msgid "Remove"
+msgstr ""
+
+#: src/interface.c:1772
+msgid "Remove selected breakpoint"
+msgstr ""
+
+#: src/interface.c:1784
+msgid "Enable"
+msgstr ""
+
+#: src/interface.c:1785
+msgid "Enable/Disable selected breakpoint"
+msgstr ""
+
+#: src/interface.c:1797
+msgid "Hardware"
+msgstr ""
+
+#: src/interface.c:1798
+msgid "Switch selected breakpoint from software to hardware"
+msgstr ""
+
+#: src/interface.c:1898
+msgid "PC ADDR:"
+msgstr ""
+
+#: src/interface.c:1908
+msgid "DATA ADDR:"
+msgstr ""
+
+#: src/interface.c:1918
+msgid "PC MASK:"
+msgstr ""
+
+#: src/interface.c:1928
+msgid "DATA MASK:"
+msgstr ""
+
+#: src/interface.c:1938
+msgid "Search Results"
+msgstr ""
+
+#: src/interface.c:1981
+msgid "Opcode"
+msgstr ""
+
+#: src/interface.c:2107
+msgid "Copyright (C) 1999, 2000 by Daniel Balster"
+msgstr ""
+
+#: src/interface.c:2109
+msgid "simple r3k realtime/remote debugger"
+msgstr ""
+
+#: src/interface.c:2125
+msgid ""
+"There is no program running on\n"
+"the remote target. Please start a\n"
+"program first."
+msgstr ""
+
+#: src/interface.c:2161
+msgid ""
+"Communication link seems to be broken!\n"
+"Please restart the target machine and re-\n"
+"upload the program and try again. Sorry."
+msgstr ""
+
+#: src/interface.c:2197
+msgid ""
+"No executable filename given!\n"
+"Please correct that."
+msgstr ""
+
+#: src/interface.c:2233
+msgid ""
+"A debugging version of your\n"
+"executable binary is needed for this."
+msgstr ""
+
+#: src/support.c:96 src/support.c:134
+#, c-format
+msgid "Couldn't find pixmap file: %s"
+msgstr ""
+
+#: src/support.c:112
+#, c-format
+msgid "Couldn't create pixmap from file: %s"
+msgstr ""

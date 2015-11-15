@@ -1,0 +1,602 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2000-01-18 23:50+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+
+#: src/interface.c:278
+msgid "PSXDEV CD-ROM Maker"
+msgstr ""
+
+#: src/interface.c:326
+msgid "New"
+msgstr ""
+
+#: src/interface.c:339
+msgid "Open"
+msgstr ""
+
+#: src/interface.c:340
+msgid "Reload current settings from local project file"
+msgstr ""
+
+#: src/interface.c:351
+msgid "Save"
+msgstr ""
+
+#: src/interface.c:352
+msgid "Save current settings to .psxcdmakerrc"
+msgstr ""
+
+#: src/interface.c:365
+msgid "Master"
+msgstr ""
+
+#: src/interface.c:366
+msgid "Master CD image"
+msgstr ""
+
+#: src/interface.c:377
+msgid "Write"
+msgstr ""
+
+#: src/interface.c:378
+msgid "Write CD image to CD writer"
+msgstr ""
+
+#: src/interface.c:391
+msgid "Exit"
+msgstr ""
+
+#: src/interface.c:392
+msgid "Exit application"
+msgstr ""
+
+#: src/interface.c:433
+msgid "label34"
+msgstr ""
+
+#: src/interface.c:464
+msgid "Help"
+msgstr ""
+
+#: src/interface.c:479
+msgid "Input Path"
+msgstr ""
+
+#: src/interface.c:532
+msgid "%V MB used"
+msgstr ""
+
+#: src/interface.c:536
+msgid "Disk _Usage"
+msgstr ""
+
+#: src/interface.c:544
+msgid "Perform \"du -sm\" and display it based on a 750 MB scale"
+msgstr ""
+
+#: src/interface.c:546
+msgid "Output Path"
+msgstr ""
+
+#: src/interface.c:599
+msgid "%V of %U MB left (%P %%)"
+msgstr ""
+
+#: src/interface.c:601
+msgid "Paths"
+msgstr ""
+
+#: src/interface.c:616
+msgid "Filesystem Header"
+msgstr ""
+
+#: src/interface.c:647
+msgid ""
+"The Volume Identifier. There is space on the disc for 32 characters of "
+"information."
+msgstr ""
+
+#: src/interface.c:648
+msgid "VOLUME_ID"
+msgstr ""
+
+#: src/interface.c:664
+msgid ""
+"The Volume Set Name. There is space on the disc for 128 characters of "
+"information."
+msgstr ""
+
+#: src/interface.c:665
+msgid "VOLUME_SET"
+msgstr ""
+
+#: src/interface.c:681
+msgid ""
+"This should describe the publisher of the CDROM, usually with a mailing "
+"address and phone number. There is space on the disc for 128 characters of "
+"information."
+msgstr ""
+
+#: src/interface.c:682
+msgid "PUBLISHER"
+msgstr ""
+
+#: src/interface.c:698
+msgid ""
+"This should describe the preparer of the CDROM, usually with a mailing "
+"address and phone number. There is space on the disc for 128 characters of "
+"information."
+msgstr ""
+
+#: src/interface.c:699
+msgid "DATA_PREPARER"
+msgstr ""
+
+#: src/interface.c:715
+msgid ""
+"The application identifier should describe the application that will be on "
+"the disc. There is space on the disc for 128 characters of information."
+msgstr ""
+
+#: src/interface.c:716 src/interface.c:733
+msgid "PLAYSTATION"
+msgstr ""
+
+#: src/interface.c:732
+msgid ""
+"The System Identifier. There is space on the disc for 32 characters of "
+"information."
+msgstr ""
+
+#: src/interface.c:735
+msgid "Volume ID:"
+msgstr ""
+
+#: src/interface.c:745
+msgid "Volume Set:"
+msgstr ""
+
+#: src/interface.c:755
+msgid "Publisher:"
+msgstr ""
+
+#: src/interface.c:765
+msgid "Data Preparer:"
+msgstr ""
+
+#: src/interface.c:775
+msgid "Application ID:"
+msgstr ""
+
+#: src/interface.c:785
+msgid "System ID:"
+msgstr ""
+
+#: src/interface.c:795
+msgid "Information Files"
+msgstr ""
+
+#: src/interface.c:827
+msgid ""
+"The  bibliographic information, often the name of a file on the disc "
+"containing a bibliography. There is space in the disc for 37 characters of "
+"information."
+msgstr ""
+
+#: src/interface.c:844
+msgid ""
+"The copyright information, often the name of a file on the disc containing "
+"the copyright notice. There is space in the disc for 37 characters of "
+"information."
+msgstr ""
+
+#: src/interface.c:861
+msgid ""
+"The  abstract information, often the name of a file on the disc containing "
+"an abstract. There is space in the disc for 37 characters of information."
+msgstr ""
+
+#: src/interface.c:863
+msgid "Abstract:"
+msgstr ""
+
+#: src/interface.c:872
+msgid "Copyright:"
+msgstr ""
+
+#: src/interface.c:881
+msgid "Bibliography:"
+msgstr ""
+
+#: src/interface.c:890 src/interface.c:1224
+msgid "Miscellaneous"
+msgstr ""
+
+#: src/interface.c:904
+msgid "Follow Symbolic Links"
+msgstr ""
+
+#: src/interface.c:914
+msgid "Include All Files"
+msgstr ""
+
+#: src/interface.c:924
+msgid "Allow files to begin with period"
+msgstr ""
+
+#: src/interface.c:934
+msgid "Omit trailing periods"
+msgstr ""
+
+#: src/interface.c:944
+msgid "Times and Dates"
+msgstr ""
+
+#: src/interface.c:991
+msgid "Creation:"
+msgstr ""
+
+#: src/interface.c:1000
+msgid "Expiration:"
+msgstr ""
+
+#: src/interface.c:1009
+msgid "Modification:"
+msgstr ""
+
+#: src/interface.c:1018
+msgid "Effective:"
+msgstr ""
+
+#: src/interface.c:1037
+msgid "Comment"
+msgstr ""
+
+#: src/interface.c:1061
+msgid "ISO9660"
+msgstr ""
+
+#: src/interface.c:1076
+msgid "SYSTEM.CNF;1"
+msgstr ""
+
+#: src/interface.c:1092
+msgid "_Generate SYSTEM.CNF;1"
+msgstr ""
+
+#: src/interface.c:1134
+msgid "0x4"
+msgstr ""
+
+#: src/interface.c:1150
+msgid "0x10"
+msgstr ""
+
+#: src/interface.c:1166
+msgid "0x801FFFF0"
+msgstr ""
+
+#: src/interface.c:1182
+msgid "cdrom:ABCD_000.00;1"
+msgstr ""
+
+#: src/interface.c:1184
+msgid "TCB="
+msgstr ""
+
+#: src/interface.c:1194
+msgid "EVENT="
+msgstr ""
+
+#: src/interface.c:1204
+msgid "STACK="
+msgstr ""
+
+#: src/interface.c:1214
+msgid "BOOT="
+msgstr ""
+
+#: src/interface.c:1256
+msgid "License file:"
+msgstr ""
+
+#: src/interface.c:1266
+msgid "Exclusion List"
+msgstr ""
+
+#: src/interface.c:1304
+msgid ""
+"All files which match a pattern in this list are excluded from the CD-ROM"
+msgstr ""
+
+#: src/interface.c:1338 src/interface.c:1444 src/interface.c:1582
+msgid "_Add"
+msgstr ""
+
+#: src/interface.c:1350 src/interface.c:1456 src/interface.c:1593
+msgid "_Remove"
+msgstr ""
+
+#: src/interface.c:1362 src/interface.c:1468
+msgid "_Clear"
+msgstr ""
+
+#: src/interface.c:1372
+msgid "XA File Inclusion List"
+msgstr ""
+
+#: src/interface.c:1410
+msgid ""
+"All files which match a pattern in this list are embedded as XA files (2336 "
+"bytes/sector)"
+msgstr ""
+
+#: src/interface.c:1478
+msgid "PSX"
+msgstr ""
+
+#: src/interface.c:1493
+msgid "Track List"
+msgstr ""
+
+#: src/interface.c:1521
+msgid "Filename"
+msgstr ""
+
+#: src/interface.c:1529
+msgid "Size"
+msgstr ""
+
+#: src/interface.c:1537
+msgid "Copy"
+msgstr ""
+
+#: src/interface.c:1544
+msgid "Preemp."
+msgstr ""
+
+#: src/interface.c:1551
+msgid "Type"
+msgstr ""
+
+#: src/interface.c:1604
+msgid "Re_fresh"
+msgstr ""
+
+#: src/interface.c:1615
+msgid "_CopyPerm."
+msgstr ""
+
+#: src/interface.c:1626
+msgid "_Preemp."
+msgstr ""
+
+#: src/interface.c:1635
+msgid "Audio"
+msgstr ""
+
+#: src/interface.c:1650
+msgid "CDR DAO"
+msgstr ""
+
+#: src/interface.c:1681
+msgid "if this field is /dev/cdrecorder is used"
+msgstr ""
+
+#: src/interface.c:1682
+msgid "0,5,0"
+msgstr ""
+
+#: src/interface.c:1693
+msgid "cdd2600"
+msgstr ""
+
+#: src/interface.c:1694
+msgid "plextor"
+msgstr ""
+
+#: src/interface.c:1695
+msgid "plextor-scan"
+msgstr ""
+
+#: src/interface.c:1696
+msgid "generic-mmc"
+msgstr ""
+
+#: src/interface.c:1697
+msgid "generic-mmc-raw"
+msgstr ""
+
+#: src/interface.c:1698
+msgid "ricoh-mp6200"
+msgstr ""
+
+#: src/interface.c:1699
+msgid "yamaha-cdr10x"
+msgstr ""
+
+#: src/interface.c:1700
+msgid "teac-cdr55"
+msgstr ""
+
+#: src/interface.c:1701
+msgid "sony-cdu920"
+msgstr ""
+
+#: src/interface.c:1702
+msgid "sony-cdu948"
+msgstr ""
+
+#: src/interface.c:1703
+msgid "taiyo-yuden"
+msgstr ""
+
+#: src/interface.c:1712
+msgid "if this field is empty the driver is detected automatically"
+msgstr ""
+
+#: src/interface.c:1714
+msgid "Device:"
+msgstr ""
+
+#: src/interface.c:1724
+msgid "Driver:"
+msgstr ""
+
+#: src/interface.c:1734
+msgid "Speed:"
+msgstr ""
+
+#: src/interface.c:1744
+msgid "Buffers:"
+msgstr ""
+
+#: src/interface.c:1763
+msgid "enter 0 for maximum speed"
+msgstr ""
+
+#: src/interface.c:1775
+msgid "CDR DAO Options"
+msgstr ""
+
+#: src/interface.c:1790
+msgid "Simulate (turn laser off)"
+msgstr ""
+
+#: src/interface.c:1800
+msgid "Eject"
+msgstr ""
+
+#: src/interface.c:1810
+msgid "Force"
+msgstr ""
+
+#: src/interface.c:1819
+msgid "No 10 seconds pause"
+msgstr ""
+
+#: src/interface.c:1828
+msgid "Reload tray"
+msgstr ""
+
+#: src/interface.c:1837
+msgid "Swab audio byte order"
+msgstr ""
+
+#: src/interface.c:1846
+msgid "On the fly"
+msgstr ""
+
+#: src/interface.c:1856
+msgid "Edit TOC"
+msgstr ""
+
+#: src/interface.c:1866
+msgid "TOC"
+msgstr ""
+
+#: src/interface.c:1891
+msgid "CD-Writer"
+msgstr ""
+
+#: src/interface.c:1931
+msgid "Reset"
+msgstr ""
+
+#: src/interface.c:1939
+msgid "Kill"
+msgstr ""
+
+#: src/interface.c:1948
+msgid "Shell"
+msgstr ""
+
+#: src/interface.c:1963
+msgid "Commands"
+msgstr ""
+
+#: src/interface.c:1994
+msgid "/bin/bash"
+msgstr ""
+
+#: src/interface.c:2010
+msgid "du -sm"
+msgstr ""
+
+#: src/interface.c:2026
+msgid "psx-mkisofs"
+msgstr ""
+
+#: src/interface.c:2042
+msgid "cdrdao"
+msgstr ""
+
+#: src/interface.c:2044
+msgid "SHELL:"
+msgstr ""
+
+#: src/interface.c:2054
+msgid "DISKUSAGE:"
+msgstr ""
+
+#: src/interface.c:2064
+msgid "MKISOFS:"
+msgstr ""
+
+#: src/interface.c:2074
+msgid "CDRDAO:"
+msgstr ""
+
+#: src/interface.c:2084
+msgid "Temporary Names"
+msgstr ""
+
+#: src/interface.c:2115
+msgid "image.toc"
+msgstr ""
+
+#: src/interface.c:2131
+msgid "image.iso"
+msgstr ""
+
+#: src/interface.c:2133
+msgid "ISO image filename:"
+msgstr ""
+
+#: src/interface.c:2143
+msgid "TOC sheet filename:"
+msgstr ""
+
+#: src/interface.c:2153
+msgid "Config"
+msgstr ""
+
+#: src/interface.c:2296
+msgid "Copyright (C) 2000 by Daniel Balster"
+msgstr ""
+
+#: src/interface.c:2298
+msgid "A simple frontend for CDRDAO and MKISOFS "
+msgstr ""
+
+#: src/support.c:97 src/support.c:135
+#, c-format
+msgid "Couldn't find pixmap file: %s"
+msgstr ""
+
+#: src/support.c:113
+#, c-format
+msgid "Couldn't create pixmap from file: %s"
+msgstr ""

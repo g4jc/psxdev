@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html lang=en><head>
+<title>psxdev.de: convert a PPM image into a TIM image</title>
+<meta http-equiv="content-type" content="text/html;">
+<link rel=stylesheet type="text/css" href="psxdev.css">
+</head><body background="images/bg.png" color=#000000 bgcolor=#999999>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>convert a PPM image into a TIM image</TD><TD ALIGN=RIGHT>[<A HREF=index.html>top</A>|<A HREF=overview.html>sitemap</A>|<A HREF=download.html>download</A>|<A HREF=documentation.html>docs</A>]</TD></TR></TABLE>
+<hr size=2 noshade>
+<center><img src=images/psxtux2.png border=0 width=78 height=90><img src=images/logo.png width=496 height=90></center>
+<h1>convert a PPM image into a TIM image</h1>
+
+<table  width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center><table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#FFFFFF><td width=100% valign=top>
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE><tr VALIGN=top><td align=left>
+<B>ppmtotim</B> - convert a PPM image into a TIM image</td><td align=right>
+<FONT SIZE=-2><A HREF="mailto:dbalster@psxdev.de">Daniel Balster</A>/psxdev-tools
+</FONT></td></tr></table>
+<ul><li><b>SYNOPSIS OF ppmtotim</b><br>
+<CODE><PRE>
+</PRE></CODE></ul>
+<ul><li><b>DESCRIPTION OF ppmtotim</b><br>
+<B>ppmtotim</B> can be used to create TIM images in batch scripts. it can be used directly in a pipe and read/write from standard input/output. An external palette file can be used instead of palette calculation and an externaltransparency plane can also be given.
+</ul>
+<ul><li><b>EXAMPLES FOR ppmtotim</b><br>
+cat input.ppm | ppmquant 256 | ppmtotim --8bit > output.tim
+
+</ul>
+<ul><li><b>NOTES ON ppmtotim</b><br>
+This utility is very old and served my needs for over three years, that's why I included it without any change.
+</ul>
+<ul><li><b>SEE ALSO</b><br>
+<A HREF=timtoppm.html>timtoppm</A>&nbsp;&nbsp;&nbsp;<p>&nbsp;</p></table></td></tr></table><hr width=0 size=0>
+<P ALIGN=CENTER><A HREF=psxdev-tools.html>back to index</A></P>
+<hr size=2 noshade>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>
+<address>Created with <a href=psxdev.pl>psxdev.pl</a></address>
+</td><td align=right>
+<address>Copyright &copy;2000
+ by <a href="mailto:dbalster@psxdev.de">Daniel Balster</a></address>
+</td></tr></table>
+</body></html>

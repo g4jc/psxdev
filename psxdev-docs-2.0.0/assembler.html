@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html lang=en><head>
+<title>psxdev.de: GNU assembler and GTE</title>
+<meta http-equiv="content-type" content="text/html;">
+<link rel=stylesheet type="text/css" href="psxdev.css">
+</head><body background="images/bg.png" color=#000000 bgcolor=#999999>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>GNU assembler and GTE</TD><TD ALIGN=RIGHT>[<A HREF=index.html>top</A>|<A HREF=overview.html>sitemap</A>|<A HREF=download.html>download</A>|<A HREF=documentation.html>docs</A>]</TD></TR></TABLE>
+<hr size=2 noshade>
+<center><img src=images/psxtux2.png border=0 width=78 height=90><img src=images/logo.png width=496 height=90></center>
+<h1>GNU assembler and GTE</h1>
+
+<table  width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center><table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#FFFFFF><td width=100% valign=top>
+I have modified the GNU assembler to support the GTE coprocessor.
+It does now know about GTE register names (in the disassembly) and
+all common GTE instructions. You only need some macro definitions
+for the register names during assembly.
+</table></td></tr></table><hr width=0 size=0>
+
+<table width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center>
+<table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#000000><td width=100%>
+<p class=title><img src=images/star.png>GNU assembler input
+</p></td></tr><tr><td bgcolor=#FFFFFF>
+
+<ul><code><pre>
+<span class=y2>/* some GTE instructions. does nothing useful */</span>
+
+<span class=x5>	.text</span>
+
+<b>	lw</b>	<span class=y1>t4</span>,0(<span class=y1>s0</span>)
+<b>	lw</b>	<span class=y1>t5</span>,4(<span class=y1>s0</span>)
+<b>	ctc2</b>	<span class=y1>t4</span>,R11R12
+<b>	ctc2</b>	<span class=y1>t5</span>,R13R21
+<b>	lw</b>	<span class=y1>t4</span>,8(<span class=y1>s0</span>)
+<b>	lw</b>	<span class=y1>t5</span>,12(<span class=y1>s0</span>)
+<b>	lw</b>	<span class=y1>t6</span>,16(<span class=y1>s0</span>)
+<b>	ctc2</b>	<span class=y1>t4</span>,R22R23
+<b>	ctc2</b>	<span class=y1>t5</span>,R31R32
+<b>	ctc2</b>	<span class=y1>t6</span>,R33
+<b>	lw</b>	<span class=y1>t4</span>,20(<span class=y1>s0</span>)
+<b>	lw</b>	<span class=y1>t5</span>,24(<span class=y1>s0</span>)
+<b>	ctc2</b>	<span class=y1>t4</span>,TRX
+<b>	lw</b>	<span class=y1>t6</span>,28(<span class=y1>s0</span>)
+<b>	ctc2</b>	<span class=y1>t5</span>,TRY
+<b>	ctc2</b>	<span class=y1>t6</span>,TRZ
+<b>	lwc2</b>	VXY0,0(<span class=y1>s4</span>)
+<b>	lwc2</b>	VZ2,20(<span class=y1>s4</span>)
+<b>	rtpt</b>
+<b>	nclip</b>
+<b>	lwc2</b>	RGB0,0(<span class=y1>t7</span>)
+<b>	lwc2</b>	RGB1,4(<span class=y1>t7</span>)
+<b>	lwc2</b>	RGB2,8(<span class=y1>t7</span>)
+<b>	lwc2</b>	RGB,8(<span class=y1>t7</span>)
+<b>	dpct</b>
+<b>	swc2</b>	RGB0,4(<span class=y1>a2</span>)
+<b>	swc2</b>	RGB1,16(<span class=y1>a2</span>)
+<b>	swc2</b>	RGB2,28(<span class=y1>a2</span>)
+<b>	mtc2</b>	<span class=y1>a2</span>,IR0
+<b>	lwc2</b>	IR1,0(<span class=y1>a0</span>)
+<b>	lwc2</b>	IR2,4(<span class=y1>a0</span>)
+<b>	lwc2</b>	IR3,8(<span class=y1>a0</span>)
+<b>	<span class=y1>gp</span>f12</b>
+<b>	mfc2</b>	<span class=y1>v0</span>,LZCR
+<b>	mtc2</b>	<span class=y1>a3</span>,IR0
+<b>	lwc2</b>	IR1,0(<span class=y1>a1</span>)
+<b>	lwc2</b>	IR2,4(<span class=y1>a1</span>)
+<b>	lwc2</b>	IR3,8(<span class=y1>a1</span>)
+<b>	<span class=y1>gp</span>l12</b>
+<b>	lw</b>	<span class=y1>t0</span>,16(<span class=y1>sp</span>)
+<b>	swc2</b>	IR1,0(<span class=y1>t0</span>)
+<b>	swc2</b>	IR2,4(<span class=y1>t0</span>)
+<b>	swc2</b>	IR3,8(<span class=y1>t0</span>)
+
+<span class=x5>	.end</span>
+</pre></code></ul>
+</td></tr></table></td></tr></table><br>
+<table width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center>
+<table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#000000><td width=100%>
+<p class=title><img src=images/star.png>GNU assembler output
+</p></td></tr><tr><td bgcolor=#FFFFFF>
+
+<ul><code><pre>
+
+<<span class=y1>sp</span>an class=y4>asm.o:</<span class=y1>sp</span>an>     file form<span class=y1>at</span> ecoff-littlemips
+
+Disassembly of section .text:
+
+00000000 &lt;.text&gt;:
+   0:	8e0c0000 	lw	$<span class=y1>t4</span>,0($<span class=y1>s0</span>)
+   4:	8e0d0004 	lw	$<span class=y1>t5</span>,4($<span class=y1>s0</span>)
+   8:	48cc0000 	ctc2	$<span class=y1>t4</span>,$R11R12
+   c:	48cd0800 	ctc2	$<span class=y1>t5</span>,$R13R21
+  10:	8e0c0008 	lw	$<span class=y1>t4</span>,8($<span class=y1>s0</span>)
+  14:	8e0d000c 	lw	$<span class=y1>t5</span>,12($<span class=y1>s0</span>)
+  18:	8e0e0010 	lw	$<span class=y1>t6</span>,16($<span class=y1>s0</span>)
+  1c:	48cc1000 	ctc2	$<span class=y1>t4</span>,$R22R23
+  20:	48cd1800 	ctc2	$<span class=y1>t5</span>,$R31R32
+  24:	48ce2000 	ctc2	$<span class=y1>t6</span>,$R33
+  28:	8e0c0014 	lw	$<span class=y1>t4</span>,20($<span class=y1>s0</span>)
+  2c:	8e0d0018 	lw	$<span class=y1>t5</span>,24($<span class=y1>s0</span>)
+  30:	48cc2800 	ctc2	$<span class=y1>t4</span>,$TRX
+  34:	8e0e001c 	lw	$<span class=y1>t6</span>,28($<span class=y1>s0</span>)
+  38:	48cd3000 	ctc2	$<span class=y1>t5</span>,$TRY
+  3c:	48ce3800 	ctc2	$<span class=y1>t6</span>,$TRZ
+  40:	ca800000 	lwc2	$VXY0,0($<span class=y1>s4</span>)
+  44:	ca850014 	lwc2	$VZ2,20($<span class=y1>s4</span>)
+	...
+  50:	4<span class=y1>a2</span>80030 	rtpt
+  54:	4b400006 	nclip
+  58:	c9f40000 	lwc2	$RGB0,0($<span class=y1>t7</span>)
+  5c:	c9f50004 	lwc2	$RGB1,4($<span class=y1>t7</span>)
+  60:	c9f60008 	lwc2	$RGB2,8($<span class=y1>t7</span>)
+  64:	c9e60008 	lwc2	$RGB,8($<span class=y1>t7</span>)
+	...
+  70:	4af8002a 	dpct
+  74:	e8d40004 	swc2	$RGB0,4($<span class=y1>a2</span>)
+  78:	e8d50010 	swc2	$RGB1,16($<span class=y1>a2</span>)
+  7c:	e8d6001c 	swc2	$RGB2,28($<span class=y1>a2</span>)
+  80:	48864000 	mtc2	$<span class=y1>a2</span>,$IR0
+  84:	c8890000 	lwc2	$IR1,0($<span class=y1>a0</span>)
+  88:	c88<span class=y1>a0</span>004 	lwc2	$IR2,4($<span class=y1>a0</span>)
+  8c:	c88b0008 	lwc2	$IR3,8($<span class=y1>a0</span>)
+	...
+  98:	4b98003d 	<span class=y1>gp</span>f12
+  9c:	4802f800 	mfc2	$<span class=y1>v0</span>,$LZCR
+<b>  <span class=y1>a0</span></b>:	48874000 	mtc2	$<span class=y1>a3</span>,$IR0
+<b>  a4</b>:	c8a90000 	lwc2	$IR1,0($<span class=y1>a1</span>)
+<b>  a8</b>:	c8a<span class=y1>a0</span>004 	lwc2	$IR2,4($<span class=y1>a1</span>)
+<b>  ac</b>:	c8ab0008 	lwc2	$IR3,8($<span class=y1>a1</span>)
+	...
+<b>  b8</b>:	4ba8003e 	<span class=y1>gp</span>l12
+<b>  bc</b>:	8fa80010 	lw	$<span class=y1>t0</span>,16($<span class=y1>sp</span>)
+<b>  c0</b>:	00000000 	nop
+<b>  c4</b>:	e9090000 	swc2	$IR1,0($<span class=y1>t0</span>)
+<b>  c8</b>:	e90<span class=y1>a0</span>004 	swc2	$IR2,4($<span class=y1>t0</span>)
+<b>  cc</b>:	e90b0008 	swc2	$IR3,8($<span class=y1>t0</span>)
+</pre></code></ul>
+</td></tr></table></td></tr></table><br>
+<hr size=2 noshade>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>
+<address>Created with <a href=psxdev.pl>psxdev.pl</a></address>
+</td><td align=right>
+<address>Copyright &copy;2000
+ by <a href="mailto:dbalster@psxdev.de">Daniel Balster</a></address>
+</td></tr></table>
+</body></html>

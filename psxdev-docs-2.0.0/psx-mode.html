@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html lang=en><head>
+<title>psxdev.de: configure global modes of a device</title>
+<meta http-equiv="content-type" content="text/html;">
+<link rel=stylesheet type="text/css" href="psxdev.css">
+</head><body background="images/bg.png" color=#000000 bgcolor=#999999>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>configure global modes of a device</TD><TD ALIGN=RIGHT>[<A HREF=index.html>top</A>|<A HREF=overview.html>sitemap</A>|<A HREF=download.html>download</A>|<A HREF=documentation.html>docs</A>]</TD></TR></TABLE>
+<hr size=2 noshade>
+<center><img src=images/psxtux2.png border=0 width=78 height=90><img src=images/logo.png width=496 height=90></center>
+<h1>configure global modes of a device</h1>
+
+<table  width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center><table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#FFFFFF><td width=100% valign=top>
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE><tr VALIGN=top><td align=left>
+<B>psx-mode</B> - configure global modes of a device</td><td align=right>
+<FONT SIZE=-2><A HREF="mailto:dbalster@psxdev.de">Daniel Balster</A>/psxdev-tools
+</FONT></td></tr></table>
+<ul><li><b>SYNOPSIS OF psx-mode</b><br>
+<CODE><PRE>
+</PRE></CODE></ul>
+<ul><li><b>DESCRIPTION OF psx-mode</b><br>
+<B>psx-mode</B> is used to switch between global modes of a given PCCL device. There is currently only one global mode available, the AUTORESUME mode.
+</ul>
+<ul><li><b>EXAMPLES FOR psx-mode</b><br>
+<code><b>psx-mode autoresume</b></code> can be used to request the current value of a mode.
+<code><b>psx-mode autoresume=on</b></code>If AUTORESUME=ON is selected the PSX is not interrupted anymore by some utilties. This makes sense if you want to access /proc/pccl/0/mem for i.e. realtime updates and the PSX shouldn't freeze everytime you access the memory.
+<code><b>psx-mode autoresume=off</b></code>This is the opposite. In the above example would this freeze the execution everytime you access i.e. /proc/pccl/0/mem.
+
+
+</ul>
+<ul><li><b>NOTES ON psx-mode</b><br>
+I'm not happy with this mode, but it was necessary.
+</ul>
+<p>&nbsp;</p></table></td></tr></table><hr width=0 size=0>
+<P ALIGN=CENTER><A HREF=psxdev-tools.html>back to index</A></P>
+<hr size=2 noshade>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>
+<address>Created with <a href=psxdev.pl>psxdev.pl</a></address>
+</td><td align=right>
+<address>Copyright &copy;2000
+ by <a href="mailto:dbalster@psxdev.de">Daniel Balster</a></address>
+</td></tr></table>
+</body></html>

@@ -1,0 +1,132 @@
+# Generated automatically from Makefile.in by configure.
+#
+# $Id: Makefile,v 1.1.1.1 2001/05/17 11:50:28 dbalster Exp $
+#
+## Makefile for mkisofs.
+
+#### Start of system configuration section. ####
+
+srcdir = .
+
+CC = gcc
+
+INSTALL = /usr/bin/install -c
+INSTALL_PROGRAM = ${INSTALL}
+INSTALL_DATA = ${INSTALL} -m 644
+
+LIBS = 
+
+prefix = /usr/local
+exec_prefix = $(prefix)
+
+bindir = $(exec_prefix)/bin
+
+# Where to put the manual pages.
+mandir = $(prefix)/man/man8
+# Extension (not including `.') for the manual page filenames.
+manext = 8
+
+#### End of system configuration section. ####
+
+CFLAGS=-g -O2 -I. -Iedc_ecc
+LDFLAGS=
+OBJS=mkisofs.o tree.o write.o hash.o rock.o multi.o \
+		joliet.o match.o name.o fnmatch.o eltorito.o \
+		getopt.o getopt1.o \
+		edc_ecc.o
+
+World: psx-mkisofs
+
+Makefile: Makefile.in config.status
+	CONFIG_FILES=Makefile CONFIG_HEADERS= $(SHELL) ./config.status
+
+config.status: configure
+	$(SHELL) config.status --recheck
+
+configure:  configure.in
+	cd $(srcdir) && autoconf
+
+psx-mkisofs: Makefile $(OBJS) 
+	$(CC) $(LDFLAGS) -o psx-mkisofs  $(OBJS)
+
+install: psx-mkisofs
+	[ -d $(bindir) ] || mkdir $(bindir)
+	$(INSTALL_PROGRAM) psx-mkisofs $(bindir)/psx-mkisofs
+
+## psx-mkisofs uses L-EC coding library, Copyright Heiko Eissfeldt
+
+edc_ecc.o: edc_ecc/crctable.out edc_ecc/encoder_tables edc_ecc/edc_ecc.c edc_ecc/crc.h edc_ecc/ecc.h  edc_ecc/sniptype.h config.h Makefile
+	( cd $(srcdir)/edc_ecc/ && $(CC) -c $(CFLAGS) edc_ecc.c -o ../edc_ecc.o )
+
+edc_ecc/crctable.out:
+	( cd $(srcdir)/edc_ecc/ && $(CC) -o crctable crctable.c crcmodel.c && ./crctable )
+
+edc_ecc/encoder_tables:
+	( cd $(srcdir)/edc_ecc/ && $(CC) -o gen_encodes gen_encodes.c && ./gen_encodes > encoder_tables )
+
+## end edc_library
+
+tree.o: tree.c mkisofs.h iso9660.h exclude.h config.h Makefile
+	$(CC) -c $(CFLAGS) $(srcdir)/tree.c
+
+write.o: write.c mkisofs.h iso9660.h config.h Makefile
+	$(CC) -c $(CFLAGS) $(srcdir)/write.c
+
+hash.o: hash.c mkisofs.h  config.h Makefile
+	$(CC) -c $(CFLAGS) $(srcdir)/hash.c
+
+rock.o: rock.c mkisofs.h iso9660.h config.h Makefile
+	$(CC) -c $(CFLAGS) $(srcdir)/rock.c
+
+joliet.o: joliet.c mkisofs.h iso9660.h config.h Makefile
+	$(CC) -c $(CFLAGS) $(srcdir)/joliet.c
+
+match.o: match.c match.h config.h Makefile
+	$(CC) -c $(CFLAGS) $(srcdir)/match.c
+
+fnmatch.o: fnmatch.c fnmatch.h config.h Makefile
+	$(CC) -c $(CFLAGS) $(srcdir)/fnmatch.c
+
+multi.o: multi.c iso9660.h mkisofs.h config.h Makefile
+	$(CC) -c $(CFLAGS) $(srcdir)/multi.c
+
+name.o: name.c iso9660.h mkisofs.h config.h Makefile
+	$(CC) -c $(CFLAGS) $(srcdir)/name.c
+
+mkisofs.o: mkisofs.c iso9660.h mkisofs.h exclude.h config.h Makefile
+	$(CC) -c $(CFLAGS) $(srcdir)/mkisofs.c
+
+eltorito.o: eltorito.c iso9660.h mkisofs.h config.h Makefile
+	$(CC) -c $(CFLAGS) $(srcdir)/eltorito.c
+
+getopt.o: getopt.c exclude.h config.h Makefile
+	$(CC) -c $(CFLAGS) $(srcdir)/getopt.c
+
+getopt1.o: getopt1.c exclude.h config.h Makefile
+	$(CC) -c $(CFLAGS) $(srcdir)/getopt1.c
+
+distclean:
+clean:
+	/bin/rm -f *.o core psx-mkisofs *~ #*#
+	/bin/rm -f config.status config.log config.cache config.h
+	/bin/rm -f edc_ecc/crctable.out
+	/bin/rm -f edc_ecc/crctable
+	/bin/rm -f edc_ecc/encoder_tables
+	/bin/rm -f edc_ecc/gen_encodes
+	/bin/rm -f edc_ecc/*.o
+
+#
+# All .h files except for config.h get copied.
+#
+dist:   Makefile
+	(mydir=`basename \`pwd\``;\
+	cd .. && tar -cvvf - $$mydir/README $$mydir/README.eltorito \
+	$$mydir/configure.in $$mydir/configure $$mydir/config.h.in \
+	$$mydir/Makefile.in  $$mydir/make.com $$mydir/TODO \
+	$$mydir/COPYING $$mydir/ChangeLog $$mydir/*.8 $$mydir/*.c \
+	$$mydir/mkisofs.spec $$mydir/acconfig.h \
+	$$mydir/install-sh $$mydir/[d-z]*.h \
+	$$mydir/cdwrite.c.diff $$mydir/README.session  \
+	| gzip -9 > $${mydir}.tar.gz)
+
+

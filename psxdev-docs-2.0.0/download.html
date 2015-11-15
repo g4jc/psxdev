@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html lang=en><head>
+<title>psxdev.de: Download area</title>
+<meta http-equiv="content-type" content="text/html;">
+<link rel=stylesheet type="text/css" href="psxdev.css">
+</head><body background="images/bg.png" color=#000000 bgcolor=#999999>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>Download area</TD><TD ALIGN=RIGHT>[<A HREF=index.html>top</A>|<A HREF=overview.html>sitemap</A>|<A HREF=download.html>download</A>|<A HREF=documentation.html>docs</A>]</TD></TR></TABLE>
+<hr size=2 noshade>
+<center><img src=images/psxtux2.png border=0 width=78 height=90><img src=images/logo.png width=496 height=90></center>
+<h1>Download area</h1>
+
+<table  width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center><table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#FFFFFF><td width=100% valign=top>
+<font size=+2>Important!</font>
+You only need to download the <b>binary RPMS</b>, the source codes
+are only needed if you want to recompile everything or just want to
+take a quick view into the sources. All binaries were compiled for
+at least an i586-type processor and with all optimizations turned on.
+Please take a look at the <A HREF="installation.html">installation guide</A>
+where you will get more informations.
+<p>
+<b>TIP:</B> Instead of single clicking all the links you should use a
+recursive web sucker. I recommend to use an utility like <A href="http://sunsite.auc.dk/ftp/pub/infosystems/wget/">wget</a>,
+download it and type in at the command line prompt<code><pre>
+wget -np -nv -r http://psxdev.de/download</pre></code> To ensure that the
+downloaded files are not corrupted you should cross check them with the
+MD5 checksums in the last box on this page; simply type <code><pre>
+md5sum *</pre></code> in your download directory. You could also use the
+<code>rpm --checksig</code> and <code>tar --test</code> functionality.
+<p>
+<b>TIP:</B> You don't need the SOURCE tarballs and the patches if you
+have downloaded the SRPM packages. You can extract the sources, patches
+and spec files by typing<code><pre>
+rpm2cpio filename.rpm | cpio --extract --make-directories</pre></code>
+The SRPM packages have the advantage that they include the SPEC file,
+which contains detailed building instructions (for RPM).
+<p>
+<b>TIP:</B> Do not download the ADMIN and ELF packages, you don't really need them.
+</table></td></tr></table><hr width=0 size=0>
+<TABLE  WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0 BGCOLOR="#000000"><TR><TD VALIGN=center><TABLE CELLSPACING=1 CELLPADDING=2 WIDTH=100% BORDER=0>
+<TR BGCOLOR=#000000><TD WIDTH=100% COLSPAN=4><p class=title><IMG SRC=images/star.png>PSXDEV Binary RPM</p></TD></TR>
+<TR BGCOLOR=#EEEEEE><TD><I>name</I></TD><TD><I>size</I></TD><TD><I>version</I></TD><TD><I>description</I></TD><tr bgcolor=#EEEEFF><td><a href="download/psxdev-admin-2.0.0-1.i586.rpm">admin</a></td><td align=right>41579</td><td align=center>2.0.0-1</td><td width=100%>psxdev - http://psxdev.de admin tools. you really don't need this!</td></tr>
+<tr bgcolor=#FFFFEE><td><a href="download/psxdev-binutils-ecoff-2.0.0-1.i586.rpm">binutils-ecoff</a></td><td align=right>1733572</td><td align=center>2.0.0-1</td><td width=100%>psxdev - binary tools (ecoff) for target psx (assembler, linker, ..)</td></tr>
+<tr bgcolor=#EEEEFF><td><a href="download/psxdev-binutils-elf-2.0.0-1.i586.rpm">binutils-elf</a></td><td align=right>2365061</td><td align=center>2.0.0-1</td><td width=100%>psxdev - binary tools (elf) for target psx (assembler, linker, ..)</td></tr>
+<tr bgcolor=#FFFFEE><td><a href="download/psxdev-cdmaker-2.0.0-1.i586.rpm">cdmaker</a></td><td align=right>113480</td><td align=center>2.0.0-1</td><td width=100%>psxdev - GNOME application for CD-ROM mastering and burning</td></tr>
+<tr bgcolor=#EEEEFF><td><a href="download/psxdev-core-2.0.0-1.i586.rpm">core</a></td><td align=right>37220</td><td align=center>2.0.0-1</td><td width=100%>psxdev - device drivers and filesystem hierarchy</td></tr>
+<tr bgcolor=#FFFFEE><td><a href="download/psxdev-curvegen-2.0.0-1.i586.rpm">curvegen</a></td><td align=right>42767</td><td align=center>2.0.0-1</td><td width=100%>psxdev - GNOME application for generating discrete curve data</td></tr>
+<tr bgcolor=#EEEEFF><td><a href="download/psxdev-debugger-2.0.0-1.i586.rpm">debugger</a></td><td align=right>78163</td><td align=center>2.0.0-1</td><td width=100%>psxdev - GNOME remote target MIPS assembler debugger</td></tr>
+<tr bgcolor=#FFFFEE><td><a href="download/psxdev-docs-2.0.0-1.noarch.rpm">docs</a></td><td align=right>1342516</td><td align=center>2.0.0-1</td><td width=100%>psxdev - documentation files</td></tr>
+<tr bgcolor=#EEEEFF><td><a href="download/psxdev-gcc-2.0.0-1.i586.rpm">gcc</a></td><td align=right>6217659</td><td align=center>2.0.0-1</td><td width=100%>psxdev - gcc C/C++ compiler for target psx</td></tr>
+<tr bgcolor=#FFFFEE><td><a href="download/psxdev-gimp-2.0.0-1.i586.rpm">gimp</a></td><td align=right>23232</td><td align=center>2.0.0-1</td><td width=100%>psxdev - gimp plug-ins</td></tr>
+<tr bgcolor=#EEEEFF><td><a href="download/psxdev-interactor-2.0.0-1.i586.rpm">interactor</a></td><td align=right>51007</td><td align=center>2.0.0-1</td><td width=100%>psxdev - GNOME application for interactive variable modification</td></tr>
+<tr bgcolor=#FFFFEE><td><a href="download/psxdev-libs-2.0.0-1.i586.rpm">libs</a></td><td align=right>62432</td><td align=center>2.0.0-1</td><td width=100%>psxdev - shared libraries</td></tr>
+<tr bgcolor=#EEEEFF><td><a href="download/psxdev-libs-devel-2.0.0-1.i586.rpm">libs-devel</a></td><td align=right>70194</td><td align=center>2.0.0-1</td><td width=100%>psxdev - shared libraries (development material)</td></tr>
+<tr bgcolor=#FFFFEE><td><a href="download/psxdev-sdk-2.0.0-1.noarch.rpm">sdk</a></td><td align=right>265998</td><td align=center>2.0.0-1</td><td width=100%>psxdev - a simple development kit (only useful for hello world)</td></tr>
+<tr bgcolor=#EEEEFF><td><a href="download/psxdev-tools-2.0.0-1.i586.rpm">tools</a></td><td align=right>83491</td><td align=center>2.0.0-1</td><td width=100%>psxdev - tools for binary conversion and remote communication</td></tr>
+<tr bgcolor=#FFFFEE><td><a href="download/psxdev-tools-for-audio-2.0.0-1.i586.rpm">tools-for-audio</a></td><td align=right>32739</td><td align=center>2.0.0-1</td><td width=100%>psxdev - tools for audio conversion and processing</td></tr>
+<tr bgcolor=#EEEEFF><td><a href="download/psxdev-tools-for-images-2.0.0-1.i586.rpm">tools-for-images</a></td><td align=right>38992</td><td align=center>2.0.0-1</td><td width=100%>psxdev - tools for image conversion and processing</td></tr>
+</table></td></tr></table><hr width=0 size=0>
+<TABLE  WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0 BGCOLOR="#000000"><TR><TD VALIGN=center><TABLE CELLSPACING=1 CELLPADDING=2 WIDTH=100% BORDER=0>
+<TR BGCOLOR=#000000><TD WIDTH=100% COLSPAN=4><p class=title><IMG SRC=images/star.png>PSXDEV Source RPM</p></TD></TR>
+<TR BGCOLOR=#EEEEEE><TD><I>name</I></TD><TD><I>size</I></TD><TD><I>version</I></TD><TD><I>description</I></TD><tr bgcolor=#EEEEFF><td><a href="download/psxdev-apps-2.0.0-1.src.rpm">apps</a></td><td align=right>1268463</td><td align=center>2.0.0-1</td><td width=100%>psxdev - some cool applications</td></tr>
+<tr bgcolor=#FFFFEE><td><a href="download/psxdev-binutils-ecoff-2.0.0-1.src.rpm">binutils-ecoff</a></td><td align=right>6676108</td><td align=center>2.0.0-1</td><td width=100%>psxdev - binary tools (ecoff) for target psx (assembler, linker, ..)</td></tr>
+<tr bgcolor=#EEEEFF><td><a href="download/psxdev-binutils-elf-2.0.0-1.src.rpm">binutils-elf</a></td><td align=right>6676005</td><td align=center>2.0.0-1</td><td width=100%>psxdev - binary tools (elf) for target psx (assembler, linker, ..)</td></tr>
+<tr bgcolor=#FFFFEE><td><a href="download/psxdev-core-2.0.0-1.src.rpm">core</a></td><td align=right>33584</td><td align=center>2.0.0-1</td><td width=100%>psxdev - device drivers and filesystem hierarchy</td></tr>
+<tr bgcolor=#EEEEFF><td><a href="download/psxdev-docs-2.0.0-1.src.rpm">docs</a></td><td align=right>1320881</td><td align=center>2.0.0-1</td><td width=100%>psxdev - documentation files</td></tr>
+<tr bgcolor=#FFFFEE><td><a href="download/psxdev-gcc-2.0.0-1.src.rpm">gcc</a></td><td align=right>12932495</td><td align=center>2.0.0-1</td><td width=100%>psxdev - gcc C/C++ compiler for target psx</td></tr>
+<tr bgcolor=#EEEEFF><td><a href="download/psxdev-gimp-2.0.0-1.src.rpm">gimp</a></td><td align=right>25232</td><td align=center>2.0.0-1</td><td width=100%>psxdev - gimp plug-ins</td></tr>
+<tr bgcolor=#FFFFEE><td><a href="download/psxdev-libs-2.0.0-1.src.rpm">libs</a></td><td align=right>545130</td><td align=center>2.0.0-1</td><td width=100%>psxdev - shared libraries</td></tr>
+<tr bgcolor=#EEEEFF><td><a href="download/psxdev-sdk-2.0.0-1.src.rpm">sdk</a></td><td align=right>241789</td><td align=center>2.0.0-1</td><td width=100%>psxdev - a simple development kit (only useful for hello world)</td></tr>
+<tr bgcolor=#FFFFEE><td><a href="download/psxdev-tools-2.0.0-1.src.rpm">tools</a></td><td align=right>478817</td><td align=center>2.0.0-1</td><td width=100%>psxdev - tools for binary conversion and remote communication</td></tr>
+</table></td></tr></table><hr width=0 size=0>
+<TABLE  WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0 BGCOLOR="#000000"><TR><TD VALIGN=center><TABLE CELLSPACING=1 CELLPADDING=2 WIDTH=100% BORDER=0>
+<TR BGCOLOR=#000000><TD WIDTH=100% COLSPAN=4><p class=title><IMG SRC=images/star.png>PSXDEV Tarball</p></TD></TR>
+<TR BGCOLOR=#EEEEEE><TD><I>name</I></TD><TD><I>size</I></TD><TD><I>version</I></TD><TD><I>description</I></TD><tr bgcolor=#EEEEFF><td><a href="download/psxdev-apps-2.0.0.tar.gz">apps</a></td><td align=right>1264854</td><td align=center>2.0.0</td><td width=100%>unconfigured source code only</td></tr>
+<tr bgcolor=#FFFFEE><td><a href="download/psxdev-binutils-ecoff-2.0.0.tar.gz">binutils-ecoff</a></td><td align=right>6682712</td><td align=center>2.0.0</td><td width=100%>unconfigured source code only</td></tr>
+<tr bgcolor=#EEEEFF><td><a href="download/psxdev-binutils-elf-2.0.0.tar.gz">binutils-elf</a></td><td align=right>6682712</td><td align=center>2.0.0</td><td width=100%>unconfigured source code only</td></tr>
+<tr bgcolor=#FFFFEE><td><a href="download/psxdev-core-2.0.0.tar.gz">core</a></td><td align=right>29424</td><td align=center>2.0.0</td><td width=100%>unconfigured source code only</td></tr>
+<tr bgcolor=#EEEEFF><td><a href="download/psxdev-docs-2.0.0.tar.gz">docs</a></td><td align=right>1316959</td><td align=center>2.0.0</td><td width=100%>unconfigured source code only</td></tr>
+<tr bgcolor=#FFFFEE><td><a href="download/psxdev-gcc-2.0.0.tar.gz">gcc</a></td><td align=right>12926400</td><td align=center>2.0.0</td><td width=100%>unconfigured source code only</td></tr>
+<tr bgcolor=#EEEEFF><td><a href="download/psxdev-gimp-2.0.0.tar.gz">gimp</a></td><td align=right>21202</td><td align=center>2.0.0</td><td width=100%>unconfigured source code only</td></tr>
+<tr bgcolor=#FFFFEE><td><a href="download/psxdev-libs-2.0.0.tar.gz">libs</a></td><td align=right>541479</td><td align=center>2.0.0</td><td width=100%>unconfigured source code only</td></tr>
+<tr bgcolor=#EEEEFF><td><a href="download/psxdev-sdk-2.0.0.tar.gz">sdk</a></td><td align=right>237355</td><td align=center>2.0.0</td><td width=100%>unconfigured source code only</td></tr>
+<tr bgcolor=#FFFFEE><td><a href="download/psxdev-tools-2.0.0.tar.gz">tools</a></td><td align=right>475177</td><td align=center>2.0.0</td><td width=100%>unconfigured source code only</td></tr>
+</table></td></tr></table><hr width=0 size=0>
+<TABLE  WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0 BGCOLOR="#000000"><TR><TD VALIGN=center><TABLE CELLSPACING=1 CELLPADDING=2 WIDTH=100% BORDER=0>
+<TR BGCOLOR=#000000><TD WIDTH=100% COLSPAN=4><p class=title><IMG SRC=images/star.png>PSXDEV Patche</p></TD></TR>
+<TR BGCOLOR=#EEEEEE><TD><I>name</I></TD><TD><I>size</I></TD><TD><I>version</I></TD><TD><I>description</I></TD><tr bgcolor=#EEEEFF><td><a href="download/psxdev-binutils-ecoff-2.0.0.patch">binutils-ecoff</a></td><td align=right>23579</td><td align=center>2.0.0</td><td width=100%>unconfigured source code only</td></tr>
+<tr bgcolor=#FFFFEE><td><a href="download/psxdev-binutils-elf-2.0.0.patch">binutils-elf</a></td><td align=right>23152</td><td align=center>2.0.0</td><td width=100%>unconfigured source code only</td></tr>
+<tr bgcolor=#EEEEFF><td><a href="download/psxdev-gcc-2.0.0.patch">gcc</a></td><td align=right>7155</td><td align=center>2.0.0</td><td width=100%>unconfigured source code only</td></tr>
+</table></td></tr></table><hr width=0 size=0>
+<TABLE  WIDTH=100% CELLSPACING=0 CELLPADDING=1 BORDER=0 BGCOLOR="#000000"><TR><TD VALIGN=center><TABLE CELLSPACING=1 CELLPADDING=2 WIDTH=100% BORDER=0>
+<TR BGCOLOR=#000000><TD WIDTH=100% COLSPAN=2><p class=title><IMG SRC=images/star.png>PSXDEV MD5 Checksum</p></TD></TR>
+<TR BGCOLOR=#EEEEEE><TD><I>MD5 checksum</I></TD><TD><I>filename</I></TD><tr bgcolor=#EEEEFF><td><b><code>2667b8961aa2907f7cae89c715129b6e</code></b></td><td width=100%>psxdev-admin-2.0.0-1.i586.rpm</td></tr>
+<tr bgcolor=#FFFFEE><td><b><code>89090385a861f8008b5d7033f244ecb7</code></b></td><td width=100%>psxdev-apps-2.0.0-1.src.rpm</td></tr>
+<tr bgcolor=#EEEEFF><td><b><code>a50c8e4f3ca773ed23c5bab644177706</code></b></td><td width=100%>psxdev-apps-2.0.0.tar.gz</td></tr>
+<tr bgcolor=#FFFFEE><td><b><code>2740645e8a03d8f73d8348b1b4edfc61</code></b></td><td width=100%>psxdev-binutils-ecoff-2.0.0-1.i586.rpm</td></tr>
+<tr bgcolor=#EEEEFF><td><b><code>a31c70d62548596efdaa1b7f0bd03964</code></b></td><td width=100%>psxdev-binutils-ecoff-2.0.0-1.src.rpm</td></tr>
+<tr bgcolor=#FFFFEE><td><b><code>c2f31820e1f087e3a1e802235cafd2c9</code></b></td><td width=100%>psxdev-binutils-ecoff-2.0.0.patch</td></tr>
+<tr bgcolor=#EEEEFF><td><b><code>14dac095c12328aa307756c367e23350</code></b></td><td width=100%>psxdev-binutils-ecoff-2.0.0.tar.gz</td></tr>
+<tr bgcolor=#FFFFEE><td><b><code>cbbbace0b546f28df01e04c274413762</code></b></td><td width=100%>psxdev-binutils-elf-2.0.0-1.i586.rpm</td></tr>
+<tr bgcolor=#EEEEFF><td><b><code>aef06d22e56252ddd50fff7b9d6869ad</code></b></td><td width=100%>psxdev-binutils-elf-2.0.0-1.src.rpm</td></tr>
+<tr bgcolor=#FFFFEE><td><b><code>c57c6b8d0184589858b9343e9f40b32a</code></b></td><td width=100%>psxdev-binutils-elf-2.0.0.patch</td></tr>
+<tr bgcolor=#EEEEFF><td><b><code>5eb2f71b38d1c31f342925369d54b017</code></b></td><td width=100%>psxdev-binutils-elf-2.0.0.tar.gz</td></tr>
+<tr bgcolor=#FFFFEE><td><b><code>a85dbca4400e70e4ec39ad63edb69de5</code></b></td><td width=100%>psxdev-cdmaker-2.0.0-1.i586.rpm</td></tr>
+<tr bgcolor=#EEEEFF><td><b><code>2ae78380ac9962782f8e0297865391c8</code></b></td><td width=100%>psxdev-core-2.0.0-1.i586.rpm</td></tr>
+<tr bgcolor=#FFFFEE><td><b><code>d286413db9c07be532d7a58a919479b7</code></b></td><td width=100%>psxdev-core-2.0.0-1.src.rpm</td></tr>
+<tr bgcolor=#EEEEFF><td><b><code>7cc20c3026d1b4072605349aa55c73e4</code></b></td><td width=100%>psxdev-core-2.0.0.tar.gz</td></tr>
+<tr bgcolor=#FFFFEE><td><b><code>fe32be56e5719134fbe1c557a15c6ff7</code></b></td><td width=100%>psxdev-curvegen-2.0.0-1.i586.rpm</td></tr>
+<tr bgcolor=#EEEEFF><td><b><code>be9fbc30d40dac944780117ceb607f7b</code></b></td><td width=100%>psxdev-debugger-2.0.0-1.i586.rpm</td></tr>
+<tr bgcolor=#FFFFEE><td><b><code>c964d7a11f60d6a18d4674cabdf63773</code></b></td><td width=100%>psxdev-docs-2.0.0-1.noarch.rpm</td></tr>
+<tr bgcolor=#EEEEFF><td><b><code>0071a6614f4eeb6308130444a6cb4665</code></b></td><td width=100%>psxdev-docs-2.0.0-1.src.rpm</td></tr>
+<tr bgcolor=#FFFFEE><td><b><code>a1e3f8e1c89883323d4c5a67612fc471</code></b></td><td width=100%>psxdev-docs-2.0.0.tar.gz</td></tr>
+<tr bgcolor=#EEEEFF><td><b><code>39fa6616e48983c0a32635ec84916e07</code></b></td><td width=100%>psxdev-gcc-2.0.0-1.i586.rpm</td></tr>
+<tr bgcolor=#FFFFEE><td><b><code>9f8ca287f55435e2318cf2ac9d2c6216</code></b></td><td width=100%>psxdev-gcc-2.0.0-1.src.rpm</td></tr>
+<tr bgcolor=#EEEEFF><td><b><code>81e1a407c588c04355736c5740ecd33b</code></b></td><td width=100%>psxdev-gcc-2.0.0.patch</td></tr>
+<tr bgcolor=#FFFFEE><td><b><code>069e9a6671f90235e5ca546060c2e53a</code></b></td><td width=100%>psxdev-gcc-2.0.0.tar.gz</td></tr>
+<tr bgcolor=#EEEEFF><td><b><code>ce59be38b14d8dfe396ccb60ecc07eb3</code></b></td><td width=100%>psxdev-gimp-2.0.0-1.i586.rpm</td></tr>
+<tr bgcolor=#FFFFEE><td><b><code>aa4517bdaf1f6f869a3f9627009dba94</code></b></td><td width=100%>psxdev-gimp-2.0.0-1.src.rpm</td></tr>
+<tr bgcolor=#EEEEFF><td><b><code>ed6590979ad9edac25b6d36ea978c201</code></b></td><td width=100%>psxdev-gimp-2.0.0.tar.gz</td></tr>
+<tr bgcolor=#FFFFEE><td><b><code>224ea4a750480054e91110075902b7b4</code></b></td><td width=100%>psxdev-interactor-2.0.0-1.i586.rpm</td></tr>
+<tr bgcolor=#EEEEFF><td><b><code>e2b9a7725f1f9635f53456d0a844bb4d</code></b></td><td width=100%>psxdev-libs-2.0.0-1.i586.rpm</td></tr>
+<tr bgcolor=#FFFFEE><td><b><code>6157e7be7d99259e5e07974d9c49cb57</code></b></td><td width=100%>psxdev-libs-2.0.0-1.src.rpm</td></tr>
+<tr bgcolor=#EEEEFF><td><b><code>91927e390f47adb81e6f109c15b5b0b3</code></b></td><td width=100%>psxdev-libs-2.0.0.tar.gz</td></tr>
+<tr bgcolor=#FFFFEE><td><b><code>451212f2247e299cb325d5b50cbdd838</code></b></td><td width=100%>psxdev-libs-devel-2.0.0-1.i586.rpm</td></tr>
+<tr bgcolor=#EEEEFF><td><b><code>756f2f203fabeb144345e6904d3b386d</code></b></td><td width=100%>psxdev-sdk-2.0.0-1.noarch.rpm</td></tr>
+<tr bgcolor=#FFFFEE><td><b><code>cb4e858b488fc23b8d50108d2e702f90</code></b></td><td width=100%>psxdev-sdk-2.0.0-1.src.rpm</td></tr>
+<tr bgcolor=#EEEEFF><td><b><code>3fbbd43df4656b25043535f980857053</code></b></td><td width=100%>psxdev-sdk-2.0.0.tar.gz</td></tr>
+<tr bgcolor=#FFFFEE><td><b><code>515fd0910ce38c16a3b9e4e6e17e984c</code></b></td><td width=100%>psxdev-tools-2.0.0-1.i586.rpm</td></tr>
+<tr bgcolor=#EEEEFF><td><b><code>fe3e86e6286df767b4aaeb59a963979d</code></b></td><td width=100%>psxdev-tools-2.0.0-1.src.rpm</td></tr>
+<tr bgcolor=#FFFFEE><td><b><code>4323e5c0d1181920f17813f5366eebff</code></b></td><td width=100%>psxdev-tools-2.0.0.tar.gz</td></tr>
+<tr bgcolor=#EEEEFF><td><b><code>1436a3b95b33d3fc99351f7a3f6eaeff</code></b></td><td width=100%>psxdev-tools-for-audio-2.0.0-1.i586.rpm</td></tr>
+<tr bgcolor=#FFFFEE><td><b><code>cbcfabf8e999c9d39713a94b0bd5a587</code></b></td><td width=100%>psxdev-tools-for-images-2.0.0-1.i586.rpm</td></tr>
+</table></td></tr></table><hr width=0 size=0>
+</td></tr></table>
+
+<hr size=2 noshade>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>
+<address>Created with <a href=psxdev.pl>psxdev.pl</a></address>
+</td><td align=right>
+<address>Copyright &copy;2000
+ by <a href="mailto:dbalster@psxdev.de">Daniel Balster</a></address>
+</td></tr></table>
+</body></html>

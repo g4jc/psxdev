@@ -1,0 +1,1085 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html lang=en><head>
+<title>psxdev.de: PCCL API reference</title>
+<meta http-equiv="content-type" content="text/html;">
+<link rel=stylesheet type="text/css" href="psxdev.css">
+</head><body background="images/bg.png" color=#000000 bgcolor=#999999>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>PCCL API reference</TD><TD ALIGN=RIGHT>[<A HREF=index.html>top</A>|<A HREF=overview.html>sitemap</A>|<A HREF=download.html>download</A>|<A HREF=documentation.html>docs</A>]</TD></TR></TABLE>
+<hr size=2 noshade>
+<center><img src=images/psxtux2.png border=0 width=78 height=90><img src=images/logo.png width=496 height=90></center>
+<h1>PCCL API reference guide and documentation</h1>
+
+<table  width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center><table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#FFFFFF><td width=100% valign=top>
+This is the offical PCCL API reference guide. It documents all
+commands and their parameter packets. Using the /dev/pccl device driver
+prevents you from using a direct I/O port based programming interface
+and simplifies a lot.
+</table></td></tr></table><hr width=0 size=0>
+<table width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center>
+<table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#000000><td width=100%>
+<p class=title><img src=images/star.png>/dev/pccl I/O command reference</p></td></tr><tr><td bgcolor=#FFFFFF>
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_COMMAND</B></td><td align=right>
+<FONT SIZE=-1>lowlevel operations (always possible)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>command handshake with caetla</I></td>
+<td align=right>
+<B>u_char : WR</B>
+</td>
+</tr>
+</table>
+This is the lowlevel caetla handshake. It exchanges 'CL' against 'do' and
+takes as parameter a command byte. If you want to program caetla directly
+you definitly need this. This command is only for experienced caetla hackers!
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_COMMAND_RAW</B></td><td align=right>
+<FONT SIZE=-1>lowlevel operations (always possible)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>lowlevel command handshake with caetla</I></td>
+<td align=right>
+<B>u_char : WR</B>
+</td>
+</tr>
+</table>
+This is the same as CAEIOC_COMMAND, but it exchanges 'PR' against 'do'. This
+is the old PSPAR handshake which is used by all cartridges during the RESET
+phase. It is needed if you want to reflash a cartridge's EEPROM with the
+original protocol. I'm using this only for the emergency reflash.
+It takes a command byte for the protocol as parameter. DO NOT USE THIS
+UNLESS YOU KNOW WHAT YOU ARE DOING...
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_SWAP_8</B></td><td align=right>
+<FONT SIZE=-1>lowlevel operations (always possible)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>exchange 8-bit value with caetla</I></td>
+<td align=right>
+<B>u_char * : WR</B>
+</td>
+</tr>
+</table>
+This exchanges a single character with over the link. The parameter is a
+pointer to a character; the character will be sent over the link and the
+result is written to the character.
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_SWAP_16</B></td><td align=right>
+<FONT SIZE=-1>lowlevel operations (always possible)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>exchange 16-bit value with caetla</I></td>
+<td align=right>
+<B>u_short * : WR</B>
+</td>
+</tr>
+</table>
+This exchanges a single 16-bit value with over the link. The parameter is a
+pointer to a 16-bit value; the 16-bit value will be sent over the link and the
+result is written to the 16-bit value.
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_SWAP_32</B></td><td align=right>
+<FONT SIZE=-1>lowlevel operations (always possible)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>exchange 32-bit value with caetla</I></td>
+<td align=right>
+<B>u_long * : WR</B>
+</td>
+</tr>
+</table>
+This exchanges a single 32-bit value with over the link. The parameter is a
+pointer to a 32-bit value; the 32-bit value will be sent over the link and the
+result is written to the 32-bit value.
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_DEVICE_INFO</B></td><td align=right>
+<FONT SIZE=-1>lowlevel operations (always possible)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>checksum exchange (after a memory transfer)</I></td>
+<td align=right>
+<B>caetla_device_info_t * : R</B>
+</td>
+</tr>
+</table>
+After a memory transfer you need to exchange a checksum, which is done with
+this command. See the example sources on how to use it correctly.
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_DEVICE_GET_MODE</B></td><td align=right>
+<FONT SIZE=-1>lowlevel operations (always possible)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>get global device mode</I></td>
+<td align=right>
+<B>caetla_device_mode_t * : R</B>
+</td>
+</tr>
+</table>
+This command will fill the parameter packet with informations about a
+requested mode. The mode in request must be given in the parameter packet
+and its value will be returned in that structure too.
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_DEVICE_SET_MODE</B></td><td align=right>
+<FONT SIZE=-1>lowlevel operations (always possible)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>set global device mode</I></td>
+<td align=right>
+<B>caetla_device_mode_t * : W</B>
+</td>
+</tr>
+</table>
+Set a global mode for the current device. The only currently supported global
+mode is the AUTORESUME mode. Since /dev/pccl has a /proc interface there
+was no good choice of how to deal with a resumed execution. If you are
+modifying remote memory you probably don't want to press a RESUME button
+every time you changed a byte (especially when you were using /proc/pccl/0/mem).
+On the other hand you want to control the execution flow surely by yourself
+if you are debugging. This is why there is a AUTORESUME. If activated, you
+can't interrupt the remote machine; it will continue as soon as possible. If
+deactivated the remote machine will stop on each access unless you let resume
+the execution.
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_NOP</B></td><td align=right>
+<FONT SIZE=-1>base operations (always possible)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>do nothing operation</I></td>
+<td align=right>
+<B>void : -</B>
+</td>
+</tr>
+</table>
+Does really nothing. Needed by the fileserver.
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_CONTROL</B></td><td align=right>
+<FONT SIZE=-1>base operations (always possible)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>control basic operation mode of caetla</I></td>
+<td align=right>
+<B>u_char : WR</B>
+</td>
+</tr>
+</table>
+Control the current mode of caetla. Caetla provides several basic modes:
+<ul>
+<li>main menu
+<li>memory card manager
+<li>frame buffer viewer
+<li>code selector
+<li>CD-ROM manager
+<li>configuration
+<li>debug utility
+</ul>
+The debug mode can only be used if a game is running, and all other modes
+only if no game is running (caetla menu mode).
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_RESUME</B></td><td align=right>
+<FONT SIZE=-1>base operations (always possible)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>resume execution (give control back to caetla)</I></td>
+<td align=right>
+<B>void : -</B>
+</td>
+</tr>
+</table>
+The execution on the remote machine is resumed. This command is ignored in
+AUTORESUME=off mode.
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_RESET</B></td><td align=right>
+<FONT SIZE=-1>base operations (always possible)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>software reset</I></td>
+<td align=right>
+<B>void : -</B>
+</td>
+</tr>
+</table>
+Tries to software reset the PSX. If the PSX is crashed a software reset does not
+work, so have to do it manually.
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_CONSOLE</B></td><td align=right>
+<FONT SIZE=-1>base operations (always possible)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>switch I/O redirection on/off</I></td>
+<td align=right>
+<B>u_char : W</B>
+</td>
+</tr>
+</table>
+All standard input and output can be redirected to a local server. You have to
+enable/disable this feature with this command.
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_VERSION</B></td><td align=right>
+<FONT SIZE=-1>base operations (always possible)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>get caetla subsystems versions</I></td>
+<td align=right>
+<B>caetla_version_t * : R</B>
+</td>
+</tr>
+</table>
+This will fill out the supplied parameter packet with the versions of all caetla
+sub systems. These versions are not very useful and it seems that the caetla
+authors do not update them. The version numbers are 8.8 bit numbers.
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_GET_STATUS_PSPAR</B></td><td align=right>
+<FONT SIZE=-1>base operations (always possible)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>get status in PSPAR notation</I></td>
+<td align=right>
+<B>u_char * : R</B>
+</td>
+</tr>
+</table>
+Fills out the parameter packet with the current status in PS/PAR notation.
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_GET_STATUS_CAETLA</B></td><td align=right>
+<FONT SIZE=-1>base operations (always possible)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>get status in caetla notation</I></td>
+<td align=right>
+<B>u_char * : R</B>
+</td>
+</tr>
+</table>
+Fills out the parameter packet with the current status in CAETLA notation.
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_GET_EXECUTE_FLAGS</B></td><td align=right>
+<FONT SIZE=-1>base operations (always possible)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>get caetla execution flags</I></td>
+<td align=right>
+<B>u_char * : R</B>
+</td>
+</tr>
+</table>
+Returns the settings from caetlas configuration manager during the execution of an
+application, like if I/O redirection is enabled, breakpoints are allowed etc.
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_WRITE_MEMORY</B></td><td align=right>
+<FONT SIZE=-1>normal communication (CAETLA_MM)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>write memory to PSX</I></td>
+<td align=right>
+<B>caetla_memory_t * : W</B>
+</td>
+</tr>
+</table>
+Initiate a memory transfer to the PSX. The paramter packet tells the address and length
+of the data to be transferred. After this command you should call <b>write()</b> with
+exactly <i>length</i> bytes of data. Finally you have to send an 8-bit checksum.
+/dev/pccl does always calculate an internal checksum, you can get it with the the
+CAEIOC_DEVICE_INFO command. See the tutorial for a detailed description.
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_READ_MEMORY</B></td><td align=right>
+<FONT SIZE=-1>normal communication (CAETLA_MM)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>read memory from PSX</I></td>
+<td align=right>
+<B>caetla_memory_t * : R</B>
+</td>
+</tr>
+</table>
+This is the same as the WRITE_MEMORY command but in the other direction.
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_EXECUTE</B></td><td align=right>
+<FONT SIZE=-1>normal communication (CAETLA_MM)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>execute a program on PSX</I></td>
+<td align=right>
+<B>caetla_execute_t * : W</B>
+</td>
+</tr>
+</table>
+With this command you will provide an execution environment. The program code must
+already be transferred. The execution will start as soon as you give the control back
+to the PSX (with CAEIOC_RESUME).
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_JUMP_ADDRESS</B></td><td align=right>
+<FONT SIZE=-1>normal communication (CAETLA_MM)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>continue execution at a specific address</I></td>
+<td align=right>
+<B>u_long : W</B>
+</td>
+</tr>
+</table>
+Directly execute program code at a specific address. No environment is created, so the
+code must initialize itself (clear all registers, set a stack and so on).
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_ARGUMENTS</B></td><td align=right>
+<FONT SIZE=-1>normal communication (CAETLA_MM)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>set main() function arguments</I></td>
+<td align=right>
+<B>caetla_arguments_t * : W</B>
+</td>
+</tr>
+</table>
+This command should be used to set the <i>int argc, char **argv</i> arguments of a main()
+function, unfortunately I have no clue how to really get these arguments; so this
+command is considered non-working.
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_MC_DIRECTORY</B></td><td align=right>
+<FONT SIZE=-1>memory card (CAETLA_MCM)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>get directory of memory card</I></td>
+<td align=right>
+<B>caetla_mc_directory_t * : R</B>
+</td>
+</tr>
+</table>
+Get the directory listing of a memory card. The parameter packet will hold the complete
+directory informations after this command. You have to provide only the memory card slot.
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_MC_READ_SECTOR</B></td><td align=right>
+<FONT SIZE=-1>memory card (CAETLA_MCM)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>read sector from memory card</I></td>
+<td align=right>
+<B>caetla_mc_sector_t * : R</B>
+</td>
+</tr>
+</table>
+Read a raw sector from a memory card.
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_MC_WRITE_SECTOR</B></td><td align=right>
+<FONT SIZE=-1>memory card (CAETLA_MCM)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>write sector to memory card</I></td>
+<td align=right>
+<B>caetla_mc_sector_t * : R</B>
+</td>
+</tr>
+</table>
+Write a raw sector to a memory card.
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_MC_FORMAT</B></td><td align=right>
+<FONT SIZE=-1>memory card (CAETLA_MCM)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>format a memory card</I></td>
+<td align=right>
+<B>caetla_mc_result_t * : R</B>
+</td>
+</tr>
+</table>
+Install a new filesystem to a memory card. This command does not work correctly,
+caetla will hang. This seems to be a bug in caetla.
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_MC_LOCK</B></td><td align=right>
+<FONT SIZE=-1>memory card (CAETLA_MCM)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>lock a memory card</I></td>
+<td align=right>
+<B>caetla_mc_result_t * : R</B>
+</td>
+</tr>
+</table>
+Locks a memory card
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_MC_UNLOCK</B></td><td align=right>
+<FONT SIZE=-1>memory card (CAETLA_MCM)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>unlock a memory card</I></td>
+<td align=right>
+<B>caetla_mc_result_t * : R</B>
+</td>
+</tr>
+</table>
+Unlocks a memory card
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_MC_STATUS</B></td><td align=right>
+<FONT SIZE=-1>memory card (CAETLA_MCM)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>get status of memory card</I></td>
+<td align=right>
+<B>caetla_mc_result_t * : R</B>
+</td>
+</tr>
+</table>
+Get the status of a memory card. Various error bits are set in the status.
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_MC_READ_FILE</B></td><td align=right>
+<FONT SIZE=-1>memory card (CAETLA_MCM)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>read a file from memory card</I></td>
+<td align=right>
+<B>caetla_mc_file_read_t * : R</B>
+</td>
+</tr>
+</table>
+Read a file from a memory card
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_MC_CREATE_FILE</B></td><td align=right>
+<FONT SIZE=-1>memory card (CAETLA_MCM)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>create a file on a memory card</I></td>
+<td align=right>
+<B>caetla_mc_file_create_t * : R</B>
+</td>
+</tr>
+</table>
+Create a file on a memory card.
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_MC_DELETE_FILE</B></td><td align=right>
+<FONT SIZE=-1>memory card (CAETLA_MCM)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>delete a file from a memory card</I></td>
+<td align=right>
+<B>caetla_mc_result_t * : R</B>
+</td>
+</tr>
+</table>
+Delete a file from a memory card
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_MC_RESCAN_FILES</B></td><td align=right>
+<FONT SIZE=-1>memory card (CAETLA_MCM)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>rescan files from a memory card</I></td>
+<td align=right>
+<B>caetla_mc_result_t * : R</B>
+</td>
+</tr>
+</table>
+Rescan the directory of a memory card into the caetla buffer. The directory
+is cached in the caetla memory card manager.
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_FB_READ_MEMORY</B></td><td align=right>
+<FONT SIZE=-1>frame buffer (CAETLA_FBV)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>read frame buffer memory</I></td>
+<td align=right>
+<B>caetla_fb_mode_t * : R</B>
+</td>
+</tr>
+</table>
+This command transfers selected portions of the remote frame buffer. You
+have to provide the basic modes in the parameter packet.
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_FB_WRITE_MEMORY</B></td><td align=right>
+<FONT SIZE=-1>frame buffer (CAETLA_FBV)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>write frame buffer memory</I></td>
+<td align=right>
+<B>caetla_fb_mode_t * : W</B>
+</td>
+</tr>
+</table>
+This is the same as the above command but in the other direction.
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_FB_GET_MODE</B></td><td align=right>
+<FONT SIZE=-1>frame buffer (CAETLA_FBV)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>get frame buffer video mode</I></td>
+<td align=right>
+<B>caetla_fb_mode_t * : R</B>
+</td>
+</tr>
+</table>
+Get the current frame buffer mode (as selected in the caetla frame buffer viewer)
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_FB_SET_MODE</B></td><td align=right>
+<FONT SIZE=-1>frame buffer (CAETLA_FBV)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>set frame buffer video mode</I></td>
+<td align=right>
+<B>caetla_fb_mode_t * : W</B>
+</td>
+</tr>
+</table>
+Sets the frame buffer video mode.
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_DU_FLUSH_ICACHE</B></td><td align=right>
+<FONT SIZE=-1>debugger commands (CAETLA_DU)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>flush processor instruction cache</I></td>
+<td align=right>
+<B>void : -</B>
+</td>
+</tr>
+</table>
+This is an important call if you are modifying code, like inserting breakpoints.
+You always have to call this command before continuing execution after you have
+modified the machine code!
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_DU_DISABLE_HBP</B></td><td align=right>
+<FONT SIZE=-1>debugger commands (CAETLA_DU)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>disable use of hardware breakpoints</I></td>
+<td align=right>
+<B>void : -</B>
+</td>
+</tr>
+</table>
+Switch off hardware breakpoints.
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_DU_CONFIGURE_HBP</B></td><td align=right>
+<FONT SIZE=-1>debugger commands (CAETLA_DU)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>configure a hardware breakpoint</I></td>
+<td align=right>
+<B>caetla_hbp_t * : W</B>
+</td>
+</tr>
+</table>
+Configure the hardware breakpoint. These breakpoints can not only be used to
+stop at a given address, they can also be used to watch the access of a memory
+location (readable and writable).
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_DU_GET_REGISTERS</B></td><td align=right>
+<FONT SIZE=-1>debugger commands (CAETLA_DU)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>get processor registers</I></td>
+<td align=right>
+<B>caetla_registers_t * : R</B>
+</td>
+</tr>
+</table>
+Get all registers of the MIPS R3000 processor
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_DU_SET_REGISTER</B></td><td align=right>
+<FONT SIZE=-1>debugger commands (CAETLA_DU)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>set a processor register</I></td>
+<td align=right>
+<B>caetla_register_t * : R</B>
+</td>
+</tr>
+</table>
+Set a single register of the MIPS R3000 processor
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_DU_GET_CPCOND</B></td><td align=right>
+<FONT SIZE=-1>debugger commands (CAETLA_DU)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>get coprocessor condition</I></td>
+<td align=right>
+<B>caetla_cpcond_t * : R</B>
+</td>
+</tr>
+</table>
+Get CP condition.
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_DU_WRITE_MEMORY</B></td><td align=right>
+<FONT SIZE=-1>debugger commands (CAETLA_DU)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>write memory to PSX in debug mode</I></td>
+<td align=right>
+<B>caetla_memory_t * : W</B>
+</td>
+</tr>
+</table>
+If a game is running, you have to use the DU_*_MEMORY commands to transfer memory.
+These commands unfortunately have a different syntax. The recommended way of
+accessing memory is currently the /proc/pccl/?/fullmem interface.
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_DU_READ_MEMORY</B></td><td align=right>
+<FONT SIZE=-1>debugger commands (CAETLA_DU)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>read memory from PSX in debug mode</I></td>
+<td align=right>
+<B>caetla_memory_t * : R</B>
+</td>
+</tr>
+</table>
+See the above command.
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_DU_WRITE_BYTE</B></td><td align=right>
+<FONT SIZE=-1>debugger commands (CAETLA_DU)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>write a byte in debug mode</I></td>
+<td align=right>
+<B>caetla_byte_t * : W</B>
+</td>
+</tr>
+</table>
+Write a single byte
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_DU_WRITE_WORD</B></td><td align=right>
+<FONT SIZE=-1>debugger commands (CAETLA_DU)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>write a word (32-bit) in debug mode</I></td>
+<td align=right>
+<B>caetla_word_t * : W</B>
+</td>
+</tr>
+</table>
+Write a word (32-bit) in debug mode
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_DU_READ_WORD</B></td><td align=right>
+<FONT SIZE=-1>debugger commands (CAETLA_DU)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>read a word (32-bit) in debug mode</I></td>
+<td align=right>
+<B>caetla_word_t * : R</B>
+</td>
+</tr>
+</table>
+Read a word (32-bit) in debug mode
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_DU_HBP_DETECTION</B></td><td align=right>
+<FONT SIZE=-1>debugger commands (CAETLA_DU)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>enable/disable hardware breakpoint detection</I></td>
+<td align=right>
+<B>u_char : W</B>
+</td>
+</tr>
+</table>
+enable/disable hardware breakpoint detection
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_READ_CODE_MEMORY</B></td><td align=right>
+<FONT SIZE=-1>code preservation area (CAETLA_MM)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>read from code preservation area of cartridge</I></td>
+<td align=right>
+<B>u_long * : R</B>
+</td>
+</tr>
+</table>
+read from code preservation area of cartridge
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_WRITE_CODE_MEMORY</B></td><td align=right>
+<FONT SIZE=-1>code preservation area (CAETLA_MM)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>write to code preservation area of cartridge</I></td>
+<td align=right>
+<B>u_long * : W</B>
+</td>
+</tr>
+</table>
+write to code preservation area of cartridge
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_READ_XALIST</B></td><td align=right>
+<FONT SIZE=-1>code preservation area (CAETLA_MM)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>read XALIST from non volatile EEPROM</I></td>
+<td align=right>
+<B>u_long * : R</B>
+</td>
+</tr>
+</table>
+read XALIST from non volatile EEPROM
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_WRITE_XALIST</B></td><td align=right>
+<FONT SIZE=-1>code preservation area (CAETLA_MM)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>write XALIST to non volatile EEPROM</I></td>
+<td align=right>
+<B>void : -</B>
+</td>
+</tr>
+</table>
+write XALIST to non volatile EEPROM
+
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE>
+<tr VALIGN=top><td align=left>
+<B>CAEIOC_WRITE_EEPROM</B></td><td align=right>
+<FONT SIZE=-1>code preservation area (CAETLA_MM)</FONT></td></tr>
+<tr bgcolor=#FFFFEE>
+<td align=left><I>flash EEPROM of cartridge</I></td>
+<td align=right>
+<B>caetla_eeprom_t * : W</B>
+</td>
+</tr>
+</table>
+flash EEPROM of cartridge
+
+</td></tr></table></td></tr></table><br><table width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center>
+<table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#000000><td width=100%>
+<p class=title><img src=images/star.png>/dev/pccl data types and structures</p></td></tr><tr><td bgcolor=#FFFFFF>
+For a more detailed description of each field and all constants you
+should definitly take a look into <code>/opt/psxdev/include/pccl.h</code>!
+<table width=100%>
+<tr><td>
+<code><pre>
+<font color=black><b>typedef struct</b></font> {
+	<font color=red><b>int</b></font> mode;
+	<font color=red><b>int</b></font> value;
+} <font color=blue>caetla_device_mode_t</font>;
+</pre></code>
+</td><td width=100%>
+Used as parameter packet for the get and set mode command
+</td></tr>
+<tr><td>
+<code><pre>
+<font color=black><b>typedef struct</b></font> {
+	<font color=red><b>u_char</b></font> checksum;
+	<font color=red><b>u_short</b></font> checksum2;
+} <font color=blue>caetla_device_info_t</font>;
+</pre></code>
+</td><td width=100%>
+Footer of a memory read/write transaction.
+Used to transfer the checksums after a read or write access.
+</td></tr>
+<tr><td>
+<code><pre>
+<font color=black><b>typedef struct</b></font> {
+	<font color=red><b>u_long</b></font> address;
+	<font color=red><b>u_long</b></font> size;
+} <font color=blue>caetla_memory_t</font>;
+</pre></code>
+</td><td width=100%>
+Header of a memory read/write transaction.
+Used to transfer the memory range.
+</td></tr>
+<tr><td>
+<code><pre>
+<font color=black><b>typedef struct</b></font> {
+	<font color=red><b>u_long</b></font> pc0;
+	<font color=red><b>u_long</b></font> gp0;
+	<font color=red><b>u_long</b></font> t_addr;
+	<font color=red><b>u_long</b></font> t_size;
+	<font color=red><b>u_long</b></font> d_addr;
+	<font color=red><b>u_long</b></font> d_size;
+	<font color=red><b>u_long</b></font> b_addr;
+	<font color=red><b>u_long</b></font> b_size;
+	<font color=red><b>u_long</b></font> s_addr;
+	<font color=red><b>u_long</b></font> s_size;
+	<font color=red><b>u_long</b></font> sp,fp,gp,ret,base;
+	<font color=red><b>u_long</b></font> task;
+	<font color=red><b>u_long</b></font> event;
+	<font color=red><b>u_long</b></font> stack;
+	<font color=red><b>u_char</b></font> mode;
+} <font color=blue>caetla_execute_t</font>;
+</pre></code>
+</td><td width=100%>
+Used to setup the execution environment.
+</td></tr>
+<tr><td>
+<code><pre>
+<font color=black><b>typedef struct</b></font> {
+	<font color=red><b>u_short</b></font> firmware;
+	<font color=red><b>u_short</b></font> cdm, mcm, fbv;
+	<font color=red><b>u_short</b></font> cs, du, cfg, mm;
+} <font color=blue>caetla_version_t</font>;
+</pre></code>
+</td><td width=100%>
+Holds all version numbers for the caetla subsystems.
+</td></tr>
+<tr><td>
+<code><pre>
+<font color=black><b>typedef struct</b></font> {
+	<font color=red><b>u_long</b></font> address;
+	<font color=red><b>u_long</b></font> argv;
+	<font color=red><b>u_long</b></font> argc;
+} <font color=blue>caetla_arguments_t</font>;
+</pre></code>
+</td><td width=100%>
+Used to set the main() arguments. Currently not possible.
+</td></tr>
+<tr><td>
+<code><pre>
+<font color=black><b>typedef struct</b></font> {
+	<font color=red><b>u_long</b></font> address;
+	<font color=red><b>u_long</b></font> condition;
+	<font color=red><b>u_long</b></font> datamask;
+	<font color=red><b>u_long</b></font> execmask;
+} <font color=blue>caetla_hbp_t</font>;
+</pre></code>
+</td><td width=100%>
+CAEIOC_CONFIGURE_HBP parameter packet. Describes a hardware breakpoint.
+</td></tr>
+<tr><td>
+<code><pre>
+<font color=black><b>typedef struct</b></font> {
+	<font color=red><b>u_long</b></font> number;
+	<font color=red><b>u_long</b></font> data;
+} <font color=blue>caetla_register_t</font>;
+</pre></code>
+</td><td width=100%>
+CAEIOC_SET_REGISTER parameter packet. Sets a single processor register.
+</td></tr>
+<tr><td>
+<code><pre>
+<font color=black><b>typedef struct</b></font> {
+	<font color=red><b>u_long</b></font> data[36];
+} <font color=blue>caetla_registers_t</font>;
+</pre></code>
+</td><td width=100%>
+CAEIOC_GET_REGISTERS parameter packet. Gets all processor registers at once.
+</td></tr>
+<tr><td>
+<code><pre>
+<font color=black><b>typedef</b></font> <font color=red><b>u_char</b></font> <font color=blue>caetla_cpcond_t</font>;
+</pre></code>
+</td><td width=100%>
+CAEIOC_GET_CPCOND parameter packet. The coprocessor status bits.
+</td></tr>
+<tr><td>
+<code><pre>
+<font color=black><b>typedef</b></font> <font color=red><b>u_char</b></font> <font color=blue>caetla_status_t</font>;
+</pre></code>
+</td><td width=100%>
+CAEIOC_STATUS parameter packet. The status of the caetla link.
+</td></tr>
+<tr><td>
+<code><pre>
+<font color=black><b>typedef</b></font> <font color=red><b>u_char</b></font> <font color=blue>pspar_status_t</font>;
+</pre></code>
+</td><td width=100%>
+The status in PSPAR notation.
+</td></tr>
+<tr><td>
+<code><pre>
+<font color=black><b>typedef struct</b></font> {
+	<font color=red><b>u_long</b></font> address;
+	<font color=red><b>u_char</b></font> data;
+} <font color=blue>caetla_byte_t</font>;
+</pre></code>
+</td><td width=100%>
+Single byte transfer parameter packet.
+</td></tr>
+<tr><td>
+<code><pre>
+<font color=black><b>typedef struct</b></font> {
+	<font color=red><b>u_long</b></font> address;
+	<font color=red><b>u_long</b></font> data;
+} <font color=blue>caetla_word_t</font>;
+</pre></code>
+</td><td width=100%>
+Single word (32-bit) transfer parameter packet.
+</td></tr>
+<tr><td>
+<code><pre>
+<font color=black><b>typedef struct</b></font> {
+	<font color=red><b>u_short</b></font> magic;
+	<font color=red><b>u_char</b></font> type;
+	<font color=red><b>u_char</b></font> size;
+	<font color=red><b>u_char</b></font> name[64];
+	<font color=red><b>u_char</b></font> reserved[28];
+	<font color=red><b>u_short</b></font> clut[16];
+	<font color=red><b>u_short</b></font> icon[3][(16*16)/4];
+} <font color=blue>caetla_mc_file_header_t</font>;
+</pre></code>
+</td><td width=100%>
+Used by memory card interface
+</td></tr>
+<tr><td>
+<code><pre>
+<font color=black><b>typedef struct</b></font> {
+	<font color=red><b>u_long</b></font> magic;
+	<font color=red><b>u_long</b></font> reserved;
+	<font color=red><b>u_long</b></font> pc0;
+	<font color=red><b>u_long</b></font> gp0;
+	<font color=red><b>u_long</b></font> t_addr;
+	<font color=red><b>u_long</b></font> t_size;
+	<font color=red><b>u_long</b></font> d_addr;
+	<font color=red><b>u_long</b></font> d_size;
+	<font color=red><b>u_long</b></font> b_addr;
+	<font color=red><b>u_long</b></font> b_size;
+	<font color=red><b>u_long</b></font> s_addr;
+	<font color=red><b>u_long</b></font> s_size;
+} <font color=blue>caetla_mc_mexe_header_t</font>;
+</pre></code>
+</td><td width=100%>
+Used by memory card interface
+</td></tr>
+<tr><td>
+<code><pre>
+<font color=black><b>typedef struct</b></font> {
+	<font color=red><b>u_short</b></font> slot;
+	<font color=red><b>u_short</b></font> fileno;
+	<font color=red><b>u_short</b></font> blocks;
+	<font color=red><b>u_short</b></font> checksum;
+	<font color=red><b>u_short</b></font> result;
+} <font color=blue>caetla_mc_file_read_t</font>;
+</pre></code>
+</td><td width=100%>
+Used by memory card interface
+</td></tr>
+<tr><td>
+<code><pre>
+<font color=black><b>typedef struct</b></font> {
+	<font color=red><b>u_short</b></font> slot;
+	<font color=red><b>u_char</b></font> name[];
+	<font color=red><b>u_long</b></font> size;
+	<font color=red><b>u_short</b></font> blocks;
+	<font color=red><b>u_short</b></font> checksum;
+	<font color=red><b>u_short</b></font> result;
+} <font color=blue>caetla_mc_file_create_t</font>;
+</pre></code>
+</td><td width=100%>
+Used by memory card interface
+</td></tr>
+<tr><td>
+<code><pre>
+<font color=black><b>typedef struct</b></font> {
+	<font color=red><b>u_short</b></font> slot;
+	<font color=red><b>u_short</b></font> sector;
+	<font color=red><b>u_long</b></font> size;
+	<font color=red><b>u_char</b></font> *data;
+	<font color=red><b>u_short</b></font> checksum;
+	<font color=red><b>u_short</b></font> result;
+} <font color=blue>caetla_mc_sector_t</font>;
+</pre></code>
+</td><td width=100%>
+Used by memory card interface
+</td></tr>
+<tr><td>
+<code><pre>
+<font color=black><b>typedef struct</b></font> {
+	<font color=red><b>u_short</b></font> p1;
+	<font color=red><b>u_long</b></font> size;
+	<font color=red><b>u_short</b></font> p2;
+	<font color=red><b>char</b></font> name[];
+	<font color=red><b>u_char</b></font> p3;
+	<font color=red><b>u_short</b></font> p4;
+	<font color=red><b>u_short</b></font> p5;
+	<font color=red><b>char</b></font> comment[94];
+} <font color=blue>caetla_mc_file_info_t</font>;
+</pre></code>
+</td><td width=100%>
+Used by memory card interface
+</td></tr>
+<tr><td>
+<code><pre>
+<font color=black><b>typedef struct</b></font> {
+	<font color=red><b>u_short</b></font> slot;
+	<font color=red><b>u_short</b></font> result;
+	<font color=red><b>u_short</b></font> fileno;
+} <font color=blue>caetla_mc_result_t</font>;
+</pre></code>
+</td><td width=100%>
+Used by memory card interface
+</td></tr>
+<tr><td>
+<code><pre>
+<font color=black><b>typedef struct</b></font> {
+	<font color=red><b>u_short</b></font> slot;
+	<font color=red><b>u_short</b></font> count;
+	caetla_mc_file_info_t file[16];
+} <font color=blue>caetla_mc_directory_t</font>;
+</pre></code>
+</td><td width=100%>
+Used by memory card interface
+</td></tr>
+<tr><td>
+<code><pre>
+<font color=black><b>typedef struct</b></font> {
+	<font color=red><b>u_char</b></font> action;
+	<font color=red><b>u_long</b></font> address;
+	<font color=red><b>u_long</b></font> size;
+} <font color=blue>caetla_write_eeprom_t</font>;
+</pre></code>
+</td><td width=100%>
+Used to flash an eeprom
+</td></tr>
+<tr><td>
+<code><pre>
+<font color=black><b>typedef struct</b></font> {
+	<font color=red><b>u_short</b></font> x,y;
+	<font color=red><b>u_short</b></font> width, height;
+	<font color=red><b>u_short</b></font> mode;
+} <font color=blue>caetla_fb_mode_t</font>;
+</pre></code>
+</td><td width=100%>
+Set/get the frame buffer mode
+</td></tr>
+</table>
+</td></tr></table></td></tr></table><br>
+<hr size=2 noshade>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>
+<address>Created with <a href=psxdev.pl>psxdev.pl</a></address>
+</td><td align=right>
+<address>Copyright &copy;2000
+ by <a href="mailto:dbalster@psxdev.de">Daniel Balster</a></address>
+</td></tr></table>
+</body></html>

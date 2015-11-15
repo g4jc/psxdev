@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html lang=en><head>
+<title>psxdev.de: psxdev-libs</title>
+<meta http-equiv="content-type" content="text/html;">
+<link rel=stylesheet type="text/css" href="psxdev.css">
+</head><body background="images/bg.png" color=#000000 bgcolor=#999999>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>psxdev-libs</TD><TD ALIGN=RIGHT>[<A HREF=index.html>top</A>|<A HREF=overview.html>sitemap</A>|<A HREF=download.html>download</A>|<A HREF=documentation.html>docs</A>]</TD></TR></TABLE>
+<hr size=2 noshade>
+<center><img src=images/psxtux2.png border=0 width=78 height=90><img src=images/logo.png width=496 height=90></center>
+<h1>psxdev libs - shared libraries</h1>
+
+<table  width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center><table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#FFFFFF><td width=100% valign=top>
+Here is the programming documentation for the PSXDEV shared libraries.
+This documentation is not yet completed.
+</table></td></tr></table><hr width=0 size=0>
+<table width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center>
+<table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#000000><td width=100%>
+<p class=title><img src=images/star.png>psxdev server library</p></td></tr><tr><td bgcolor=#FFFFFF>
+The PSXDEV server library (<i>libpsxdev.so</i>) does contain commonly used
+code. Currently there is only but important function which is documented.
+<ul>
+<li>void psxdev_init (void);<br>
+initialize the library.
+<li>int psxdev_server (int dev, int sockin, int sockout);<br>
+This is the complete file server and I/O redirection for caetla. You
+can provide two file descriptors/sockets (use 0=stdin and 1=stdout)
+which are used as stdin and stdout streams. This allows you to connect
+the sockets to something more useful than shell output, just take a
+look at the <code>XtAppAddInput</code> function or any other
+function with the same purpose (in Gtk+, Qt, libc, ...)
+</ul>
+</td></tr></table></td></tr></table><br><table width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center>
+<table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#000000><td width=100%>
+<p class=title><img src=images/star.png>TIM image format library</p></td></tr><tr><td bgcolor=#FFFFFF>
+The TIM image library (<i>libtim.so</i>) lets you deal with TIM images.
+It aids you in accessing their contents and creating them
+
+<ul>
+<li>void tim_init (void);<br>
+Initialize the library. Required.
+<li>tim_t *tim_new (tim_mode_t mode, u_short width, u_short height, u_short ncluts);<br>
+Create a new TIM image with the given attributes. The image is linear mapped
+after the returned pointer, so if you write tim_sizeof(tim) bytes you have
+saved the TIM image.
+<li>void tim_free (tim_t *tim);<br>
+Frees the TIM image.
+<li>tim_chunk_t *tim_clut_addr (tim_t *tim);<br>
+Get the address of the CLUT in the TIM image
+<li>tim_chunk_t *tim_pixel_addr (tim_t *tim);<br>
+Get the address of the first pixel in the TIM image
+<li>int tim_sizeof (tim_t *tim);<br>
+Get the size in bytes of an TIM image
+<li>int tim_width (tim_t *tim,int ofclut);<br>
+Get the width in pixels of a TIM image
+<li>int tim_height (tim_t *tim,int ofclut);<br>
+Get the height in pixels of a TIM image
+<li>tim_pixel_t *tim_pixel (tim_t *tim, int x, int y);<br>
+Get the address (16-bit pointer) for an X,Y pixel in an TIM image
+<li>tim_pixel_t *tim_clut (tim_t *tim, int x, int y);<br>
+Get the address (16-bit pointer) for an X,Y CLUT entry in an TIM image
+<li>char *tim_get_alpha (tim_t *tim);<br>
+This extracts the transparency plane, which is width x height bytes long.
+You should free this pointer with a call to free().
+<li>char *tim_get_rgb (tim_t *tim, int shift);<br>
+This will convert a TIM image into a RGB image. You should free this
+pointer with a call to free() if it is no more needed.
+</ul>
+</td></tr></table></td></tr></table><br><table width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center>
+<table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#000000><td width=100%>
+<p class=title><img src=images/star.png>BS image format library</p></td></tr><tr><td bgcolor=#FFFFFF>
+The BS image library (<i>libbs.so</i>) lets you deal with BS images.
+
+<ul>
+<li>void bs_init (void);<br>
+Initialize the library. Required.
+<li>int bs_encode (bs_header_t *outbuf,bs_input_image_t *img,int type,int q_scale,unsigned char *myiqtab);<br>
+Encode a raw 24-bit RGB buffer directly into a BS image
+<li>void bs_decode_rgb24 (unsigned char *outbuf,bs_header_t *img,int width, int height,unsigned char *myiqtab);<br>
+Decode a BS image into a raw 24-bit RGB buffer
+<li>void bs_decode_rgb15 (unsigned short *outbuf,bs_header_t *img,int width, int height,unsigned char *myiqtab);<br>
+Decode a BS image into a raw 15-bit RGB buffer (*untested*)
+</ul>
+</td></tr></table></td></tr></table><br>
+<hr size=2 noshade>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>
+<address>Created with <a href=psxdev.pl>psxdev.pl</a></address>
+</td><td align=right>
+<address>Copyright &copy;2000
+ by <a href="mailto:dbalster@psxdev.de">Daniel Balster</a></address>
+</td></tr></table>
+</body></html>

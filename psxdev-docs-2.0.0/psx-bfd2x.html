@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html lang=en><head>
+<title>psxdev.de: BFD to PS-X EXE converter</title>
+<meta http-equiv="content-type" content="text/html;">
+<link rel=stylesheet type="text/css" href="psxdev.css">
+</head><body background="images/bg.png" color=#000000 bgcolor=#999999>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>BFD to PS-X EXE converter</TD><TD ALIGN=RIGHT>[<A HREF=index.html>top</A>|<A HREF=overview.html>sitemap</A>|<A HREF=download.html>download</A>|<A HREF=documentation.html>docs</A>]</TD></TR></TABLE>
+<hr size=2 noshade>
+<center><img src=images/psxtux2.png border=0 width=78 height=90><img src=images/logo.png width=496 height=90></center>
+<h1>BFD to PS-X EXE converter</h1>
+
+<table  width=100% cellspacing=0 cellpadding=1 border=0 bgcolor="#000000"><tr><td valign=center><table cellspacing=1 cellpadding=2 width=100% border=0>
+<tr bgcolor=#FFFFFF><td width=100% valign=top>
+<table width=100% cellpadding=2 cellspacing=0 border=0 bgcolor=#EEEEEE><tr VALIGN=top><td align=left>
+<B>psx-bfd2x</B> - BFD to PS-X EXE converter</td><td align=right>
+<FONT SIZE=-2><A HREF="mailto:dbalster@psxdev.de">Daniel Balster</A>/psxdev-tools
+</FONT></td></tr></table>
+<ul><li><b>SYNOPSIS OF psx-bfd2x</b><br>
+<CODE><PRE>
+</PRE></CODE></ul>
+<ul><li><b>DESCRIPTION OF psx-bfd2x</b><br>
+<B>psx-bfd2x</B> will convert a BFD binary into a PSX executable binary. BFD binaries are produced by psx-ld. The BFD binary must be stripped, you should do a psx-strip before the conversion (conversion will fail if the binary isn't stripped). You can set the area code copyright or an own title. I'm not sure about the GP register value; it seems to be more required than I initially thought - so you always should use the <code>-g</code> option switch!
+
+</ul>
+<ul><li><b>EXAMPLES FOR psx-bfd2x</b><br>
+<code><pre><b>psx-strip file.bfd
+psx-bfd2x -o file.psx -g -t "my title" file.bfd
+</b></pre></code>
+This will strip debug and symbol informations from the GNU binary and convert it into a suitable PSX binary.
+
+</ul>
+<ul><li><b>NOTES ON psx-bfd2x</b><br>
+The kernel function LoadExec() fails on binaries which are not 2K padded. psx-bfd2x keeps track of that.
+
+</ul>
+<ul><li><b>SEE ALSO</b><br>
+<A HREF=psx-bin2x.html>psx-bin2x</A>&nbsp;&nbsp;&nbsp;<p>&nbsp;</p></table></td></tr></table><hr width=0 size=0>
+<P ALIGN=CENTER><A HREF=psxdev-tools.html>back to index</A></P>
+<hr size=2 noshade>
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=left>
+<address>Created with <a href=psxdev.pl>psxdev.pl</a></address>
+</td><td align=right>
+<address>Copyright &copy;2000
+ by <a href="mailto:dbalster@psxdev.de">Daniel Balster</a></address>
+</td></tr></table>
+</body></html>

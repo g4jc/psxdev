@@ -1,0 +1,147 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+   <meta name="GENERATOR" content="Mozilla/4.6 [en] (X11; I; Linux 2.2.10 i586) [Netscape]">
+</head>
+<body>
+
+<center>
+<h1>
+<font color="#FF0000">PSX-INTEWRACTOR</font></h1></center>
+
+<center><i>A remote variable editor for interactive artist intervention
+into running games</i></center>
+
+<p><br>
+<table WIDTH="100%" NOSAVE >
+<tr ALIGN=LEFT VALIGN=TOP NOSAVE>
+<td ALIGN=LEFT VALIGN=TOP NOSAVE><a href="intewractor.jpeg"><img SRC="intewractor.gif" height=168 width=224></a></td>
+
+<td><b><font color="#FF0000">PSX-INTEWRACTOR</font></b> allows you to <b>interactively
+change</b> the contents of variables of a <b>remotely running program</b>.
+You can attach this program anytime to a running program, if the communication
+link does allow remote debugging! For some datatypes special editors exist,
+like COLOR, MATRIX and VECTOR. The datatypes and symbol names are retrieved
+from a debugging version of the executable which is currently running on
+the PSX. Due to technical restrictions it is only possible to edit <b>global
+static</b> variables, only these are visible to the intewractor.</td>
+</tr>
+</table>
+
+<center>
+<h2>
+Software Requirements:</h2></center>
+
+<ul>
+<li>
+PSXDEV 1.0-2 (Release 2)</li>
+
+<li>
+GNOME 1.0.x</li>
+
+<li>
+GTK 1.2.x</li>
+
+<li>
+GLIB 1.2.x</li>
+</ul>
+
+<center>
+<h2>
+Download:</h2></center>
+
+<ul>
+<li>
+not yet</li>
+</ul>
+
+<center>
+<h2>
+Installation:</h2></center>
+
+<ul>
+<li>
+unpack the sources</li>
+
+<li>
+./configure</li>
+
+<li>
+make</li>
+
+<li>
+make install</li>
+</ul>
+
+<center>
+<h2>
+Application Usage:</h2></center>
+Start the intewractor with the program to be debugged as argument. The
+file format of the program must be an unstripped debugging version in MIPS-ECOFF
+format (this is what the PSXDEV egcs compiler does produce by default).
+Typically you would to the following:
+<br>&nbsp;
+<ol>
+<li>
+compile your program with "-g"</li>
+
+<li>
+keep an unstripped copy (i.e. file.dbg)</li>
+
+<li>
+strip the original (i.e. file.bfd)</li>
+
+<li>
+convert it to PSX-EXE&nbsp;(psx-bfd2x -o file.psx file.bfd)</li>
+
+<li>
+upload and start the PSX-EXE&nbsp;(psx-run -R -S file.psx)</li>
+
+<li>
+if you're using the pcdrv: file server for initial data uploads, wait until
+they're finished</li>
+
+<li>
+interrupt the file server (CTRL-C to psx-run)</li>
+
+<li>
+start "psx-intewractor file.dbg"</li>
+</ol>
+All this activities should be placed in your projects Makefile!
+<br>&nbsp;
+<table COLS=2 WIDTH="100%" NOSAVE >
+<tr NOSAVE>
+<td><img SRC="mainwindow.gif" height=328 width=418></td>
+
+<td>
+<ul>
+<li>
+<b>Revert Button<br>
+</b>Reloads the symbol table (do this after a recompilation..)<br>
+<BR></li>
+
+<li>
+<b>Resume/Halt/Reset Buttons<br>
+</b>They control the PlayStation, but are not very important.<br>
+<BR></li>
+
+<li>
+<b>Variable List<br>
+</b>All global static declarations will appear here. Dynamic or local declarations
+can't be detected.</li>
+</ul>
+</td>
+</tr>
+</table>
+The datatype buttons below the list view will open a datatype editor for
+the currently selected variable. You can open as many editors as you like,
+get rid of them by closing them. You even can open two different editors
+for the same variable, i.e. to check different things with different values..
+<br>
+<hr WIDTH="100%">
+<br>PSX-INTEWRACTOR is Copyright (C) 1999 by Daniel Balster &lt;dbalster@poboxes.com>,
+All rights reserved.
+<br>&nbsp;
+</body>
+</html>

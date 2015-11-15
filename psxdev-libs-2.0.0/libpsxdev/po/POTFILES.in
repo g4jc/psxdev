@@ -1,0 +1,6 @@
+src/init.c
+src/server.c
+src/string.c
+src/util.c
+src/debugger.c
+src/bfd.c
